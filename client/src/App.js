@@ -11,7 +11,9 @@ function App() {
       <div>
         {/* <Nav /> */}
         <Switch>
+          {/* home page route goes to user hub */}
           <Route exact path="/" component={Groups} />
+          {/* /events goes to group */}
           <Route exact path="/events" component={Events} />
 
           {/* <Route exact path="/books/:id" component={Detail} /> */}
