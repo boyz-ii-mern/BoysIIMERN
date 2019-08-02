@@ -7,19 +7,23 @@ import React, { Component } from "react";
 // import { List, ListItem } from "../components/List";
 // import { Input, TextArea, FormBtn } from "../components/Form";
 
-class Groups extends Component {
+class Events extends Component {
   state = {
 
   };
 
+
   render() {
     return (
-      <div>
-        <h1>here's a list of all of your events </h1>
-      </div>
+        <div>
+            <h1>HERE IS A LIST OF ALL OF OUR EVENTS</h1>
+            <img src="https://i.ibb.co/R0DCnsM/Screen-Shot-2019-08-01-at-9-42-27-PM.png"></img>
+        </div>
     );
   }
 }
 
 
-export default Groups;
+
+
+export default Events;
