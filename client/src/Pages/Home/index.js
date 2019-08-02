@@ -7,20 +7,20 @@ import React, { Component } from "react";
 // import { List, ListItem } from "../components/List";
 // import { Input, TextArea, FormBtn } from "../components/Form";
 
-class Groups extends Component {
+class Home extends Component {
   state = {
 
   };
 
-
   render() {
     return (
-        <div>
-            <h1>HERE IS A LIST OF ALL OF OUR GROUPS</h1>
-            <img src="https://slack-imgs.com/?c=1&url=https%3A%2F%2Fmedia0.giphy.com%2Fmedia%2FQWXXuU2AYmbXiMVGjB%2Fgiphy.gif%3Fcid%3D6104955e5d4393783076313449eb97ab%26rid%3Dgiphy.gif"></img>
-        </div>
+      <div>
+        <h1>here's your home </h1>
+        <img src="https://i.ibb.co/NKhd4rN/Screen-Shot-2019-08-01-at-9-42-13-PM.png"></img>
+
+      </div>
     );
   }
 }
 
-export default Groups;
+export default Home;

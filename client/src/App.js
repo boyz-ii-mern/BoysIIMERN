@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"; //<!super important to get router to work 
-import Groups from "./Pages/Groups";
+import Home from "./Pages/Home";
 import Events from "./Pages/Events";
 import NoMatch from "./Pages/NoMatch";
 // import Nav from "./components/Nav";
@@ -11,7 +11,7 @@ function App() {
       <div>
         {/* <Nav /> */}
         <Switch>
-          <Route exact path="/" component={Groups} />
+          <Route exact path="/" component={Home} />
           <Route exact path="/events" component={Events} />
 
           {/* <Route exact path="/books/:id" component={Detail} /> */}
