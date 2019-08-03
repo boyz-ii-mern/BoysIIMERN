@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Groups from "../../components/Groups"
+import Groups from "../../components/Groups";
+import Events from "../../components/Events";
 // import DeleteBtn from "../components/DeleteBtn";
 // import Jumbotron from "../components/Jumbotron";
 // import API from "../utils/API";
@@ -18,6 +19,7 @@ class Home extends Component {
       <div>
         <div className="row">
          <Groups className="col5"/> 
+         <Events className="col7"/>
         </div>
         
         <h1>here's your home </h1>
