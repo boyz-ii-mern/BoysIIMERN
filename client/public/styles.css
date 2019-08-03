@@ -1,6 +1,29 @@
+/* ------------------ Global Styling ------------------- */
+
+/* --------- Fonts --------- */
 h1 {
     color: blue;
 }
+
+h5 {
+    color: #ffffff;
+}
+
+h6 {
+    color: #556270;
+    font-size: 15px;
+    padding: 0px;
+    margin: 0px;
+    font-weight: 700 bold;
+}
+
+p {
+    padding: 0px;
+    margin: 0px;
+    font-size: 12px;
+}
+
+/* ---------------------- Container Styling ------------------------- */
 
 .nav-wrapper {
     padding-left: 50px;
@@ -16,4 +39,28 @@ h1 {
     margin: 0 auto;
     padding: 5px;
     padding-left: 20px;
+}
+
+.side-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* -------------------------------- User Card ----------------------------- */
+
+.user-section {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.user-image {
+    width: 40px!important;
+    height: 40px!important;
+    margin-right: 10px;
+}
+
+/* -------------------------------- Group Events Card ----------------------------- */
+.events-section {
+    padding: 10px;
 }
