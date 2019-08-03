@@ -5,6 +5,7 @@ const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const passport = require("./controllers/passportController");
+const config = require("./config/config");
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
