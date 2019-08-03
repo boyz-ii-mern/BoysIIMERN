@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import GroupMembers from "../../components/groupMembers/index";
+import GroupEvents from "../../components/eventsInGroup/index";
 // import DeleteBtn from "../components/DeleteBtn";
 // import Jumbotron from "../components/Jumbotron";
 // import API from "../utils/API";
@@ -17,10 +18,14 @@ class Events extends Component {
   render() {
     return (
         <div className="row">
-          <GroupMembers />
+          <div className="col m3 side-content">
+            <GroupMembers />
+            <GroupEvents />
+          </div>
+         
+
             
-            <h1>HERE IS A LIST OF ALL OF OUR EVENTS</h1>
-            <img src="https://i.ibb.co/R0DCnsM/Screen-Shot-2019-08-01-at-9-42-27-PM.png"></img>
+            
         </div>
     );
   }

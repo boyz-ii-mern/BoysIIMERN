@@ -5,7 +5,7 @@ class GroupMembers extends Component {
     render() {
         return(
             //component for group member card
-            <div className="card col m3">
+            <div className="card col">
                 <div className="card-header">
                     <h5>Group Members</h5>
                 </div>

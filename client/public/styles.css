@@ -41,6 +41,11 @@ p {
     padding-left: 20px;
 }
 
+.side-content {
+    display: flex;
+    flex-direction: column;
+}
+
 /* -------------------------------- User Card ----------------------------- */
 
 .user-section {
@@ -53,4 +58,9 @@ p {
     width: 40px!important;
     height: 40px!important;
     margin-right: 10px;
+}
+
+/* -------------------------------- Group Events Card ----------------------------- */
+.events-section {
+    padding: 10px;
 }
