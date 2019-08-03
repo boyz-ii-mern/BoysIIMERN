@@ -4,7 +4,10 @@
 h1 {
     color: blue;
 }
-
+h4 {
+    padding: 0px;
+    margin: 0px;
+}
 h5 {
     color: #ffffff;
 }
@@ -60,6 +63,25 @@ p {
     margin-right: 10px;
 }
 
+.profile-image {
+    width: 80px!important;
+    height: 80px!important;
+    margin-right: 10px;
+    background-size: cover; 
+}
+
+.profile-section {
+   margin: 0 auto;
+   padding: 40px;
+   display: flex;
+   flex-direction: column;
+   text-align: center;
+   color: #ffffff
+}
+
+.profile-card {
+    background-color: #556270;
+}
 /* -------------------------------- Group Events Card ----------------------------- */
 .events-section {
     padding: 10px;

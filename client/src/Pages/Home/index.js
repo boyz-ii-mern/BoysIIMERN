@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Groups from "../../components/Groups";
 import Events from "../../components/Events";
+import UserProfile from "../../components/profile/userProfile";
 // import DeleteBtn from "../components/DeleteBtn";
 // import Jumbotron from "../components/Jumbotron";
 // import API from "../utils/API";
@@ -18,13 +19,13 @@ class Home extends Component {
     return (
       <div>
         <div className="row">
-         <Groups className="col5"/> 
-         <Events className="col7"/>
-        </div>
+          <div className="col m5 side-content">
+            <UserProfile />
+            <Groups /> 
+          </div>
+          <Events className="col7"/>
         
-        <h1>here's your home </h1>
-        <img src="https://i.ibb.co/NKhd4rN/Screen-Shot-2019-08-01-at-9-42-13-PM.png"></img>
-
+        </div>
       </div>
     );
   }

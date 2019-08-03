@@ -5,7 +5,7 @@ class Groups extends Component {
         return (
             //add some kind of mapping to add a card for every group you're in
             
-                <div className="card col m5">
+                <div className="card col">
                     <div className="card-header">
                         <h5>Groups I'm In</h5>
                     </div>
