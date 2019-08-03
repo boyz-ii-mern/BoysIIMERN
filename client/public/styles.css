@@ -1,0 +1,19 @@
+h1 {
+    color: blue;
+}
+
+.nav-wrapper {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.card {
+    padding: 0px!important;
+}
+.card-header {
+    background-color: #556270;
+    color: #ffffff;
+    margin: 0 auto;
+    padding: 5px;
+    padding-left: 20px;
+}

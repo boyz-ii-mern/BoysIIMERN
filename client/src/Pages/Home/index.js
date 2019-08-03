@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Groups from "../../components/Groups";
+import Events from "../../components/Events";
 // import DeleteBtn from "../components/DeleteBtn";
 // import Jumbotron from "../components/Jumbotron";
 // import API from "../utils/API";
@@ -15,6 +17,11 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <div className="row">
+         <Groups className="col5"/> 
+         <Events className="col7"/>
+        </div>
+        
         <h1>here's your home </h1>
         <img src="https://i.ibb.co/NKhd4rN/Screen-Shot-2019-08-01-at-9-42-13-PM.png"></img>
 
