@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { IdentityContext } from "../../identity-context";
 
-import User from "../../User";
+import User from "../../components/User";
 
 class Login extends Component {
     state = {
