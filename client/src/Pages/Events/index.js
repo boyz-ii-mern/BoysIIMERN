@@ -17,7 +17,7 @@ class Events extends Component {
   render() {
     return (
         <div className="row">
-          <GroupMembers className="col m3 l3" />
+          <GroupMembers />
             
             <h1>HERE IS A LIST OF ALL OF OUR EVENTS</h1>
             <img src="https://i.ibb.co/R0DCnsM/Screen-Shot-2019-08-01-at-9-42-27-PM.png"></img>

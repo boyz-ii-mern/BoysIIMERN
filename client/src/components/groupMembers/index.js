@@ -10,6 +10,8 @@ class GroupMembers extends Component {
                     <h5>Group Members</h5>
                 </div>
                 <User />
+                <User />
+                <User />
             </div>
             
                 //component for user row (photo, name, superlative, divider)

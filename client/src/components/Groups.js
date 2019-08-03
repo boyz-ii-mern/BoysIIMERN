@@ -12,17 +12,17 @@ class Groups extends Component {
                         <div className="card-content">
                         <div className="card-stacked">
                                 <div className="section">
-                                <h5>Leon</h5>
+                                <h6>Leon</h6>
                                 <p>Most likely to use puns</p>
                                 <div className="divider"></div>
                                 </div>
                                 <div className="section">
-                                <h5>Leon</h5>
+                                <h6>Leon</h6>
                                 <p>Most likely to use puns</p>
                                 <div className="divider"></div>
                                 </div>
                                 <div className="section">
-                                <h5>Leon</h5>
+                                <h6>Leon</h6>
                                 <p>Most likely to use puns</p>
                                 <div className="divider"></div>
                                 </div>
