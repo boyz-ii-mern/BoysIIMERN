@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom"; //<!s
 import Home from "./Pages/Home";
 import Events from "./Pages/Events";
 import NoMatch from "./Pages/NoMatch";
+import Navbar from "./components/Navbar";
 // import Nav from "./components/Nav";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     <Router>
       <div>
         {/* <Nav /> */}
+        <Navbar />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/events" component={Events} />
