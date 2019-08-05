@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import GroupMembers from "../../components/groupMembers/index";
 import GroupEvents from "../../components/eventsInGroup/index";
+import EventContainer from "../../components/eventContent/eventContainer";
 // import DeleteBtn from "../components/DeleteBtn";
 // import Jumbotron from "../components/Jumbotron";
 // import API from "../utils/API";
@@ -22,6 +23,9 @@ class Events extends Component {
             <GroupMembers />
             <GroupEvents />
           </div>
+         <div className="col s12 m8 l9 event-content">
+           <EventContainer />
+         </div>
          
 
             
