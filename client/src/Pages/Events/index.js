@@ -18,7 +18,7 @@ class Events extends Component {
   render() {
     return (
         <div className="row">
-          <div className="col m3 side-content">
+          <div className="col s12 m4 l3 side-content">
             <GroupMembers />
             <GroupEvents />
           </div>

@@ -13,7 +13,8 @@ function App() {
       <div>
         {/* <Nav /> */}
         <Navbar />
-        <Switch>
+        <div className="container">
+          <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/events" component={Events} />
           <Route exact path="/login" component={Login} />
@@ -21,6 +22,8 @@ function App() {
           {/* <Route exact path="/books/:id" component={Detail} /> */}
           <Route component={NoMatch} />
         </Switch>
+        </div>
+        
       </div>
     </Router>
   );

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class Events extends Component {
     render() {
         return (
-            <div className="card col m7">
+            <div className="card col s12 m7">
             <div className="card-header">
                 <h5>My Events</h5>
             </div>

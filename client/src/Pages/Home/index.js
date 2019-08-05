@@ -19,7 +19,7 @@ class Home extends Component {
     return (
       <div>
         <div className="row">
-          <div className="col m5 side-content">
+          <div className="col s12 m5 side-content">
             <UserProfile />
             <Groups /> 
           </div>
