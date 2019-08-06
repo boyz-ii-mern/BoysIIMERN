@@ -83,6 +83,46 @@ p {
     background-color: #556270;
 }
 /* -------------------------------- Group Events Card ----------------------------- */
+.card {
+    width: 100%!important;
+}
+
 .events-section {
+    padding: 10px 10px 0px 10px;
+}
+
+.event-title-container {
+    display: flex;
+    flex-direction: row;
     padding: 10px;
+}
+
+.event-date {
+    border-right: 1px solid black;
+    text-align: center;
+    padding-right: 20px;
+    margin-right: 20px;
+}
+
+.event-title h4 {
+    color: #556270;
+    font-size: 22px;
+}
+
+.event-title p {
+    color: #7d7d7e;
+}
+
+.events-nav {
+    background-color: #e0e0e0!important;
+    padding: 10px;
+    margin: 10px;
+    height: auto!important;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.events-nav a {
+    color: #556270;
 }

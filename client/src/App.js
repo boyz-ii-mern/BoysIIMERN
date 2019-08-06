@@ -1,16 +1,29 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"; //<!super important to get router to work 
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"; //<!super important to get router to work 
 import Home from "./Pages/Home";
 import Events from "./Pages/Events";
 import NoMatch from "./Pages/NoMatch";
 import Navbar from "./components/Navbar";
 import Login from "./Pages/Login";
-import Photobook from "./Pages/Photobook";
+import Photobook from "./components/Photobook";
 // import Nav from "./components/Nav";
 
 function App() {
   return (
     <Router>
+
+{/* <div>
+          <ul>
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/events'>Topics</Link></li>
+          </ul>
+
+          <hr />
+
+          <Route exact path='/' component={Home} />
+          <Route path='/events' component={Login} />
+</div> */}
+
       <div>
         {/* <Nav /> */}
         <Navbar />
