@@ -23,7 +23,7 @@ class Home extends Component {
             <UserProfile />
             <Groups /> 
           </div>
-          <Events className="col7"/>
+          <Events />
         
         </div>
       </div>
