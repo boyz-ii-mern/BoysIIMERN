@@ -1,9 +1,9 @@
 // here's where you'd import your database models if you were using them.
 
-let user = require("../models/user");
-user.all(function (data){
-    console.log("this is the return data", data);
-})
+// let user = require("../models/user");
+// user.all(function (data){
+//     console.log("this is the return data", data);
+// })
 
 
 const userController = {
@@ -16,14 +16,6 @@ const userController = {
         response.json(request.user);
 
     },
-    getAllUsers: (request, response) => {
-        console.log("this is getAllUsers");
-        console.log("this is user", user);
-        user.all(function (data){
-            console.log("this is the return data", data);
-        })
-    },
-
     logout: (request, response) => {
         request.logout();
         response.send("user logged out");

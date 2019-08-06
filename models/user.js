@@ -1,8 +1,8 @@
 let orm = require("../config/orm");
 
 var user = {
-    all: function (cb) {
-        orm.all("users", function (res) {
+    userSearch: function (email, cb) {
+        orm.userSearch("users", email, function (res) {
             cb(res);
         })
     }

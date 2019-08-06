@@ -9,11 +9,7 @@ router
 router
     .route("/login")
     .post(passport.authenticate("local"), userController.login);
-  
-router
-    .route("/allUsers")
-    .get(userController.getAllUsers)
-
+    
 router
     .route("/logout")
     .post(userController.logout)
