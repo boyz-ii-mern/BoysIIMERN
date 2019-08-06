@@ -5,6 +5,7 @@ import Events from "./Pages/Events";
 import NoMatch from "./Pages/NoMatch";
 import Navbar from "./components/Navbar";
 import Login from "./Pages/Login";
+import Photobook from "./components/Photobook";
 // import Nav from "./components/Nav";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/events" component={Events} />
+          <Route exact path="/photobook" component={Photobook} />
           <Route exact path="/login" component={Login} />
 
           {/* <Route exact path="/books/:id" component={Detail} /> */}
