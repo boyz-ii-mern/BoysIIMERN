@@ -36,8 +36,9 @@ function objToSql(ob) {
 
 // Object for all our SQL statement functions.
 var orm = {
-  all: function (tableInput, cb) {
-    var queryString = "SELECT * FROM " + tableInput + ";";
+  userSearch: function (tableInput, email, cb) {
+    var queryString = `SELECT * FROM ${tableInput} WHERE email='${email}';`;
+    console.log(queryString);
     config.query(queryString, function (err, result) {
       if (err) {
         throw err;
