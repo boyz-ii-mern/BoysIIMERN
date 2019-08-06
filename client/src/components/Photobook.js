@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 // import ImageUploader from 'react-images-upload';
-import {storage} from ".././../firebase";
+import {storage} from "../firebase";
 
 
 class Photobook extends Component {
     constructor(props) {
         super(props);
          this.state = {
+            //  key or id for sorting by event:
              image: null,
              url: ''
          };
@@ -42,10 +43,12 @@ class Photobook extends Component {
             })
         });
     }
+
+    // Need to code a "Display All Images" function, one that can pull images PER event.
  
     render() {
         const style = {
-            height: '100vh',
+            height: '50vh',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -53,8 +56,9 @@ class Photobook extends Component {
         };
         return (
         <>
-            <h1>Upload Your Pictures here!</h1>
             <div style={style}>
+            <h3>Upload Your Pictures here!</h3>
+            <br/>
             <input type="file" onChange={this.handleChange}/>
             <button onClick={this.handleUpload}>Upload</button>
             <br/>
@@ -66,4 +70,3 @@ class Photobook extends Component {
 }
   
   export default Photobook;
-  

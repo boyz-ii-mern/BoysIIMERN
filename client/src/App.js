@@ -5,7 +5,7 @@ import Events from "./Pages/Events";
 import NoMatch from "./Pages/NoMatch";
 import Navbar from "./components/Navbar";
 import Login from "./Pages/Login";
-import Photobook from "./Pages/Photobook";
+import Photobook from "./components/Photobook";
 // import Nav from "./components/Nav";
 
 function App() {
