@@ -21,7 +21,7 @@ class Events extends Component {
         <div className="row">
           <div className="col s12 m4 l3 side-content">
             <GroupMembers />
-            <GroupEvents />
+            {/* <GroupEvents /> */}
           </div>
          <div className="col s12 m8 l9 event-content">
            <EventContainer />

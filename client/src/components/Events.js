@@ -4,8 +4,9 @@ class Events extends Component {
     render() {
         return (
             <div className="card col s12 m7">
-            <div className="card-header">
+            <div className="card-header my-events">
                 <h5>My Events</h5>
+                <button>Create Event</button>
             </div>
                 <div className="card-content">
                 <div className="card-stacked">

@@ -21,7 +21,7 @@ class Home extends Component {
         <div className="row">
           <div className="col s12 m5 side-content">
             <UserProfile />
-            <Groups /> 
+            {/* <Groups />  */}
           </div>
           <Events />
         
