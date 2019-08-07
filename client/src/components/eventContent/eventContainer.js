@@ -6,7 +6,7 @@ import Comments from "./Comments/commentSection";
 class EventContainer extends Component {
     render() {
         return (
-            <div className="card col s12 m8 l9">
+            <div className="card col s12 m8 l9 events-card">
             <div className="card-header">
                 <h5>Event Recap</h5>
             </div>

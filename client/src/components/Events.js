@@ -30,9 +30,9 @@ class Events extends Component {
     render() {
         return (
             <div className="card col s12 m7">
-            <div className="card-header my-events">
+            <div className="card-header my-events valign-wrapper">
                 <h5>My Events</h5>
-                <button className="create-event-btn">Create Event</button>
+                <Link to={"/formtest"}><button className="create-event-btn waves-effect waves-light btn">Create Event</button></Link>
             </div>
                 <div className="card-content">
                 <div className="card-stacked">
