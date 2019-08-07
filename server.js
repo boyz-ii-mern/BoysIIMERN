@@ -4,7 +4,7 @@ var session = require("express-session");
 const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 const app = express();
-const passport = require("./controllers/passportController");
+const passport = require("./auth");
 const config = require("./config/config");
 
 // Define middleware here
