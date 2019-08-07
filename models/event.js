@@ -12,6 +12,9 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.DATE,
             allowNull: false,
         },
+        isActive: {
+            type: DataTypes.BOOLEAN,
+        }
     })
 
     Event.associate = function (models) {
