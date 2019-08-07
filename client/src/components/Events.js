@@ -1,12 +1,16 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"; //<!super important to get router to work 
+
+import eventsTest from "./eventsTest.json"; //<--this is just a test variable object used to dynamically create each event
+
+
+console.log("this is eventsTest", eventsTest)
 
 class Events extends Component {
     //set initial state
-    // state = {
-    //     events: [],
-    //     eventName: "",
-    //     eventLocation: ""
-    // }
+    state = {
+        eventsTest
+    }
 
     // //when component mounts, load all events and save them to this.state.events
     // componentDidMount() {
@@ -32,21 +36,21 @@ class Events extends Component {
             </div>
                 <div className="card-content">
                 <div className="card-stacked">
-                        <div className="section">
-                        <h5>Ice Skating at the Park</h5>
-                        <p>Maggie Daley Park</p>
-                        <div className="divider"></div>
-                        </div>
-                        <div className="section">
-                        <h5>Girls' Night Out</h5>
-                        <p>River North</p>
-                        <div className="divider"></div>
-                        </div>
-                        <div className="section">
-                        <h5>Wine and Web Dev</h5>
-                        <p>Daniel's House</p>
-                        <div className="divider"></div>
-                        </div>
+
+
+                        {this.state.eventsTest.map(thing => {
+                  return (
+                      <div className="section">
+                      <Link to={"/events/" + thing.event}>
+                        <strong>
+                          {thing.id}: {thing.event}
+                        </strong>
+                      </Link>
+                      <hr className="divider"></hr>
+                      </div>
+                  );
+                })}
+
                     </div>
                     </div>
         </div>
