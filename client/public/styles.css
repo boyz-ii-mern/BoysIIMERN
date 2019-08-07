@@ -49,6 +49,11 @@ p {
     flex-direction: column;
 }
 
+.my-events {
+    display: flex;
+    justify-content: space-between;
+}
+
 /* -------------------------------- User Card ----------------------------- */
 
 .user-section {
