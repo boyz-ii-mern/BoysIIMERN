@@ -19,6 +19,7 @@
     "nodemon": "^1.18.7"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^8.0.0",
     "express": "^4.16.3",
     "express-session": "^1.16.2",
@@ -28,6 +29,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "react-images-upload": "^1.2.7",
+    "sequelize": "^5.12.3",
     "session": "^0.1.0"
   }
 }
