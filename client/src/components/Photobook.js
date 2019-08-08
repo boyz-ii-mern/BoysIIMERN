@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import ImageUploader from 'react-images-upload';
-import {storage} from "../firebase";
+import { storage, database } from "../firebase";
 
 
 class Photobook extends Component {
@@ -8,8 +8,9 @@ class Photobook extends Component {
         super(props);
          this.state = {
             //  key or id for sorting by event:
-             image: null,
-             url: ''
+            image: null,
+            url: '',
+            images: []
          };
 
          this.handleChange = this.handleChange.bind(this);
@@ -20,31 +21,48 @@ class Photobook extends Component {
     handleChange = e => {
         if(e.target.files[0]) {
             const image = e.target.files[0];
-            this.setState(() => ({image}));
+            this.setState(() => ({
+                image: {image},
+                url: URL.createObjectURL(image)
+            }));
         }
     }
 
     handleUpload = () => {
         const {image} = this.state;
-        const uploadTask = storage.ref(`images/${image.name}`).put(image);
-        uploadTask.on('state_changed', 
-        (snapshot) => {
-            // Progress Function
-        },
+        const uploadTask = storage.ref(`images/${image.name}`).put(image[0]);
+        const key = '';
+
+        uploadTask.on('state_changed',
         (error) => {
             // Error Function
             console.log(error);
         },
         () => {
-            // Complete function
-            storage.ref('images').child(image.name).getDownloadURL().then(url => {
-                console.log(url);
-                this.setState({url});
+            storage.ref('images').child(image.name).getDownloadURL().then((snap) => {
+                database.ref().child(this.state).child(key).set({
+                    "url" : snap.metadata.downloadURLs[0]
+                })
+            })
+        
+            this.setState({
+                file: null,
+                url: null,
             })
         });
     }
 
-    // Need to code a "Display All Images" function, one that can pull images PER event.
+    componentDidMount() {
+        const ref = database.ref();
+        ref.on('child_added', (child) => {
+            let images = this.state.images.slice();
+            images.push({
+                key: child.key,
+                url: child.val().url
+            })
+            this.setState({images})
+        });
+    }
  
     render() {
         const style = {
@@ -54,15 +72,31 @@ class Photobook extends Component {
             alignItems: 'center',
             justifyContent: 'center'
         };
+
+        const previewStyle = {
+            maxHeight: "100px",
+            maxWidth: "100px"
+        };
+
+        const imgStyle = {
+            maxHeight: "300px",
+            maxWidth: "300px"
+        };
+
         return (
         <>
-            <div style={style}>
+        <div style={style}>
             <h3>Upload Your Pictures here!</h3>
             <br/>
             <input type="file" onChange={this.handleChange}/>
+            <img src={this.state.url} style={previewStyle} alt=" " />
             <button onClick={this.handleUpload}>Upload</button>
             <br/>
-            <img src={this.state.url} alt="Uploaded Images" height="auto" width="auto"/>
+            {this.state.images.map((image) =>
+                <div key={image.key}>
+                    <img src={image.url} style={imgStyle} alt=" " />
+                </div>
+            )}
         </div>
         </>
         );
@@ -70,3 +104,4 @@ class Photobook extends Component {
 }
   
   export default Photobook;
+  
