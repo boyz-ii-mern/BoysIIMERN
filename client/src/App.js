@@ -6,9 +6,9 @@ import EventsTest from "./Pages/EventsTest"
 import NoMatch from "./Pages/NoMatch";
 import Navbar from "./components/Navbar";
 import Login from "./Pages/Login";
-import Photobook from "./components/Photobook";
 import FormContainer from "./Pages/FormTest";
 import Form from "./Pages/FormTest";
+import Photobook from "./components/Photobook";
 // import Nav from "./components/Nav";
 
 function App() {

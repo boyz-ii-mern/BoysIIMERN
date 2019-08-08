@@ -15,8 +15,8 @@ import 'firebase/database';
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-  const storage = firebase.storage();
-  const database = firebase.database();
+  const storage = firebase.storage().ref();
+  const database = firebase.database().ref();
 
   export {
       storage, database, firebase as default
