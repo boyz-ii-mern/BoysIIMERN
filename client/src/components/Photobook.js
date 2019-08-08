@@ -1,107 +1,149 @@
+// Import Necessary Libraries
+// React & ShortID
 import React, { Component } from "react";
-// import ImageUploader from 'react-images-upload';
+import shortid from 'shortid'
+
+// FilePond
+import { FilePond, registerPlugin, File } from "react-filepond";
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+
+// FilePond CSS
+import "filepond/dist/filepond.min.css";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+
+// Firebase
 import { storage, database } from "../firebase";
+import "firebase/storage";
+import "firebase/database";
+
+// Register Filepond Plugins for Additional Functionality
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 
+// Start of Photobook Component
 class Photobook extends Component {
     constructor(props) {
         super(props);
-         this.state = {
-            //  key or id for sorting by event:
-            image: null,
-            url: '',
-            images: []
-         };
-
-         this.handleChange = this.handleChange.bind(this);
-
-         this.handleUpload = this.handleUpload.bind(this);
+        // Reference Firebase 
+        this.storageRef = storage;
+        this.databaseRef = database;
     }
- 
-    handleChange = e => {
-        if(e.target.files[0]) {
-            const image = e.target.files[0];
-            this.setState(() => ({
-                image: {image},
-                url: URL.createObjectURL(image)
-            }));
-        }
-    }
+        state = {
+           files: [],
+           uploadValue: 0,
+           filesMetadata: [],
+           rows: [],
+        };
 
-    handleUpload = () => {
-        const {image} = this.state;
-        const uploadTask = storage.ref(`images/${image.name}`).put(image[0]);
-        const key = '';
+    
 
-        uploadTask.on('state_changed',
-        (error) => {
-            // Error Function
-            console.log(error);
-        },
-        () => {
-            storage.ref('images').child(image.name).getDownloadURL().then((snap) => {
-                database.ref().child(this.state).child(key).set({
-                    "url" : snap.metadata.downloadURLs[0]
+
+    // Handles our Image Storage
+    handleProcessing(fieldName, file, metadata, load, error, progress, abort) {
+        // Logs for Testing
+        console.log("FILE UPLOADED HERE");
+        console.log(this.storageRef.child(file.name).fullPath);
+
+        const fileUpload = file;
+
+        // ShortID 
+        const id = shortid.generate();
+
+        const task = this.storageRef.child(file.name).put(fileUpload, {
+            shortID: id});
+
+        // Handle Uploading Here
+            task.on(`state_changed` , (snap) => {
+                let percentage = (snap.bytesTransferred / snap.totalBytes) * 100;
+                console.log(percentage);
+                // Process
+                this.setState({
+                    uploadValue: percentage 
                 })
-            })
+            }, (err) => {
+                // Log Error
+                console.log("error: %o", err);
+                error(err.message);
+            }, () => {
+                // Success
+                console.log("VICTORY");
+                this.setState({
+                    picture: task.snapshot.downloadURL
+                })
+
+                // Get Metadata
+                this.storageRef.child(file.name).getMetadata().then((metadata) => {
+                    // Metadata for 'filepond/${file.name}' contained
+                    let downloadURL = '';
+                    this.storageRef.child(file.name).getDownloadURL().then(url => {
+                        console.log(url)
+                        let metadataFile = {
+                            name: metadata.name,
+                            size: metadata.size,
+                            contentType: metadata.contentType,
+                            fullPath: metadata.fullPath,
+                            downloadURL: url,
+                            id: id 
+                        }
+
+                    // Save Metadata
+                    this.databaseRef.child(`${file.url}`).push({ metadataFile });
+                        // this.databaseRef.child(`${file.url}`).child(`log`).push().set({
+                        //     action: `${file.name} uploaded.`,
+                        //     timestamp:new Date()
+                        // });
+                    })
+                    alert("Immortalized on the Internet FOREVER!")
+
+                }).catch(function(error) {
+                    console.log(error)
+            });
         
-            this.setState({
-                file: null,
-                url: null,
-            })
-        });
+        })
     }
 
-    componentDidMount() {
-        const ref = database.ref();
-        ref.on('child_added', (child) => {
-            let images = this.state.images.slice();
-            images.push({
-                key: child.key,
-                url: child.val().url
-            })
-            this.setState({images})
-        });
+    handleInit() {
+        console.log("FilePond ACTIVATED", this.pond);
     }
- 
+
     render() {
-        const style = {
-            height: '50vh',
+        const uploadStyle = {
+            marginTop: '2rem',
+            display: 'flex',
+            flexDirection: 'column'
+        };
+
+        const arrayStyle = {
+            marginTop: '10rem',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center'
         };
 
-        const previewStyle = {
-            maxHeight: "100px",
-            maxWidth: "100px"
-        };
-
-        const imgStyle = {
-            maxHeight: "300px",
-            maxWidth: "300px"
-        };
-
-        return (
-        <>
-        <div style={style}>
-            <h3>Upload Your Pictures here!</h3>
-            <br/>
-            <input type="file" onChange={this.handleChange}/>
-            <img src={this.state.url} style={previewStyle} alt=" " />
-            <button onClick={this.handleUpload}>Upload</button>
-            <br/>
-            {this.state.images.map((image) =>
-                <div key={image.key}>
-                    <img src={image.url} style={imgStyle} alt=" " />
+        return(
+            <div className="Photobook" style={uploadStyle}>
+                <FilePond
+                    ref={ref => (this.pond = ref)}
+                    files={this.state.files}
+                    allowMultiple={true}
+                    maxFiles={5}
+                    server={{process : this.handleProcessing.bind(this)}}
+                    oninit={() => this.handleInit()}
+                >
+                    {this.state.files.map(file => (
+                        <File key = {file} source = {file}/>
+                    ))}
+                </FilePond>
+                <div id="imgArray" style={arrayStyle}>
+                    <h4>Images Will Show Here</h4>
+                    <img></img>
                 </div>
-            )}
-        </div>
-        </>
-        );
+            </div>
+        )
     }
+
 }
-  
-  export default Photobook;
-  
+
+export default Photobook;
