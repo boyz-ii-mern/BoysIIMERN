@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Groups from "../../components/Groups";
-import Events from "../../components/Events";
+import HomeEvents from "../../components/HomeEvents";
 import UserProfile from "../../components/profile/userProfile";
 // import DeleteBtn from "../components/DeleteBtn";
 // import Jumbotron from "../components/Jumbotron";
@@ -23,7 +23,7 @@ class Home extends Component {
             <UserProfile />
             {/* <Groups />  */}
           </div>
-          <Events />
+          <HomeEvents />
         
         </div>
       </div>

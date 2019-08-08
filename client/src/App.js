@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"; //<!super important to get router to work 
 import Home from "./Pages/Home";
 import Events from "./Pages/Events";
+import EventsTest from "./Pages/EventsTest"
 import NoMatch from "./Pages/NoMatch";
 import Navbar from "./components/Navbar";
 import Login from "./Pages/Login";
@@ -30,9 +31,11 @@ function App() {
         <div className="container">
           <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/events/:id" component={EventsTest} />
           <Route exact path="/events" component={Events} />
           <Route exact path="/photobook" component={Photobook} />
           <Route exact path="/login" component={Login} />
+          
 
           {/* <Route exact path="/books/:id" component={Detail} /> */}
           <Route component={NoMatch} />
