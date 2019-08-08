@@ -5,7 +5,7 @@ import { Tabs } from "@yazanaabed/react-tabs";
 class TabsTest extends React.Component {
     return() {
         render(
-            <div style={styles}>
+            <div>
                 <Tabs
                 activeTab={{
                     id: "tab1"
