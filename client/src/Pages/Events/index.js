@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import GroupMembers from "../../components/groupMembers/index";
 import GroupEvents from "../../components/eventsInGroup/index";
 import EventContainer from "../../components/eventContent/eventContainer";
+import ImageHeader from "../../components/eventContent/Comments/imageHeader";
 // import DeleteBtn from "../components/DeleteBtn";
 // import Jumbotron from "../components/Jumbotron";
 // import API from "../utils/API";
@@ -19,6 +20,7 @@ class Events extends Component {
   render() {
     return (
         <div className="row">
+          <ImageHeader />
           <div className="col s12 m4 l3 side-content">
             <GroupMembers />
             {/* <GroupEvents /> */}

@@ -1,15 +1,23 @@
 /* ------------------ Global Styling ------------------- */
-
+body {
+    background-color: #fafafa;
+}
 /* --------- Fonts --------- */
 h1 {
     color: blue;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
 }
 h4 {
     padding: 0px;
     margin: 0px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
 }
 h5 {
     color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
 }
 
 h6 {
@@ -17,15 +25,32 @@ h6 {
     font-size: 15px;
     padding: 0px;
     margin: 0px;
-    font-weight: 700 bold;
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
 }
 
 p {
     padding: 0px;
     margin: 0px;
     font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
 }
 
+a {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+}
+
+button {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+}
+
+form {
+    font-family: 'Open Sans', sans-serif!important;
+    font-weight: 400;
+}
 select {
     display: inline-block!important;
     height: auto!important;
@@ -59,6 +84,21 @@ select {
 .my-events {
     display: flex;
     justify-content: space-between;
+}
+
+.events-header {
+    max-height: 300px;
+    min-height: 100px;
+}
+
+.events-header-image {
+    object-fit: cover!important;
+    object-position: 100%, 0;
+    max-height: 300px;
+    min-height: 100px;
+    width: 100%;
+    z-index: -10;
+    padding-top: 20px;
 }
 
 /* -------------------------------- User Card ----------------------------- */
@@ -152,12 +192,26 @@ select {
 
 
 /* -------------------------------- Create Event Form ----------------------------- */
+.create-form-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
 .form-card {
+    margin: 0 auto;
+}
+
+.create-event-form {
     padding: 50px!important;
-    margin: 20px;
+    text-align: center;
 }
 
 .create-event-select {
     padding: 10px 10px 10px 10px!important;
     margin-top: 10px!important;
+}
+
+.create-form-submit {
+    width: 200px!important;
 }

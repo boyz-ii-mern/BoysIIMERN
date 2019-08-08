@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import EventTitle from "./eventTitle";
 import EventNav from "./eventNav";
 import Comments from "./Comments/commentSection";
+import TabsTest from "./tabContent";
 
 class EventContainer extends Component {
     render() {
@@ -14,7 +15,8 @@ class EventContainer extends Component {
               <EventTitle />  
             </div>
             <EventNav />
-            <Comments />
+            {/* <Comments /> */}
+            <TabsTest />
             
             {/* event date/title component */}
             {/* event nav component */}
