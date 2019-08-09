@@ -17,23 +17,23 @@ module.exports = function (sequelize, DataTypes) {
         }
     })
 
-    Event.associate = function (models) {
-        Event.belongsTo(models.Group, {
-            onDelete: "cascade"
-        });
+    // Event.associate = function (models) {
+    //     Event.belongsTo(models.Group, {
+    //         onDelete: "cascade"
+    //     });
         
-        Event.hasOne(models.User, {
-            as: "Admin"
-        });
+    //     Event.hasOne(models.User, {
+    //         as: "Admin"
+    //     });
         
-        Event.hasMany(models.User, {
-            as: "Attendees"
-        });
+    //     Event.hasMany(models.User, {
+    //         as: "Attendees"
+    //     });
         
-        Event.hasMany(models.EventPhoto, {
-            onDelete: "cascade"
-        });
-    }
+    //     Event.hasMany(models.EventPhoto, {
+    //         onDelete: "cascade"
+    //     });
+    // }
 
     return Event
 }

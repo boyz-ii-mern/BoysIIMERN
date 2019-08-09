@@ -4,18 +4,18 @@ const bcrypt = require("bcryptjs");
 //////////////////////////////////////////////////////////////
 // need to delete once sequelize is implemented
 //////////////////////////////////////////////////////////////
-let orm = require("../config/orm");
-var user = {
-    userSearch: function (email, cb) {
-        orm.userSearch("users", email, function (res) {
-            cb(res);
-        })
-    }
-};
+// let orm = require("../config/orm");
+// var user = {
+//     userSearch: function (email, cb) {
+//         orm.userSearch("users", email, function (res) {
+//             cb(res);
+//         })
+//     }
+// };
 //////////////////////////////////////////////////////////////
 
 
-function userModel(sequelize, DataTypes) {
+module.exports = function userModel(sequelize, DataTypes) {
     const User = sequelize.define('User', {
         firstName: {
             type: DataTypes.STRING,
@@ -38,7 +38,11 @@ function userModel(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true,
         }
-    }, {
+    }, 
+    {
+        timestamps: false
+    },
+    {
         hooks: {
             beforeCreate: (user, options) => {
                 user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
@@ -59,4 +63,4 @@ function userModel(sequelize, DataTypes) {
     return User
 }
 
-module.exports = { user, userModel };
+// module.exports = { user, userModel };

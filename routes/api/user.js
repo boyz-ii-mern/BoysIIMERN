@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const passport = require("../../auth");
+const models = require("../../models");
 
 router
   .route("/")
@@ -14,6 +15,18 @@ router
     console.log("Authenticated User", req.user);
     res.json(req.user);
   });
+
+router
+  .route("/signup")
+  .post((req, res) => {
+    // create new user
+    console.log("this is models: ", models)
+    models.User.create(req.body)
+    .then(function(data){ 
+      console.log(data);
+    })
+    console.log("This is signup User", req.body);
+  })
 
 router
   .route("/logout")
