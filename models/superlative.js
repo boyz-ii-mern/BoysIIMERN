@@ -1,3 +1,5 @@
+// const models = require("../../models");
+
 module.exports = function (sequelize, DataTypes) {
     const Superlative = sequelize.define('Superlative', {
         text: {
@@ -14,13 +16,13 @@ module.exports = function (sequelize, DataTypes) {
         },
     });
 
-    Superlative.associate = function (models) {
-        Superlative.belongsTo(models.EventPhoto, {
-            onDelete: "cascade"
-        });
+    // Superlative.associate = function (models) {
+    //     Superlative.belongsTo(models.EventPhoto, {
+    //         onDelete: "cascade"
+    //     });
 
-        Superlative.hasOne(User);
-    }
+    //     Superlative.hasOne(models.User);
+    // }
 
     return Superlative
 }

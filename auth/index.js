@@ -1,30 +1,35 @@
 const passport = require("passport");
-const user = require("../models/user").user
+// const user = require("../models/user").user
+const models = require("../models");
 var LocalStrategy = require("passport-local").Strategy;
 
 passport.use(new LocalStrategy(
     function (email, password, done) { // callback with email and password from our form
         console.log("this is email: ", email);
 
-        user.userSearch(email, function (data) {
-            console.log("this is the mysql user data: ", data);
-            if (!data[0]) {
-                return console.log("Incorrect Email");
+        // user.userSearch(email, function (data) {
+        //     console.log("this is the mysql user data: ", data);
+        //     if (!data[0]) {
+        //         return console.log("Incorrect Email");
+        //     }
+        //     else if (data[0].password != password || !data[0]) {
+        //         return console.log("Incorrect Password");
+        //     }
+
+        //     let user = { username: data[0].email };
+        //     return done(null, user);
+
+        // });
+
+        models.User.findOne({
+            where: {
+                "email": email
             }
-            else if (data[0].password != password || !data[0]) {
-                return console.log("Incorrect Password");
-            }
-
-            // if the user is found but the password is wrong
-            // if (!(data[0].password == password))
-            //   return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
-
-            // all is well, return successful user
-            // return done(null, data[0]);
-            let user = { username: data[0].email };
-            return done(null, user);
-
-        });
+        }).then(function(data){
+            console.log(data);
+            let user = { username: data.email}
+            return done(null,user);
+        })
 
     }
 ));
@@ -35,12 +40,12 @@ passport.use(new LocalStrategy(
 // passport needs methods to serialize and deseralize the user
 // this is a simple example, the serialzed user is the username -- which is stored in the session.
 passport.serializeUser(function (user, callback) {
-    callback(null, user.username);
+    callback(null, {username: user.username});
 });
 
 // the deserialized user is an object with a username property -- which is availabe as request.user
 passport.deserializeUser(function (username, callback) {
-    callback(null, { username });
+    callback(null, { username: user.username });
 });
 
 

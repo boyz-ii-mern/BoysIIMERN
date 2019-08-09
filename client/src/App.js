@@ -9,6 +9,9 @@ import Login from "./Pages/Login";
 import FormContainer from "./Pages/FormTest";
 import Form from "./Pages/FormTest";
 import Photobook from "./components/Photobook";
+import SignUp from "./Pages/SignUp"
+
+
 // import Nav from "./components/Nav";
 
 function App() {
@@ -38,6 +41,7 @@ function App() {
           <Route exact path="/photobook" component={Photobook} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/formtest" component={Form} />
+          <Route exact path="/signup" component={SignUp} />
 
           {/* <Route exact path="/books/:id" component={Detail} /> */}
           <Route component={NoMatch} />
