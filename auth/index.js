@@ -26,7 +26,7 @@ passport.use(new LocalStrategy(
                 "email": email
             }
         }).then(function(data){
-            console.log(data);
+            // console.log(data);
             let user = { username: data.email}
             return done(null,user);
         })
