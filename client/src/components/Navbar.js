@@ -26,48 +26,71 @@ class Navbar extends Component {
             })
     }
 
-    logout = event => {
-        event.preventDefault();
-        axios.post("/api/user/logout")
-            .then(response => {
-                this.setState({
-                    errorMessage: "",
-                    user: {},
-                    loggedIn: false
+    handleOnClick = event => {
+        if (this.state.loggedIn == false) {
+            event.preventDefault();
+            window.location.href = "/login";
+        } else {
+            event.preventDefault();
+            axios.post("/api/user/logout")
+                .then(response => {
+                    this.setState({
+                        errorMessage: "",
+                        user: {},
+                        loggedIn: false
+                    })
+                    window.location.href = "/";
                 })
-            })
+        }
     }
 
-   render () {
-    //    let buttonText = this.state.loggedIn ? "Log Out" : "Log In"
-    //    console.log("this is the buttonText",buttonText);
-       return (
-        <nav>
-              <IdentityContext.Provider value={{
-                user: this.state.user,
-                loggedIn: this.state.loggedIn,
-                login: this.login,
-                logout: this.logout
-            }}></IdentityContext.Provider>
-            
-            <div className="nav-wrapper">
-            <a href="/" className="brand-logo"><img src="../Images/logo.png" width="150px" /> </a>
-            <ul id="nav-mobile" className="right hide-on-med-and-down">
-                <li><Link to='/'>Home</Link></li>
-                <li><Link to='/events'>Events</Link></li>
-                <li><Link to='/formtest'>Create Event</Link></li>
-                <IdentityContext.Consumer>
-                    {({ user, logout }) => (
-                            <button onClick={logout}>{this.state.loggedIn == true ? `Log Out` : `Login`}</button>
-                    )}
-                </IdentityContext.Consumer>
+    // login = event => {
+    //     event.preventDefault();
+    //     window.location.href("/login");
+    // }
 
-            </ul>
-            </div>
-        </nav>
-       
-       )
-   }
+    // logout = event => {
+    //     event.preventDefault();
+    //     axios.post("/api/user/logout")
+    //         .then(response => {
+    //             this.setState({
+    //                 errorMessage: "",
+    //                 user: {},
+    //                 loggedIn: false
+    //             })
+    //         })
+    // }
+
+    render() {
+        //    let buttonText = this.state.loggedIn ? "Log Out" : "Log In"
+        //    console.log("this is the buttonText",buttonText);
+        return (
+            <nav>
+                <IdentityContext.Provider value={{
+                    user: this.state.user,
+                    loggedIn: this.state.loggedIn,
+                    login: this.login,
+                    logout: this.logout
+                }}></IdentityContext.Provider>
+
+                <div className="nav-wrapper">
+                    <a href="/" className="brand-logo"><img src="../Images/logo.png" width="150px" /> </a>
+                    <ul id="nav-mobile" className="right hide-on-med-and-down">
+                        <li><Link to='/'>Home</Link></li>
+                        <li><Link to='/events'>Events</Link></li>
+                        <li><Link to='/formtest'>Create Event</Link></li>
+                        <IdentityContext.Consumer>
+                            {({ user, logout }) => (
+                                <button onClick={this.handleOnClick}>{this.state.loggedIn == true ? `Log Out` : `Login`}</button>
+                            )}
+                        </IdentityContext.Consumer>
+
+                    </ul>
+                </div>
+            </nav>
+
+        )
+    }
 }
 
 export default Navbar
