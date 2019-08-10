@@ -37,6 +37,9 @@ class HomeEvents extends Component {
           <div className="card-content">
             <div className="card-stacked">
               {/* Currently, state is set to this eventsTest object. Once backend has the api calls set up, we can call the API via a componentDidMount() and set state to that object.  */}
+              
+          
+              
               {this.state.eventsTest.map(thing => {
                 return (
                   <div className="section">

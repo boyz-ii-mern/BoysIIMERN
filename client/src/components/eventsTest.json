@@ -1,7 +1,24 @@
 [
   {
     "id": 1,
-    "event": "Maggie Daley Park"
+    "event": "Ice Skating at Maggie Daley Park",
+    "location": "Maggie Daley Park",
+    "date": "08/15/2019",
+    "members": ["Daniel, Patricia, Maggie Jo, Steph"],
+    "comments": [
+      {"user": "Daniel",
+       "message": "I hate ice skating!"
+      },
+      {"user": "Patricia",
+      "message": "Umm...isn't it a little warm to be ice skating in August?"
+      },
+      {"user": "Steph",
+      "message": "maybe leon meant roller blading..." 
+      },
+      {"user": "Maggie Jo",
+      "message": "I like turtles"
+      }     
+    ]
   },
   {
     "id": 2,
