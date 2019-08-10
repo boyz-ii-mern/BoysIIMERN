@@ -19,14 +19,28 @@ class Navbar extends Component {
                     console.log("USER FROM API", response.data)
                     this.setState({
                         user: response.data,
-                        userStateInfo: `${response.data.username} is logged in`
+                        userStateInfo: `${response.data.username} is logged in`,
+                        loggedIn: true
                     })
                 }
             })
     }
 
+    logout = event => {
+        event.preventDefault();
+        axios.post("/api/user/logout")
+            .then(response => {
+                this.setState({
+                    errorMessage: "",
+                    user: {},
+                    loggedIn: false
+                })
+            })
+    }
+
    render () {
-       let buttonText = this.state.loggedIn ? "Log Out" : "Log In"
+    //    let buttonText = this.state.loggedIn ? "Log Out" : "Log In"
+    //    console.log("this is the buttonText",buttonText);
        return (
         <nav>
               <IdentityContext.Provider value={{
@@ -43,7 +57,9 @@ class Navbar extends Component {
                 <li><Link to='/events'>Events</Link></li>
                 <li><Link to='/formtest'>Create Event</Link></li>
                 <IdentityContext.Consumer>
-                    <button className="login-button">{buttonText}</button>
+                    {({ user, logout }) => (
+                            <button onClick={logout}>{this.state.loggedIn == true ? `Log Out` : `Login`}</button>
+                    )}
                 </IdentityContext.Consumer>
 
             </ul>
