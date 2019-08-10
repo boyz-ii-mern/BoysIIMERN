@@ -18,8 +18,8 @@ passport.use(new LocalStrategy(
             if (data == null) {
                 return done(null)
             } else {
-                console.log("this is user model data: ", data);
                 let user = { username: data.email, firstName: data.firstName, superlative: data.superlative, photo: data.superlative }
+                console.log("this is authenticated user object", user);
                 return done(null, user);
             }
 

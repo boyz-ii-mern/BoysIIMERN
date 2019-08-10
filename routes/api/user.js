@@ -38,7 +38,7 @@ router.route("/profile/:userId")
 router
   .route("/login")
   .post(passport.authenticate("local"), (req, res) => {
-    console.log("this is req:", req)
+    // console.log("this is req:", req)
     console.log("Authenticated User", req.user);
     res.json(req.user);
   }
@@ -57,7 +57,7 @@ router
         firstName: data.dataValues.firstName,
         superlative: data.dataValues.superlative
       }
-      console.log("this is the new user: ", user);
+      console.log("this is the new user.username: ", user.username);
       res.json(user.username);
     })
 
