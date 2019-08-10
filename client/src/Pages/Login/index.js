@@ -85,14 +85,6 @@ class Login extends Component {
                 login: this.login,
                 logout: this.logout
             }}>
-                <IdentityContext.Consumer>
-                    {({ user, logout }) => (
-                        <div>
-                            <span>{user.username}</span>
-                            <button onClick={logout}>Logout</button>
-                        </div>
-                    )}
-                </IdentityContext.Consumer>
                 <div className="card col sm12 m10 l8 form-card">
                     <div className="card-header">
                         <h5>Log In</h5>

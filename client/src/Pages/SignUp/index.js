@@ -40,11 +40,7 @@ class SignUp extends Component {
     signup = event => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         event.preventDefault();
-    
-        // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
-        alert(`Hello ${this.state.firstName} ${this.state.lastName}`);
-
-        
+           
         axios.post("/api/user/signup", { "email": this.state.username, 
         "password": this.state.password, 
         "firstName": this.state.firstName, 
@@ -74,7 +70,7 @@ class SignUp extends Component {
                     this.setState({
                         user: {},
                         logginId: false,
-                        errorMessage: "Error logging in"
+                        errorMessage: "User Already Exists"
                     })
                 })
             })
@@ -88,22 +84,14 @@ class SignUp extends Component {
                 login: this.login,
                 logout: this.logout
             }}>
-                <IdentityContext.Consumer>
-                    {({ user, logout }) => (
-                        <div>
-                            <span>{user.username}</span>
-                            <button onClick={logout}>Logout</button>
-                        </div>
-                    )}
-                </IdentityContext.Consumer>
                 <div className="Login">
                     <IdentityContext.Consumer>
                         {({ user, loggedIn }) => (
-                            <h2>{this.state.errorMessage
+                            <h4>{this.state.errorMessage
                                 ? this.state.errorMessage
                                 : loggedIn
-                                    ? `${user.username} is logged in`
-                                    : "Logged Out"}</h2>
+                                    ? `Signed In!`
+                                    : ""}</h4>
                         )}
                     </IdentityContext.Consumer>
                     <IdentityContext.Consumer>
