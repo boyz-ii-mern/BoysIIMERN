@@ -43,21 +43,39 @@ class SignUp extends Component {
     
         // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
         alert(`Hello ${this.state.firstName} ${this.state.lastName}`);
+
         
-        axios.post("/api/user/signup", { "username": this.state.username, 
+        axios.post("/api/user/signup", { "email": this.state.username, 
         "password": this.state.password, 
         "firstName": this.state.firstName, 
         "lastName": this.state.lastName, 
         "photo": this.state.photo,
         "superlative": this.state.superlative})
-            .then(response => {
-                this.setState({
-                    username: "",
-                    password: "",
-                    firstName: "",
-                    lastName: "",
-                    photo: "",
-                    superlative: ""
+            .then((response) => {
+                let resOBJ =JSON.parse(response.config.data);
+                console.log("this is resOBJ", resOBJ);
+                axios.post("/api/user/login", { "username": resOBJ.email, "password": resOBJ.password })
+                .then((response) => {
+                    console.log("this is login response: ", response)
+                    if (response.status == 200){
+                        this.setState({
+                            user: response.data,
+                            loggedIn: true,
+                            username: "",
+                            password: "",
+                            errorMessage: ""
+                        })
+                        window.location.href = "/";
+                    }
+                    
+                })
+                .catch(error => {
+                    console.log("LOGIN ERROR")
+                    this.setState({
+                        user: {},
+                        logginId: false,
+                        errorMessage: "Error logging in"
+                    })
                 })
             })
       };

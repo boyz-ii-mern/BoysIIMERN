@@ -37,13 +37,18 @@ class Login extends Component {
         event.preventDefault();
         axios.post("/api/user/login", { "username": this.state.username, "password": this.state.password })
             .then(response => {
-                this.setState({
-                    user: response.data,
-                    loggedIn: true,
-                    username: "",
-                    password: "",
-                    errorMessage: ""
-                })
+                console.log("this is login response: ", response)
+                if (response.status == 200){
+                    this.setState({
+                        user: response.data,
+                        loggedIn: true,
+                        username: "",
+                        password: "",
+                        errorMessage: ""
+                    })
+                    window.location.href = "/";
+                }
+                
             })
             .catch(error => {
                 console.log("LOGIN ERROR")

@@ -27,7 +27,7 @@ passport.use(new LocalStrategy(
             }
         }).then(function(data){
             // console.log(data);
-            let user = { username: data.email}
+            let user = { username: data.email, firstName: data.firstName, superlative: data.superlative, photo: data.superlative}
             return done(null,user);
         })
 
@@ -40,12 +40,12 @@ passport.use(new LocalStrategy(
 // passport needs methods to serialize and deseralize the user
 // this is a simple example, the serialzed user is the username -- which is stored in the session.
 passport.serializeUser(function (user, callback) {
-    callback(null, {username: user.username});
+    callback(null, {username: user.username, firstName: user.firstName, superlative: user.superlative, photo: user.superlative});
 });
 
 // the deserialized user is an object with a username property -- which is availabe as request.user
-passport.deserializeUser(function (username, callback) {
-    callback(null, { username: user.username });
+passport.deserializeUser(function (user, callback) {
+    callback(null, { username: user.username, firstName: user.firstName, superlative: user.superlative, photo: user.superlative});
 });
 
 
