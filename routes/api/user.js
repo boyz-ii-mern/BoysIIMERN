@@ -38,7 +38,7 @@ router.route("/profile/:userId")
 router
   .route("/login")
   .post(passport.authenticate("local"), (req, res) => {
-    // console.log("this is req:", req)
+    console.log("this is req:", req)
     console.log("Authenticated User", req.user);
     res.json(req.user);
   }

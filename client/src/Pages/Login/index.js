@@ -51,11 +51,11 @@ class Login extends Component {
                 
             })
             .catch(error => {
-                console.log("LOGIN ERROR")
+                // console.log("LOGIN ERROR")
                 this.setState({
                     user: {},
                     logginId: false,
-                    errorMessage: "Error logging in"
+                    errorMessage: "Invalid Login, please try again"
                 })
             })
     }
@@ -89,14 +89,14 @@ class Login extends Component {
                     )}
                 </IdentityContext.Consumer>
                 <div className="Login">
-                    <h1>React-Passport-Context</h1>
+                    <h1>Login</h1>
                     <IdentityContext.Consumer>
                         {({ user, loggedIn }) => (
-                            <h2>{this.state.errorMessage
+                            <h4>{this.state.errorMessage
                                 ? this.state.errorMessage
                                 : loggedIn
-                                    ? `${user.username} is logged in`
-                                    : "Logged Out"}</h2>
+                                    ? `Logged In!`
+                                    : ""}</h4>
                         )}
                     </IdentityContext.Consumer>
                     <IdentityContext.Consumer>
@@ -122,9 +122,6 @@ class Login extends Component {
                             </form>
                         )}
                     </IdentityContext.Consumer>
-                </div>
-                <div>
-                    <User />
                 </div>
             </IdentityContext.Provider>
         );
