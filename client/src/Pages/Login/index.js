@@ -33,24 +33,34 @@ class Login extends Component {
         })
     }
 
+    handleSignUp = event => {
+        event.preventDefault();
+        window.location.href = "/signup"
+    }
+
     login = event => {
         event.preventDefault();
         axios.post("/api/user/login", { "username": this.state.username, "password": this.state.password })
             .then(response => {
-                this.setState({
-                    user: response.data,
-                    loggedIn: true,
-                    username: "",
-                    password: "",
-                    errorMessage: ""
-                })
+                console.log("this is login response: ", response)
+                if (response.status == 200){
+                    this.setState({
+                        user: response.data,
+                        loggedIn: true,
+                        username: "",
+                        password: "",
+                        errorMessage: ""
+                    })
+                    window.location.href = "/home";
+                }
+                
             })
             .catch(error => {
-                console.log("LOGIN ERROR")
+                // console.log("LOGIN ERROR")
                 this.setState({
                     user: {},
                     logginId: false,
-                    errorMessage: "Error logging in"
+                    errorMessage: "Invalid Login, please try again"
                 })
             })
     }
@@ -69,34 +79,28 @@ class Login extends Component {
 
     render() {
         return (
-            <IdentityContext.Provider value={{
+        <IdentityContext.Provider value={{
                 user: this.state.user,
                 loggedIn: this.state.loggedIn,
                 login: this.login,
                 logout: this.logout
             }}>
-                <IdentityContext.Consumer>
-                    {({ user, logout }) => (
-                        <div>
-                            <span>{user.username}</span>
-                            <button onClick={logout}>Logout</button>
-                        </div>
-                    )}
-                </IdentityContext.Consumer>
-                <div className="Login">
-                    <h1>React-Passport-Context</h1>
+                <div className="card col sm12 m10 l8 form-card">
+                    <div className="card-header">
+                        <h5>Log In</h5>
+                    </div>
                     <IdentityContext.Consumer>
                         {({ user, loggedIn }) => (
-                            <h2>{this.state.errorMessage
+                            <h4>{this.state.errorMessage
                                 ? this.state.errorMessage
                                 : loggedIn
-                                    ? `${user.username} is logged in`
-                                    : "Logged Out"}</h2>
+                                    ? `Logged In!`
+                                    : ""}</h4>
                         )}
                     </IdentityContext.Consumer>
                     <IdentityContext.Consumer>
                         {({ user, loggedIn, login }) => (
-                            <form>
+                            <form className="form create-event-form">
                                 <input
                                     type="text"
                                     name="username"
@@ -109,17 +113,18 @@ class Login extends Component {
                                     placeholder="Password"
                                     value={this.state.password}
                                     onChange={this.handleInputChange} /><br />
-                                <input
-                                    type="submit"
+                                <button className="waves-effect waves-light btn create-form-submit"type="submit"
                                     name="submit"
                                     value="Login"
-                                    onClick={login} />
+                                    onClick={login}>
+                                    Submit
+                                </button>
+                                <p>Don't have an account?</p>
+                                <button onClick={this.handleSignUp} className="waves-effect waves-light btn sign-up-btn">Sign Up</button>
+                               
                             </form>
                         )}
                     </IdentityContext.Consumer>
-                </div>
-                <div>
-                    <User />
                 </div>
             </IdentityContext.Provider>
         );

@@ -37,7 +37,8 @@ function App() {
         <Navbar />
         <div className="container">
           <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Login} />
+          <Route exact path="/home" component={Home} />
           <Route exact path="/events/:id" component={EventsTest} />
           <Route exact path="/events" component={Events} />
           <Route exact path="/photobook" component={Photobook} />

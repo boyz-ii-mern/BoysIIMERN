@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { IdentityContext } from "../../identity-context";
 
-import User from "../../components/User";
+// import User from "../../components/User";
 
 class SignUp extends Component {
     state = {
@@ -40,24 +40,38 @@ class SignUp extends Component {
     signup = event => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         event.preventDefault();
-    
-        // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
-        alert(`Hello ${this.state.firstName} ${this.state.lastName}`);
-        
-        axios.post("/api/user/signup", { "username": this.state.username, 
+           
+        axios.post("/api/user/signup", { "email": this.state.username, 
         "password": this.state.password, 
         "firstName": this.state.firstName, 
         "lastName": this.state.lastName, 
         "photo": this.state.photo,
         "superlative": this.state.superlative})
-            .then(response => {
-                this.setState({
-                    username: "",
-                    password: "",
-                    firstName: "",
-                    lastName: "",
-                    photo: "",
-                    superlative: ""
+            .then((response) => {
+                let resOBJ =JSON.parse(response.config.data);
+                console.log("this is resOBJ", resOBJ);
+                axios.post("/api/user/login", { "username": resOBJ.email, "password": resOBJ.password })
+                .then((response) => {
+                    console.log("this is login response: ", response)
+                    if (response.status == 200){
+                        this.setState({
+                            user: response.data,
+                            loggedIn: true,
+                            username: "",
+                            password: "",
+                            errorMessage: ""
+                        })
+                        window.location.href = "/home";
+                    }
+                    
+                })
+                .catch(error => {
+                    console.log("LOGIN ERROR")
+                    this.setState({
+                        user: {},
+                        logginId: false,
+                        errorMessage: "User Already Exists"
+                    })
                 })
             })
       };
@@ -70,23 +84,14 @@ class SignUp extends Component {
                 login: this.login,
                 logout: this.logout
             }}>
-                <IdentityContext.Consumer>
-                    {({ user, logout }) => (
-                        <div>
-                            <span>{user.username}</span>
-                            <button onClick={logout}>Logout</button>
-                        </div>
-                    )}
-                </IdentityContext.Consumer>
                 <div className="Login">
-                    <h1>React-Passport-Context</h1>
                     <IdentityContext.Consumer>
                         {({ user, loggedIn }) => (
-                            <h2>{this.state.errorMessage
+                            <h4>{this.state.errorMessage
                                 ? this.state.errorMessage
                                 : loggedIn
-                                    ? `${user.username} is logged in`
-                                    : "Logged Out"}</h2>
+                                    ? `Signed In!`
+                                    : ""}</h4>
                         )}
                     </IdentityContext.Consumer>
                     <IdentityContext.Consumer>
@@ -137,9 +142,7 @@ class SignUp extends Component {
                         )}
                     </IdentityContext.Consumer>
                 </div>
-                <div>
-                    <User />
-                </div>
+            
             </IdentityContext.Provider>
         );
     }

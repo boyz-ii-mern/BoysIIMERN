@@ -34,6 +34,10 @@ module.exports = function userModel(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        photo: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         superlative: {
             type: DataTypes.STRING,
             allowNull: true,
