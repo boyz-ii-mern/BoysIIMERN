@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import TabsTest from './tabContent';
 import Comments from '../Comments/commentSection';
 
-function RenderTabs() {
+function RenderTabs(props) {
+    // console.log("rendertabs", props)
     return (
         <div>
             <TabsTest>
                 <div label="Comments">
-                    <Comments />
+                    <Comments comments={props.comments}/>
                 </div>
                 <div label="Photo Gallery">
                    <p>The photo gallery goes here!</p>

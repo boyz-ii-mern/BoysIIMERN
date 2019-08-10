@@ -15,7 +15,9 @@ function GroupMembers (props) {
                 </div>
    
             {currentMembers.map(gmember => (
-          <User member={gmember}/>
+        //   <User member={gmember}/>
+             <User>{gmember} </User>
+
             ))}
 
                         

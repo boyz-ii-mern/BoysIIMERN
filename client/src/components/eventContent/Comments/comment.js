@@ -1,25 +1,23 @@
 import React, { Component } from "react";
 import User from "../../groupMembers/UserCard";
 
-class CommentList extends Component {
-    render() {
+function CommentList (props){
+    console.log("commentlist", props);
         return(
             <div className="comment-list">
                 <div>
-                    <User />
-                    <p className="comment-content">Comment List goes here</p>
-                </div>
+            {/* use comments.user */}
+                 {props.comments.map(comment => ( 
                 <div>
-                    <User />
-                    <p className="comment-content">Comment List goes here</p>
+                   <User>{comment.user}</User>
+                   <p className="comment-content">{comment.message}</p>
                 </div>
-                <div>
-                    <User />
-                    <p className="comment-content">Comment List goes here</p>
+                 ))}   
+
                 </div>
             </div>
         )
     }
-}
+
 
 export default CommentList;

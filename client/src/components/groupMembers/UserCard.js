@@ -14,7 +14,8 @@ function User (props) {
                     {/* update username to database */}
       
                     {/* <h6>{props.member}</h6> */}
-                    <h6>{props.member}</h6>
+                    {/* pass as children to re-use the component! */}
+                    <h6>{props.children}</h6>
             
                     {/* update superlative to database */}
                     <p>Most Likely to Do Something</p>

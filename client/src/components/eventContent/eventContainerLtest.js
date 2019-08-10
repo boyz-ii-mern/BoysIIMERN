@@ -1,3 +1,5 @@
+//THIS IS THE PAGE THAT LEON HAD BEFORE MESSING WITH STEPHS CODE
+
 import React, { Component } from "react";
 import EventTitle from "./eventTitle";
 import EventNav from "./eventNav";
@@ -5,8 +7,8 @@ import Comments from "./Comments/commentSection";
 import RenderTabs from "./eventTabs/renderTabs";
 // import TabsTest from "./tabContent";
 
-function EventContainer (props) {
-    console.log("comments", props)
+class EventContainer extends Component {
+    render(props) {
         return (
             <div className="card col s12 m8 l9 events-card">
             <div className="card-header">
@@ -15,8 +17,9 @@ function EventContainer (props) {
             <div className="events-section">
               <EventTitle />  
             </div>
-            <RenderTabs comments={props.comments}
-            />
+
+            {/* Leon to mess around with passing in props */}
+            <RenderTabs comments={props.comments}/>
             {/* <EventNav />
             <Comments /> */}
             {/* <TabsTest /> */}
@@ -51,6 +54,6 @@ function EventContainer (props) {
         </div>
         )
     }
-
+}
 
 export default EventContainer;

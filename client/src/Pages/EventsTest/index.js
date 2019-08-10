@@ -11,7 +11,7 @@ import EventContainer from "../../components/eventContent/eventContainer";
 // import { Input, TextArea, FormBtn } from "../components/Form";
 import eventsTest from "../../components/eventsTest.json";
 
-console.log("did i grab this?", eventsTest[0]);
+// console.log("did i grab this?", eventsTest[0]);
 class EventsTest extends Component {
     
   state = {
@@ -42,7 +42,7 @@ class EventsTest extends Component {
           {/* <GroupEvents /> */}
         </div>
         <div className="col s12 m8 l9 event-content">
-          <EventContainer />
+          <EventContainer comments={this.state.staticEvent.comments}/>
         </div>
       </div>
     );
