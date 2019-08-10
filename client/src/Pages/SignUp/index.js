@@ -100,49 +100,51 @@ class SignUp extends Component {
                     </IdentityContext.Consumer>
                     <IdentityContext.Consumer>
                         {({ user, loggedIn, login }) => (
-                            <div className="card col sm12 m10 l8 form-card">
-                                <div className="card-header">
-                                    <h5>Create An Account</h5>
+                            <div className="row create-form-row">
+                                <div className="card col sm12 m10 l8 form-card">
+                                    <div className="card-header">
+                                        <h5>Create An Account</h5>
+                                    </div>
+                                    <form className="form create-event-form">
+                                        <input
+                                            type="text"
+                                            name="username"
+                                            placeholder="Email"
+                                            value={this.state.username}
+                                            onChange={this.handleInputChange} /><br />
+                                        <input
+                                            type="password"
+                                            name="password"
+                                            placeholder="Password"
+                                            value={this.state.password}
+                                            onChange={this.handleInputChange} /><br />
+                                        <input
+                                            type="text"
+                                            name="firstName"
+                                            placeholder="First Name"
+                                            value={this.state.firstName}
+                                            onChange={this.handleInputChange} /><br />
+                                        <input
+                                            type="text"
+                                            name="lastName"
+                                            placeholder="Last Name"
+                                            value={this.state.lastName}
+                                            onChange={this.handleInputChange} /><br />
+                                        <input
+                                            type="text"
+                                            name="photo"
+                                            placeholder="Photo"
+                                            value={this.state.photo}
+                                            onChange={this.handleInputChange} /><br />
+                                        <input
+                                            type="text"
+                                            name="superlative"
+                                            placeholder="Superlative"
+                                            value={this.state.superlative}
+                                            onChange={this.handleInputChange} /><br />
+                                        <button className="waves-effect waves-light btn create-form-submit" type="submit" name="submit" value="SignUp" onClick={this.signup}>submit</button>
+                                    </form>
                                 </div>
-                                <form className="form create-event-form">
-                                    <input
-                                        type="text"
-                                        name="username"
-                                        placeholder="Email"
-                                        value={this.state.username}
-                                        onChange={this.handleInputChange} /><br />
-                                    <input
-                                        type="password"
-                                        name="password"
-                                        placeholder="Password"
-                                        value={this.state.password}
-                                        onChange={this.handleInputChange} /><br />
-                                    <input
-                                        type="text"
-                                        name="firstName"
-                                        placeholder="First Name"
-                                        value={this.state.firstName}
-                                        onChange={this.handleInputChange} /><br />
-                                    <input
-                                        type="text"
-                                        name="lastName"
-                                        placeholder="Last Name"
-                                        value={this.state.lastName}
-                                        onChange={this.handleInputChange} /><br />
-                                    <input
-                                        type="text"
-                                        name="photo"
-                                        placeholder="Photo"
-                                        value={this.state.photo}
-                                        onChange={this.handleInputChange} /><br />
-                                    <input
-                                        type="text"
-                                        name="superlative"
-                                        placeholder="Superlative"
-                                        value={this.state.superlative}
-                                        onChange={this.handleInputChange} /><br />
-                                    <button className="waves-effect waves-light btn create-form-submit" type="submit" name="submit" value="SignUp" onClick={this.signup}>submit</button>
-                                </form>
                             </div>
                         )}
                     </IdentityContext.Consumer>
