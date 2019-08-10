@@ -44,6 +44,7 @@ class HomeEvents extends Component {
                 return (
                   <div className="section">
                     
+                {/* The below links will lead to /Pages/EventsTest module */}
                     <Link to={"/events/" + thing.event}>
                       <strong>
                         {thing.id}: {thing.event}

@@ -9,46 +9,44 @@ import EventContainer from "../../components/eventContent/eventContainer";
 // import { Col, Row, Container } from "../components/Grid";
 // import { List, ListItem } from "../components/List";
 // import { Input, TextArea, FormBtn } from "../components/Form";
-import eventsTest from "../../components/eventsTest.json"
+import eventsTest from "../../components/eventsTest.json";
 
-
-console.log("did i grab this?", eventsTest[0])
+console.log("did i grab this?", eventsTest[0]);
 class EventsTest extends Component {
+    
   state = {
-    staticEvent:{}
+    staticEvent: eventsTest[0] || []
+
   };
 
   componentDidMount() {
-
     //! Use the below this.props.match.params.id when doing the api call to find by ID
     // console.log("dijfaowofeiajowfa", this.props.match.params.id);
 
     //TODO: Leon: for now, using static data
-    this.setState({
-       staticEvent: eventsTest[0]
-    })
-
+    // this.setState({
+    //   staticEvent: eventsTest[0]
+    // });
   }
 
   render() {
     return (
-        <div className="row">
-          <div className="col s12 m4 l3 side-content">
+      <div className="row">
+        <div className="col s12 m4 l3 side-content">
           <h3>{this.state.staticEvent.event}</h3>
-            <GroupMembers />
-            {/* <GroupEvents /> */}
-          </div>
-         <div className="col s12 m8 l9 event-content">
-           <EventContainer />
-         </div>
-         
-           
+       
+
+          <GroupMembers member={this.state.staticEvent.members}/>
+
+          {/* Currently commented out GroupEvents */}
+          {/* <GroupEvents /> */}
         </div>
+        <div className="col s12 m8 l9 event-content">
+          <EventContainer />
+        </div>
+      </div>
     );
   }
 }
-
-
-
 
 export default EventsTest;
