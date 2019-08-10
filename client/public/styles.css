@@ -1,0 +1,236 @@
+/* ------------------ Global Styling ------------------- */
+body {
+    background-color: #fafafa;
+}
+/* --------- Fonts --------- */
+h1 {
+    color: blue;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+}
+h4 {
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+}
+h5 {
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+}
+
+h6 {
+    color: #556270;
+    font-size: 15px;
+    padding: 0px;
+    margin: 0px;
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+}
+
+p {
+    padding: 0px;
+    margin: 0px;
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
+a {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+}
+
+button {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+}
+
+form {
+    font-family: 'Open Sans', sans-serif!important;
+    font-weight: 400;
+}
+select {
+    display: inline-block!important;
+    height: auto!important;
+    color: #556270!important;
+    padding: 10px!important;
+}
+
+/* ---------------------- Container Styling ------------------------- */
+
+.nav-wrapper {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.card {
+    padding: 0px!important;
+}
+.card-header {
+    background-color: #556270;
+    color: #ffffff;
+    margin: 0 auto;
+    padding: 5px;
+    padding-left: 20px;
+}
+
+.side-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.my-events {
+    display: flex;
+    justify-content: space-between;
+}
+
+.events-header {
+    max-height: 300px;
+    min-height: 100px;
+}
+
+.events-header-image {
+    object-fit: cover!important;
+    object-position: 100%, 0;
+    max-height: 300px;
+    min-height: 100px;
+    width: 100%;
+    z-index: -10;
+    padding-top: 20px;
+}
+
+/* -------------------------------- User Card ----------------------------- */
+
+.user-section {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.user-image {
+    width: 40px!important;
+    height: 40px!important;
+    margin-right: 10px;
+}
+
+.profile-image {
+    width: 80px!important;
+    height: 80px!important;
+    margin-right: 10px;
+    background-size: cover; 
+}
+
+.profile-section {
+   margin: 0 auto;
+   padding: 40px;
+   display: flex;
+   flex-direction: column;
+   text-align: center;
+   color: #ffffff
+}
+
+.profile-card {
+    background-color: #556270;
+}
+/* -------------------------------- Group Events Card ----------------------------- */
+.events-card {
+    width: 100%!important;
+}
+
+.events-section {
+    padding: 10px 10px 0px 10px;
+}
+
+.event-title-container {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.event-date {
+    border-right: 1px solid black;
+    text-align: center;
+    padding-right: 20px;
+    margin-right: 20px;
+}
+
+.event-title h4 {
+    color: #556270;
+    font-size: 22px;
+}
+
+.event-title p {
+    color: #7d7d7e;
+}
+
+.events-nav {
+    background-color: #e0e0e0!important;
+    padding: 10px;
+    margin: 10px;
+    height: auto!important;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.events-nav a {
+    color: #556270;
+}
+
+/* ----------------- Tabs Section ----------------- */
+.tab-list {
+    border-bottom: 1px solid #ccc;
+    padding-left: 0;
+  }
+  
+  .tab-list-item {
+    display: inline-block;
+    list-style: none;
+    margin-bottom: -1px;
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .tab-list-active {
+    background-color: white;
+    border: solid #ccc;
+    border-width: 1px 1px 0 1px;
+  }
+
+/* ----------------- Comments Section ----------------- */
+.comment-list {
+    padding: 10px;
+}
+
+.comment-content {
+    padding: 0px 10px 10px 10px;
+    font-size: 16px;
+}
+
+
+
+/* -------------------------------- Create Event Form ----------------------------- */
+.create-form-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.form-card {
+    margin: 0 auto;
+}
+
+.create-event-form {
+    padding: 50px!important;
+    text-align: center;
+}
+
+.create-event-select {
+    padding: 10px 10px 10px 10px!important;
+    margin-top: 10px!important;
+}
+
+.create-form-submit {
+    width: 200px!important;
+}

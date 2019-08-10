@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Maggie-Jo",
+        "image": "https://vignette4.wikia.nocookie.net/vsbattles/images/3/39/Courage-0.png/revision/latest?cb=20160719055423",
+        "email": "maggiejo@gmail.com"
+    },
+    {
+        "id": 2,
+        "name": "Leon",
+        "image": "https://vignette4.wikia.nocookie.net/vsbattles/images/3/39/Courage-0.png/revision/latest?cb=20160719055423",
+        "email": "leon@gmail.com"
+    },
+    {
+        "id": 3,
+        "name": "Patricia",
+        "image": "https://vignette4.wikia.nocookie.net/vsbattles/images/3/39/Courage-0.png/revision/latest?cb=20160719055423",
+        "email": "patricia@gmail.com"
+    },
+    {
+        "id": 4,
+        "name": "Steph",
+        "image": "https://vignette4.wikia.nocookie.net/vsbattles/images/3/39/Courage-0.png/revision/latest?cb=20160719055423",
+        "email": "steph@gmail.com"
+    },
+    {
+        "id": 5,
+        "name": "Dan",
+        "image": "https://vignette4.wikia.nocookie.net/vsbattles/images/3/39/Courage-0.png/revision/latest?cb=20160719055423",
+        "email": "dan@gmail.com"
+    }
+]
