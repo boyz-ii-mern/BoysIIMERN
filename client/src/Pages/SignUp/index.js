@@ -40,7 +40,11 @@ class SignUp extends Component {
     signup = event => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         event.preventDefault();
-           
+    
+        // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
+        // alert(`Hello ${this.state.firstName} ${this.state.lastName}`);
+
+        
         axios.post("/api/user/signup", { "email": this.state.username, 
         "password": this.state.password, 
         "firstName": this.state.firstName, 
@@ -70,7 +74,7 @@ class SignUp extends Component {
                     this.setState({
                         user: {},
                         logginId: false,
-                        errorMessage: "User Already Exists"
+                        errorMessage: "Error logging in"
                     })
                 })
             })
@@ -86,7 +90,7 @@ class SignUp extends Component {
             }}>
                 <div className="Login">
                     <IdentityContext.Consumer>
-                        {({ user, loggedIn }) => (
+                    {({ user, loggedIn }) => (
                             <h4>{this.state.errorMessage
                                 ? this.state.errorMessage
                                 : loggedIn
@@ -96,49 +100,50 @@ class SignUp extends Component {
                     </IdentityContext.Consumer>
                     <IdentityContext.Consumer>
                         {({ user, loggedIn, login }) => (
-                            <form>
-                                <input
-                                    type="text"
-                                    name="username"
-                                    placeholder="Email"
-                                    value={this.state.username}
-                                    onChange={this.handleInputChange} /><br />
-                                <input
-                                    type="password"
-                                    name="password"
-                                    placeholder="Password"
-                                    value={this.state.password}
-                                    onChange={this.handleInputChange} /><br />
-                                <input
-                                    type="text"
-                                    name="firstName"
-                                    placeholder="First Name"
-                                    value={this.state.firstName}
-                                    onChange={this.handleInputChange} /><br />
-                                <input
-                                    type="text"
-                                    name="lastName"
-                                    placeholder="Last Name"
-                                    value={this.state.lastName}
-                                    onChange={this.handleInputChange} /><br />
-                                <input
-                                    type="text"
-                                    name="photo"
-                                    placeholder="Photo"
-                                    value={this.state.photo}
-                                    onChange={this.handleInputChange} /><br />
-                                <input
-                                    type="text"
-                                    name="superlative"
-                                    placeholder="Superlative"
-                                    value={this.state.superlative}
-                                    onChange={this.handleInputChange} /><br />
-                                <input
-                                    type="submit"
-                                    name="submit"
-                                    value="SignUp"
-                                    onClick={this.signup} />
-                            </form>
+                            <div className="card col sm12 m10 l8 form-card">
+                                <div className="card-header">
+                                    <h5>Create An Account</h5>
+                                </div>
+                                <form className="form create-event-form">
+                                    <input
+                                        type="text"
+                                        name="username"
+                                        placeholder="Email"
+                                        value={this.state.username}
+                                        onChange={this.handleInputChange} /><br />
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        placeholder="Password"
+                                        value={this.state.password}
+                                        onChange={this.handleInputChange} /><br />
+                                    <input
+                                        type="text"
+                                        name="firstName"
+                                        placeholder="First Name"
+                                        value={this.state.firstName}
+                                        onChange={this.handleInputChange} /><br />
+                                    <input
+                                        type="text"
+                                        name="lastName"
+                                        placeholder="Last Name"
+                                        value={this.state.lastName}
+                                        onChange={this.handleInputChange} /><br />
+                                    <input
+                                        type="text"
+                                        name="photo"
+                                        placeholder="Photo"
+                                        value={this.state.photo}
+                                        onChange={this.handleInputChange} /><br />
+                                    <input
+                                        type="text"
+                                        name="superlative"
+                                        placeholder="Superlative"
+                                        value={this.state.superlative}
+                                        onChange={this.handleInputChange} /><br />
+                                    <button className="waves-effect waves-light btn create-form-submit" type="submit" name="submit" value="SignUp" onClick={this.signup}>submit</button>
+                                </form>
+                            </div>
                         )}
                     </IdentityContext.Consumer>
                 </div>
