@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { IdentityContext } from "../../identity-context";
 
-import User from "../../components/User";
+// import User from "../../components/User";
 
 class SignUp extends Component {
     state = {
@@ -65,7 +65,7 @@ class SignUp extends Component {
                             password: "",
                             errorMessage: ""
                         })
-                        window.location.href = "/";
+                        window.location.href = "/home";
                     }
                     
                 })
@@ -97,7 +97,6 @@ class SignUp extends Component {
                     )}
                 </IdentityContext.Consumer>
                 <div className="Login">
-                    <h1>React-Passport-Context</h1>
                     <IdentityContext.Consumer>
                         {({ user, loggedIn }) => (
                             <h2>{this.state.errorMessage
@@ -155,9 +154,7 @@ class SignUp extends Component {
                         )}
                     </IdentityContext.Consumer>
                 </div>
-                <div>
-                    <User />
-                </div>
+            
             </IdentityContext.Provider>
         );
     }

@@ -33,6 +33,11 @@ class Login extends Component {
         })
     }
 
+    handleSignUp = event => {
+        event.preventDefault();
+        window.location.href = "/signup"
+    }
+
     login = event => {
         event.preventDefault();
         axios.post("/api/user/login", { "username": this.state.username, "password": this.state.password })
@@ -46,7 +51,7 @@ class Login extends Component {
                         password: "",
                         errorMessage: ""
                     })
-                    window.location.href = "/";
+                    window.location.href = "/home";
                 }
                 
             })
@@ -88,8 +93,10 @@ class Login extends Component {
                         </div>
                     )}
                 </IdentityContext.Consumer>
-                <div className="Login">
-                    <h1>Login</h1>
+                <div className="card col sm12 m10 l8 form-card">
+                    <div className="card-header">
+                        <h5>Log In</h5>
+                    </div>
                     <IdentityContext.Consumer>
                         {({ user, loggedIn }) => (
                             <h4>{this.state.errorMessage
@@ -101,7 +108,7 @@ class Login extends Component {
                     </IdentityContext.Consumer>
                     <IdentityContext.Consumer>
                         {({ user, loggedIn, login }) => (
-                            <form>
+                            <form className="form create-event-form">
                                 <input
                                     type="text"
                                     name="username"
@@ -114,11 +121,15 @@ class Login extends Component {
                                     placeholder="Password"
                                     value={this.state.password}
                                     onChange={this.handleInputChange} /><br />
-                                <input
-                                    type="submit"
+                                <button className="waves-effect waves-light btn create-form-submit"type="submit"
                                     name="submit"
                                     value="Login"
-                                    onClick={login} />
+                                    onClick={login}>
+                                    Submit
+                                </button>
+                                <p>Don't have an account?</p>
+                                <button onClick={this.handleSignUp} className="waves-effect waves-light btn sign-up-btn">Sign Up</button>
+                               
                             </form>
                         )}
                     </IdentityContext.Consumer>
