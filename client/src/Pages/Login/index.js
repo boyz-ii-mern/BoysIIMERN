@@ -74,12 +74,20 @@ class Login extends Component {
 
     render() {
         return (
-            <IdentityContext.Provider value={{
+        <IdentityContext.Provider value={{
                 user: this.state.user,
                 loggedIn: this.state.loggedIn,
                 login: this.login,
                 logout: this.logout
             }}>
+                <IdentityContext.Consumer>
+                    {({ user, logout }) => (
+                        <div>
+                            <span>{user.username}</span>
+                            <button onClick={logout}>Logout</button>
+                        </div>
+                    )}
+                </IdentityContext.Consumer>
                 <IdentityContext.Consumer>
                     {({ user, logout }) => (
                         <div>
