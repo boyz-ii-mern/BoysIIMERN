@@ -1,10 +1,11 @@
 const models = require("../models")
 
 const {
-    User, Group, Membership, Event, EventPhoto, Superlative, Comment, Image
+    Admin, User, Group, Membership, Event, EventPhoto, Superlative, Comment, Image
 } = models
 
 async function seedDatabase() {
+
     const user1 = await User.create({
         email: 'my@email.com',
         password: 'password',
@@ -26,6 +27,7 @@ async function seedDatabase() {
         lastName: 'Meeseeks',
         superlative: 'Most Likely to Get it DONE',
     })
+
     const image1 = await Image.create({
         url: 'photo'
     })
@@ -35,18 +37,39 @@ async function seedDatabase() {
         BannerId: image1.id
     })
 
-    const member1 = await Membership.create({
+    const membership1 = await Membership.create({
         UserId: user1.id,
         GroupId: groupApple.id,
     })
-    const member2 = await Membership.create({
+    const membership2 = await Membership.create({
         UserId: user2.id,
         GroupId: groupApple.id,
     })
-    const member3 = await Membership.create({
+    const membership3 = await Membership.create({
         UserId: user3.id,
         GroupId: groupApple.id,
     })
+
+    const event = await Event.create({
+        name: "Game Night",
+        location: "MJ's House",
+        date: "08/10/2019",
+        isActive: true,
+    })
+    groupApple.addEvent(event)
+
+    const admin1 = await Admin.create({
+        UserId: user3.id,
+        EventId: event.id,
+    })
+
+    const eventPhoto1 = await EventPhoto.create({
+        url: "photos.org",
+        date: "08/10/2019",
+    })
+
+    event.addEventPhoto(eventPhoto1)
+
 }
 
 models.sequelize.sync().then(() => {

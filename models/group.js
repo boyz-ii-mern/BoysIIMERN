@@ -10,6 +10,10 @@ module.exports = function (sequelize, DataTypes) {
         Group.hasOne(models.Image, {
             as: "Banner"
         });
+
+        Group.hasMany(models.Event, {
+            onDelete: 'cascade'
+        });
     }
     return Group
 

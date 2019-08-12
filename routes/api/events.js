@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const models = require("../../models");
+const fakeDb = require("../../config/fakedb")
 
 router.route("/")
   .post((req, res) => {
@@ -6,20 +8,47 @@ router.route("/")
     res.json({ data: 'events' })
   })
 
-router.route("/byUser/:id")
+router.route("/byUser/:userId")
   .get((req, res) => {
     res.json({ data: 'events' })
   })
 
-router.route("/byGroup/:id")
+router.route("/byGroup/:groupId")
   .get((req, res) => {
-    res.json({ data: 'events' })
+    // res.json(fakeDb.getEventsByGroup)
+    const id = parseInt(req.params.groupId)
+    models.Group.findByPk(id, {
+      include: [{
+        model: models.Image,
+        as: 'Banner'
+      }, {
+        model: models.Event
+      }]
+    })
+      .then(group => {
+        res.json({ data: group.Events })
+      }).catch(
+        console.log
+      )
   })
 
-router.route("/detail/:id")
+router.route("/detail/:eventId")
   .get((req, res) => {
     //this should include all event info, all pictures, all comments, all superlatives (pictures)
-    res.json({ data: 'events' })
+    const id = parseInt(req.params.eventId)
+    models.Event.findByPk(id, {
+      include: [{
+        model: models.User,
+        as: 'Admin'
+      }, {
+        model: models.Group
+      }]
+    })
+      .then(event => {
+        res.json({ data: event })
+      }).catch(
+        console.log
+      )
   })
   .put((req, res) => {
     // edit the event

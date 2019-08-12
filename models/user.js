@@ -58,6 +58,10 @@ module.exports = function userModel(sequelize, DataTypes) {
         User.hasOne(models.Image, {
             as: "Avatar"
         });
+        User.hasMany(models.Event, {
+            as: "AdminEvent"
+        });
+
     }
 
     User.prototype.validPassword = function (password) {
