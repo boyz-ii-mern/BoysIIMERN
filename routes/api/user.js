@@ -52,6 +52,7 @@ router
     models.User.create(req.body)
     .then(function(data){ 
       console.log("This is signup User inside .then", req.body);
+      console.log("this is signup data:", data);
       let user = {
         username: data.dataValues.email,
         firstName: data.dataValues.firstName,
@@ -60,8 +61,6 @@ router
       console.log("this is the new user.username: ", user.username);
       res.json(user.username);
     })
-
-    console.log("This is signup User", req.body);
   })
 
 router
