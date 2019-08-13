@@ -77,7 +77,7 @@ class Navbar extends Component {
                     <a href="/" className="brand-logo"><img src="../Images/logo.png" width="150px" /> </a>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         <li><Link to='/home'>Home</Link></li>
-                        <li><Link to='/events'>Events</Link></li>
+                        {/* <li><Link to='/events'>Events</Link></li> */}
                         <li><Link to='/formtest'>Create Event</Link></li>
                         <IdentityContext.Consumer>
                             {({ user, logout }) => (
