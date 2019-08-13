@@ -35,9 +35,16 @@ class UserProfile extends Component {
                         loggedIn: this.state.loggedIn
                     }}>
                     </IdentityContext.Provider>
-                    <img src="../Images/avatar-01.png" alt="" className="circle responsive-img profile-image" />
+                    {/* <img src="../Images/avatar-01.png" alt="" className="circle responsive-img profile-image" /> */}
                     <div className="section">
                         {/* update username to database */}
+                        <IdentityContext.Consumer>
+                            {({ user, loggedIn }) => (
+
+                                <img src={this.state.loggedIn ? `${this.state.user.photo}` : `../Images/avatar-01.png`} alt="" className="circle responsive-img profile-image" />
+
+                            )}
+                        </IdentityContext.Consumer>
                         <IdentityContext.Consumer>
                             {({ user, loggedIn }) => (
 
