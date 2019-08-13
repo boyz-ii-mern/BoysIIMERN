@@ -55,6 +55,7 @@ async function seedDatabase() {
         location: "MJ's House",
         date: "08/10/2019",
         isActive: true,
+        members: "[Maggie Jo, Daniel, Patricia]"
     })
     groupApple.addEvent(event)
 

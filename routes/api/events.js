@@ -1,16 +1,24 @@
 const router = require("express").Router();
 const models = require("../../models");
-const fakeDb = require("../../config/fakedb")
+// const fakeDb = require("../../config/fakedb")
 
 router.route("/")
   .post((req, res) => {
-    // create new event
-    res.json({ data: 'events' })
+    models.Event.create(req.body).then(event => {
+      console.log(`This is the event: ${event}`)
+      res.json(event);
+    })
   })
 
 router.route("/byUser/:userId")
   .get((req, res) => {
-    res.json({ data: 'events' })
+    const id = parseInt(req.params.userId)
+    models.User.findByPk(id)
+      .then(user => {
+        res.json({ data: user.Events })
+      }).catch(
+        console.log
+      )
   })
 
 router.route("/byGroup/:groupId")
@@ -59,7 +67,6 @@ router.route("/detail/:eventId")
     // delete event
     res.json({ data: 'events' })
   })
-
 
 
 // get photos by event id
