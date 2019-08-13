@@ -14,21 +14,22 @@ module.exports = function (sequelize, DataTypes) {
         },
         isActive: {
             type: DataTypes.BOOLEAN,
-        },
-        members: {
-            type: DataTypes.STRING,
         }
     })
 
-    // Event.associate = function (models) {
-    //     Event.belongsTo(models.Group, {
-    //         onDelete: "cascade"
-    //     });
+    Event.associate = function (models) {
+        Event.belongsTo(models.Group, {
+            onDelete: "cascade"
+        });
 
-    //     Event.hasMany(models.EventPhoto, {
-    //         onDelete: "cascade"
-    //     });
-    // }
+        Event.belongsTo(models.User, {
+            onDelete: "NO ACTION"
+        });
+
+        Event.hasMany(models.EventPhoto, {
+            onDelete: "cascade"
+        });
+    }
 
     return Event
 }

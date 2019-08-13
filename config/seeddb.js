@@ -1,7 +1,7 @@
 const models = require("../models")
 
 const {
-    Admin, User, Group, Membership, Event, EventPhoto, Superlative, Comment, Image
+    User, Group, Membership, Event, EventPhoto, Superlative, Comment, Image
 } = models
 
 async function seedDatabase() {
@@ -12,6 +12,7 @@ async function seedDatabase() {
         firstName: 'Joe',
         lastName: 'Man',
         superlative: 'Most Likely to Be Cool',
+
     })
     const user2 = await User.create({
         email: 'who@example.com',
@@ -55,14 +56,9 @@ async function seedDatabase() {
         location: "MJ's House",
         date: "08/10/2019",
         isActive: true,
-        members: "[Maggie Jo, Daniel, Patricia]"
     })
     groupApple.addEvent(event)
-
-    const admin1 = await Admin.create({
-        UserId: user3.id,
-        EventId: event.id,
-    })
+    user1.addEvent(event)
 
     const eventPhoto1 = await EventPhoto.create({
         url: "photos.org",

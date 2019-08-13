@@ -3,11 +3,23 @@ const models = require("../../models");
 // const fakeDb = require("../../config/fakedb")
 
 router.route("/")
-  .post((req, res) => {
-    models.Event.create(req.body).then(event => {
-      console.log(`This is the event: ${event}`)
-      res.json(event);
-    })
+  .post(async (req, res) => {
+    const groupId = parseInt(req.body.groupId)
+    const userId = parseInt(req.body.userId)
+    try {
+      const event = await models.Event.create({
+        name: req.body.name,
+        location: req.body.location,
+        date: req.body.date,
+        isActive: true
+      })
+      const setGroup = event.setGroup(groupId)
+      const setAdmin = event.setUser(userId)
+      const setAssociations = await Promise.all([setGroup, setAdmin])
+      res.json({ data: event })
+    } catch (err) {
+      res.json({ error: err })
+    }
   })
 
 router.route("/byUser/:userId")
@@ -16,9 +28,9 @@ router.route("/byUser/:userId")
     models.User.findByPk(id)
       .then(user => {
         res.json({ data: user.Events })
-      }).catch(
-        console.log
-      )
+      }).catch(err => {
+        res.json({ error: err })
+      })
   })
 
 router.route("/byGroup/:groupId")

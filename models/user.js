@@ -59,9 +59,8 @@ module.exports = function userModel(sequelize, DataTypes) {
             as: "Avatar"
         });
         User.hasMany(models.Event, {
-            as: "AdminEvent"
+            onDelete: 'NO ACTION'
         });
-
     }
 
     User.prototype.validPassword = function (password) {
