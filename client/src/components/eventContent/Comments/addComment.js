@@ -27,7 +27,7 @@ class AddComment extends Component {
     
       render() {
         return (
-          <form className="comment-form" onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit}>
             <label>
               What's on your mind?
               <input
@@ -36,7 +36,7 @@ class AddComment extends Component {
                 onChange={this.handleChange}
               />
             </label>
-            <input className="comment-submit-button" type="submit" value="Submit" />
+            <input type="submit" value="Submit" />
           </form>
         );
       }
