@@ -1,9 +1,14 @@
 import React, { Component } from "react";
+import friends from "../../../Pages/FormTest/users.json"
 
 class SuperlativesForm extends Component {
     constructor(props) {
         super(props);
-        this.state = { comment: "" };
+        this.state = { 
+            comment: "",
+            user: "",
+            friends
+         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,7 +25,10 @@ class SuperlativesForm extends Component {
     } 
 
     handleSubmit(event) {
-        alert("Your New Superlative: " + this.state.value);
+        alert(this.state.user +"'s New Superlative: " + this.state.comment);
+
+        //TODO: update user information to include new superlative
+
         event.preventDefault();
     }
 
@@ -28,18 +36,16 @@ class SuperlativesForm extends Component {
         return (
         <div className="row superlatives-form-container">
             <form onSubmit={this.handleSubmit} className="superlatives-form">
-                <label>
+                <label classNam="col m4">
                     Choose a group member
-                    <select value={this.state.value} onChange={this.handleChange}>
-                        <option value="leon">Leon</option>
-                        <option value="maggiejo">Maggie Jo</option>
-                        <option value="patricia">Patricia</option>
-                        <option value="dan">Dan</option>
-                        <option value="dan">Steph</option>
+                    <select name="user" value={this.state.value} onChange={this.handleChange}>
+                        {this.state.friends.map(friend => (
+                        <option value={friend.name}>{friend.name}</option>
+                  ))}
                     </select>
                 </label>
                 
-                <label>
+                <label className="col m6 superlatives-input">
                     <input
                         type="text"
                         name="comment"

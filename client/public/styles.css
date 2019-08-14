@@ -226,10 +226,13 @@ select {
 
 .superlatives-form {
     display: flex;
-    justify-content:space-between;
+    justify-content:space-evenly;
     width: 100%;
 }
 
+.superlatives-input {
+    margin-left: 0px!important;
+}
 /* -------------------------------- Create Event Form ----------------------------- */
 .create-form-row {
     display: flex;
