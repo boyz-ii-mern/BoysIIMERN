@@ -4,6 +4,10 @@
 import React, { Component } from "react";
 import shortid from 'shortid'
 
+// Pull from Events to get event ID for metadata and future img sorting
+import RenderEventID from "./EventPhotoID";
+
+
 // FilePond
 import { FilePond, registerPlugin, File } from "react-filepond";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
@@ -21,22 +25,25 @@ import "firebase/database";
 // Register Filepond Plugins for Additional Functionality
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-
 // Start of Photobook Component
 class UploadPhotos extends Component {
     constructor(props) {
         super(props);
+
         // Reference Firebase 
         this.storageRef = storage;
         this.databaseRef = database;
+
     }
+
         state = {
-           files: [],
-           url: null,
-           uploadValue: 0,
-           metadataFile: [],
-           rows: [],
+            files: [],
+            url: null,
+            uploadValue: 0,
+            metadataFile: [],
+            rows: [],
         };
+
 
     // Handles our Image Storage
     handleProcessing(fieldName, file, metadata, load, error, progress, abort) {
@@ -84,7 +91,9 @@ class UploadPhotos extends Component {
                             fullPath: metadata.fullPath,
                             downloadURL: url,
                             id: id,
-                            eventID: window.location.pathname
+                            // eventID: eventsTest.id,
+                            // comments: TO DO,
+                            // peepsTagged: TO DO
                         }
 
                     // Save Metadata
@@ -115,6 +124,8 @@ class UploadPhotos extends Component {
         };
 
         return(
+            <div>
+            <RenderEventID />
             <div style={uploadStyle}>
                 <FilePond
                     ref={ref => (this.pond = ref)}
@@ -130,9 +141,10 @@ class UploadPhotos extends Component {
                 </FilePond>
 
             </div>
+            </div>
         );
     }
-
 }
+
 
 export default UploadPhotos;

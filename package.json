@@ -36,9 +36,8 @@
     "passport-local": "^1.0.0",
     "prop-types": "^15.7.2",
     "react-filepond": "^7.0.1",
-    "react-grid-gallery": "^0.5.5",
-    "react-image-gallery": "^0.8.18",
     "react-images-upload": "^1.2.7",
+    "react-router": "^5.0.1",
     "sequelize": "^5.12.3",
     "session": "^0.1.0",
     "shortid": "^2.2.14"

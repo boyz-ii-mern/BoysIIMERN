@@ -8,7 +8,7 @@ import { database, storage, firebase } from "../../firebase";
 import "firebase/database";
 import "firebase/storage";
 
-import ImageGallery from "react-image-gallery";
+// import ImageGallery from "react-image-gallery";
 
 class Photos extends Component {
     constructor(props) {
@@ -36,6 +36,8 @@ class Photos extends Component {
             console.log(Object.keys(child.val()));
 
             this.setState({images: Object.keys(child.val()).map(key => child.val()[key].metadataFile.downloadURL)});
+
+
          })
     }
     
