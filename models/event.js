@@ -29,6 +29,10 @@ module.exports = function (sequelize, DataTypes) {
         Event.hasMany(models.EventPhoto, {
             onDelete: "cascade"
         });
+
+        Event.hasMany(models.Comment, {
+            onDelete: "cascade"
+        });
     }
 
     return Event

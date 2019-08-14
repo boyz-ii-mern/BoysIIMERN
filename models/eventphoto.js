@@ -10,15 +10,15 @@ module.exports = function (sequelize, DataTypes) {
         }
     })
 
-    // EventPhoto.associate = function (models) {
-    //     EventPhoto.belongsTo(models.Event, {
-    //         onDelete: "cascade"
-    //     });
+    EventPhoto.associate = function (models) {
+        EventPhoto.belongsTo(models.Event, {
+            onDelete: "cascade"
+        });
         
-    //     EventPhoto.hasMany(models.User, {
-    //         as: "Tags" 
-    //     });
-    // }
+        // EventPhoto.hasMany(models.User, {
+        //     as: "Tags" 
+        // });
+    }
 
     return EventPhoto
 }

@@ -125,19 +125,134 @@ router.route("/detail/:eventId")
     }
   })
 
-// TODO: ALL THIS
-// get photos by event id
-router.route("/photos/:id")
-  .get((req, res) => {
-    res.json({ data: 'photos' })
+
+// get all event photos by event id
+router.route("/photos/:eventId")
+  .get(async (req, res) => {
+    const id = parseInt(req.params.eventId)
+    try {
+      const photos = await models.EventPhoto.findAll({
+        where: {
+          EventId: id
+        }
+      })
+      res.json({
+        data: {
+          photos: photos
+        }
+      })
+    } catch (err) {
+      console.log(err)
+      res.json({ error: err.message })
+    }
   })
-  .post((req, res) => {
-    // create a new photo
-    res.json({ data: 'photos' })
+  .post(async (req, res) => {
+    const id = parseInt(req.params.eventId)
+    try {
+      const newPhoto = await models.EventPhoto.create({
+        url: req.body.url,
+        date: req.body.date,
+      })
+      const event = await models.Event.findByPk(id)
+      await event.addEventPhoto(newPhoto)
+      const photos = await models.EventPhoto.findAll({
+        where: {
+          EventId: id
+        }
+      })
+      res.json({
+        data: {
+          photos: photos
+        }
+      })
+    } catch (err) {
+      console.log(err)
+      res.json({ error: err.message })
+    }
   })
-  .delete((req, res) => {
-    // delete a photo
-    res.json({ data: 'photos' })
+  .delete(async (req, res) => {
+    const id = parseInt(req.body.eventPhotoId)
+    try {
+      await models.EventPhoto.destroy({
+        where: {
+          id: id
+        }
+      })
+      res.json({
+        status: "ok"
+      })
+    } catch (err) {
+      console.log(err)
+      res.json({ error: err.message })
+    }
+  })
+
+
+// get all event comments (by event id)
+router.route("/comments/:eventId")
+  .get(async (req, res) => {
+    const id = parseInt(req.params.eventId)
+    try {
+      const comments = await models.Comment.findAll({
+        where: {
+          EventId: id
+        },
+        include: [{
+          model: models.User
+        }]
+      })
+      res.json({
+        data: {
+          comments: comments
+        }
+      })
+    } catch (err) {
+      console.log(err)
+      res.json({ error: err.message })
+    }
+  })
+  .post(async (req, res) => {
+    const eventId = parseInt(req.params.eventId)
+    const userId = parseInt(req.body.userId)
+    try {
+      await models.Comment.create({
+        body: req.body.body,
+        UserId: userId,
+        EventId: eventId
+      })
+      const comments = await models.Comment.findAll({
+        where: {
+          EventId: eventId
+        },
+        include: [{
+          model: models.User
+        }]
+      })
+      res.json({
+        data: {
+          comments: comments
+        }
+      })
+    } catch (err) {
+      console.log(err)
+      res.json({ error: err.message })
+    }
+  })
+  .delete(async (req, res) => {
+    const id = parseInt(req.body.commentId)
+    try {
+      await models.Comment.destroy({
+        where: {
+          id: id
+        }
+      })
+      res.json({
+        status: "ok"
+      })
+    } catch (err) {
+      console.log(err)
+      res.json({ error: err.message })
+    }
   })
 
 module.exports = router;

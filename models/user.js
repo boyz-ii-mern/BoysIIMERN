@@ -58,6 +58,9 @@ module.exports = function userModel(sequelize, DataTypes) {
         User.hasMany(models.Event, {
             onDelete: 'NO ACTION'
         });
+        User.hasMany(models.Comment, {
+            onDelete: "cascade"
+        })
     }
 
     User.prototype.validPassword = function (password) {
