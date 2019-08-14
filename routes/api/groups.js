@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const models = require("../../models")
+const { throwIfNull } = require("../../utils")
 
 router.route("/")
   .post(async (req, res) => {
@@ -22,7 +23,8 @@ router.route("/")
         }
       })
     } catch (err) {
-      res.json({ error: err })
+      console.log(err)
+      res.json({ error: err.toString() })
     }
   })
 
@@ -51,7 +53,8 @@ router
         }
       })
     } catch (err) {
-      res.json({ error: err })
+      console.log(err)
+      res.json({ error: err.toString() })
     }
   })
 
@@ -74,7 +77,8 @@ router
         }
       })
     } catch (err) {
-      res.json({ error: err })
+      console.log(err)
+      res.json({ error: err.toString() })
     }
   })
   .post(async (req, res) => {
@@ -139,11 +143,12 @@ router
   .get(async (req, res) => {
     const id = parseInt(req.params.id)
     try {
-      const group = models.Group.findByPk(id, {
+      const group = await models.Group.findByPk(id, {
         include: [{
           model: models.Event,
         }]
       })
+      throwIfNull(group, "Group Not Found")
       const memberships = await models.Membership.findAll({
         where: {
           GroupId: id
@@ -158,7 +163,8 @@ router
         }
       })
     } catch (err) {
-      res.json({ error: err })
+      console.log(err)
+      res.json({ error: err.message })
     }
   })
   .delete(async (req, res) => {
@@ -179,7 +185,7 @@ router
       })
     } catch (err) {
       console.log(err)
-      res.json({ error: err })
+      res.json({ error: err.message })
     }
   })
 

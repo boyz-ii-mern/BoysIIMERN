@@ -77,6 +77,15 @@ async function seedDatabase() {
     groupApple.addEvent(event)
     user1.addEvent(event)
 
+    const event2 = await Event.create({
+        name: "Dance Party",
+        location: "Berlin",
+        date: "08/30/2019",
+        isActive: true,
+    })
+    groupApple.addEvent(event2)
+    user2.addEvent(event2)
+
     const eventPhoto1 = await EventPhoto.create({
         url: "photos.org",
         date: "08/10/2019",

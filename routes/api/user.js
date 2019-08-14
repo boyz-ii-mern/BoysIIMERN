@@ -44,7 +44,8 @@ router.route("/profile/:userId")
         }
       })
     } catch (err) {
-      res.json({ error: err })
+      console.log(err)
+      res.json({ error: err.toString() })
     }
   })
 
