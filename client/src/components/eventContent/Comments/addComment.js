@@ -4,7 +4,7 @@ import React, { Component } from "react";
 class AddComment extends Component {
     constructor(props) {
         super(props);
-        this.state = { value: "" };
+        this.state = { comment: "" };
     
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,16 +27,17 @@ class AddComment extends Component {
     
       render() {
         return (
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              What's on your mind?
-              <input
+          <form onSubmit={this.handleSubmit} className="add-comment-form">
+            <label className="add-comment-label">
+              <input className="add-comment-input"
                 type="text"
+                name="comment"
+                placeholder="Say something. Or don't."
                 value={this.state.value}
                 onChange={this.handleChange}
               />
             </label>
-            <input type="submit" value="Submit" />
+            <button type="submit" value="Submit" className="waves-effect waves-light btn add-comment-submit">submit</button>
           </form>
         );
       }

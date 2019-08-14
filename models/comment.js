@@ -10,6 +10,9 @@ module.exports = function (sequelize, DataTypes) {
         Comment.belongsTo(models.Event, {
             onDelete: "cascade"
         });
+        Comment.belongsTo(models.User, {
+            onDelete: "cascade"
+        })
     }
     return Comment
 
