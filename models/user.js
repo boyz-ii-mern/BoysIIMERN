@@ -34,7 +34,7 @@ module.exports = function userModel(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        photo: {
+        avatar: {
             type: DataTypes.STRING,
             allowNull: true
         },
@@ -42,22 +42,19 @@ module.exports = function userModel(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true,
         }
-    }, 
-    {
-        timestamps: false
     },
-    {
-        hooks: {
-            beforeCreate: (user, options) => {
-                user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+        {
+            timestamps: false
+        },
+        {
+            hooks: {
+                beforeCreate: (user, options) => {
+                    user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+                }
             }
-        }
-    })
+        })
 
     User.associate = function (models) {
-        User.hasOne(models.Image, {
-            as: "Avatar"
-        });
         User.hasMany(models.Event, {
             onDelete: 'NO ACTION'
         });
