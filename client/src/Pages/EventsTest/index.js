@@ -10,6 +10,7 @@ import EventContainer from "../../components/eventContent/eventContainer";
 // import { List, ListItem } from "../components/List";
 // import { Input, TextArea, FormBtn } from "../components/Form";
 import eventsTest from "../../components/eventsTest.json";
+import ImageHeader from "../../components/eventContent/Comments/imageHeader";
 
 // console.log("did i grab this?", eventsTest[0]);
 class EventsTest extends Component {
@@ -32,6 +33,7 @@ class EventsTest extends Component {
   render() {
     return (
       <div className="row">
+        <ImageHeader />
         <div className="col s12 m4 l3 side-content">
           <h3>{this.state.staticEvent.event}</h3>
        

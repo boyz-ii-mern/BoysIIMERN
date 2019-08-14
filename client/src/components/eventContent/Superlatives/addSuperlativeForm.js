@@ -36,7 +36,7 @@ class SuperlativesForm extends Component {
         return (
         <div className="row superlatives-form-container">
             <form onSubmit={this.handleSubmit} className="superlatives-form">
-                <label className="col m4 superlatives-select">
+                <label className="col s12 m4 superlatives-select">
                     Choose a group member
                     <select className="superlatives-select-input" name="user" value={this.state.value} onChange={this.handleChange}>
                         {this.state.friends.map(friend => (
@@ -45,8 +45,9 @@ class SuperlativesForm extends Component {
                     </select>
                 </label>
                 
-                <label className="col m6 superlatives-input">
+                <label className="col s9 m6 superlatives-input">
                     <input
+                        className="add-comment-input"
                         type="text"
                         name="comment"
                         placeholder="Say something. Or don't."
@@ -55,7 +56,7 @@ class SuperlativesForm extends Component {
                     />
                 </label>
                 
-                <input type="submit" value="Submit" />
+                <button type="submit" value="Submit" className="waves-effect waves-light btn add-comment-submit">submit</button>
             </form>
         </div>
         );

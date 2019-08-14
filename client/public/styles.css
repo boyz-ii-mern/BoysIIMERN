@@ -42,9 +42,20 @@ a {
     font-weight: 700;
 }
 
+/* --------- Forms --------- */
+
+input {
+    background-color: #fff!important;
+    color: #556270!important;
+    border-radius: 5px!important;
+    padding-left: 30px!important;
+    margin-left: -30px!important;
+}
+
 button {
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
+    background: #FA8334!important;
 }
 
 form {
@@ -208,12 +219,32 @@ select {
     font-size: 16px;
 }
 
+.add-comment-form {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+}
+
+.add-comment-input {
+    padding-left: 10px!important;
+    margin-left: 0px!important;
+}
+
+.add-comment-label {
+    width: 70%;
+}
 
 /* ----------------- Superlatives Section ----------------- */
 .superlative-user-image {
     width: 60px!important;
     height: 60px!important;
     margin-right: 10px;
+}
+
+.superlatives-users-container {
+    justify-content: space-between;
+    margin: 0 auto;
+    padding-left: 30px;
 }
 
 .superlatives-form-container {
@@ -257,6 +288,8 @@ select {
 .create-event-form {
     padding: 50px!important;
     text-align: center;
+    margin: 0 auto!important;
+    width: 80%;
 }
 
 .create-event-select {
@@ -266,4 +299,6 @@ select {
 
 .create-form-submit {
     width: 200px!important;
+    margin-top: 40px;
+    margin-bottom: 30px;
 }

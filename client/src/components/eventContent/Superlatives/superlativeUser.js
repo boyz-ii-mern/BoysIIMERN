@@ -7,7 +7,7 @@ class SuperlativeUser extends Component {
         
             return (
                 
-                <div className="section user-section valign-wrapper">
+                <div className="section user-section valign-wrapper col s12 m6">
                     {/* update source to database */}
                     <img src="../Images/avatar-01.png" alt="" className="circle responsive-img superlative-user-image"/>
                     <div className="section">
