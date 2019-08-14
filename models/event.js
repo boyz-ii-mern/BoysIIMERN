@@ -22,6 +22,10 @@ module.exports = function (sequelize, DataTypes) {
             onDelete: "cascade"
         });
 
+        Event.belongsTo(models.User, {
+            onDelete: "NO ACTION"
+        });
+
         Event.hasMany(models.EventPhoto, {
             onDelete: "cascade"
         });
@@ -29,3 +33,12 @@ module.exports = function (sequelize, DataTypes) {
 
     return Event
 }
+
+
+// 1. Create Event (name, location, date/time)
+// 2. Add Members to Event (eventId, user)
+    // get event, add members, serialized
+    // save event
+// 3. get events by User (user)
+// 4. add photos
+// 5. add superlatives

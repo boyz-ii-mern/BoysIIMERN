@@ -9,6 +9,7 @@ router.route("/")
 router
   .route("/byUser/:id")
   .get((req, res) => {
+    
     res.json({ data: 'groups' })
   })
 

@@ -1,16 +1,36 @@
 const router = require("express").Router();
 const models = require("../../models");
-const fakeDb = require("../../config/fakedb")
+// const fakeDb = require("../../config/fakedb")
 
 router.route("/")
-  .post((req, res) => {
-    // create new event
-    res.json({ data: 'events' })
+  .post(async (req, res) => {
+    const groupId = parseInt(req.body.groupId)
+    const userId = parseInt(req.body.userId)
+    try {
+      const event = await models.Event.create({
+        name: req.body.name,
+        location: req.body.location,
+        date: req.body.date,
+        isActive: true
+      })
+      const setGroup = event.setGroup(groupId)
+      const setAdmin = event.setUser(userId)
+      const setAssociations = await Promise.all([setGroup, setAdmin])
+      res.json({ data: event })
+    } catch (err) {
+      res.json({ error: err })
+    }
   })
 
 router.route("/byUser/:userId")
   .get((req, res) => {
-    res.json({ data: 'events' })
+    const id = parseInt(req.params.userId)
+    models.User.findByPk(id)
+      .then(user => {
+        res.json({ data: user.Events })
+      }).catch(err => {
+        res.json({ error: err })
+      })
   })
 
 router.route("/byGroup/:groupId")
@@ -59,7 +79,6 @@ router.route("/detail/:eventId")
     // delete event
     res.json({ data: 'events' })
   })
-
 
 
 // get photos by event id

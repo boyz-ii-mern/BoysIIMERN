@@ -18,21 +18,24 @@ router
   })
 
 router.route("/profile/:userId")
-  .get((req, res) => {
-    console.log("getting profile")
-    // get user info
+  .get(async (req, res) => {
     const id = parseInt(req.params.userId)
-    models.User.findByPk(id)
-      .then(user => {
-        // all groups user is a part of
-        // models.Membership.findOne()
-        res.json({ data: user })
-      }).catch(
-        console.log
-      )
-
-    // all events user is a part of
-    // res.json({ data: 'profile' })
+    try {
+      const user = await models.User.findByPk(id)
+      const memberships = await models.Membership.findAll({
+        where: {
+          UserId: user.id
+        }
+      })
+      const groupQueries = memberships.map(m => models.Group.findByPk(m.GroupId))
+      const groups = await Promise.all(groupQueries)
+      res.json({ data: {
+        user: user,
+        groups: groups
+      } })
+    } catch (err) {
+      res.json({ error: err })
+    }
   })
 
 router
