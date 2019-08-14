@@ -103,6 +103,19 @@ async function seedDatabase() {
         date: "08/10/2019",
     })
     await event1.addEventPhoto(eventPhoto3)
+
+    const comment1 = await Comment.create({
+       body: "This is gonna be a great party"
+    })
+    await event1.addComment(comment1)
+    await user1.addComment(comment1)
+
+    const comment2 = await Comment.create({
+        body: "I'm gonna have a good time"
+     })
+     await event1.addComment(comment2)
+     await user2.addComment(comment2)
+
 }
 
 models.sequelize.sync().then(() => {

@@ -125,7 +125,7 @@ router.route("/detail/:eventId")
     }
   })
 
-// TODO: ALL THIS
+
 // get all event photos by event id
 router.route("/photos/:eventId")
   .get(async (req, res) => {
@@ -187,82 +187,71 @@ router.route("/photos/:eventId")
     }
   })
 
-// TODO: ALL THIS
+
 // get all event comments (by event id)
 router.route("/comments/:eventId")
   .get(async (req, res) => {
-    const id = parseInt(req.params.groupId)
+    const id = parseInt(req.params.eventId)
     try {
-      const memberships = await models.Membership.findAll({
+      const comments = await models.Comment.findAll({
         where: {
-          GroupId: id
-        }
+          EventId: id
+        },
+        include: [{
+          model: models.User
+        }]
       })
-      const userQueries = memberships.map(m => models.User.findByPk(m.UserId))
-      const users = await Promise.all(userQueries)
       res.json({
         data: {
-          members: users
+          comments: comments
         }
       })
     } catch (err) {
       console.log(err)
-      res.json({ error: err.toString() })
+      res.json({ error: err.message })
     }
   })
   .post(async (req, res) => {
+    const eventId = parseInt(req.params.eventId)
+    const userId = parseInt(req.body.userId)
     try {
-      // TODO: if user already in group, should NOT be added again
-      const groupId = parseInt(req.params.groupId)
-      const userId = parseInt(req.body.newMember)
-      const newMembership = await models.Membership.create({
+      await models.Comment.create({
+        body: req.body.body,
         UserId: userId,
-        GroupId: groupId
+        EventId: eventId
       })
-      const memberQueries = await models.Membership.findAll({
+      const comments = await models.Comment.findAll({
         where: {
-          GroupId: groupId
-        }
+          EventId: eventId
+        },
+        include: [{
+          model: models.User
+        }]
       })
-      const memberships = await Promise.all(memberQueries)
-      const userQueries = memberships.map(m => models.User.findByPk(m.UserId))
-      const users = await Promise.all(userQueries)
       res.json({
         data: {
-          members: users
+          comments: comments
         }
       })
     } catch (err) {
       console.log(err)
-      res.json({ error: err })
+      res.json({ error: err.message })
     }
   })
   .delete(async (req, res) => {
+    const id = parseInt(req.body.commentId)
     try {
-      const groupId = parseInt(req.params.groupId)
-      const userId = parseInt(req.body.deleteMember)
-      const deleteMembership = await models.Membership.destroy({
+      await models.Comment.destroy({
         where: {
-          UserId: userId,
-          GroupId: groupId
+          id: id
         }
       })
-      const memberQueries = await models.Membership.findAll({
-        where: {
-          GroupId: groupId
-        }
-      })
-      const memberships = await Promise.all(memberQueries)
-      const userQueries = memberships.map(m => models.User.findByPk(m.UserId))
-      const users = await Promise.all(userQueries)
       res.json({
-        data: {
-          members: users
-        }
+        status: "ok"
       })
     } catch (err) {
       console.log(err)
-      res.json({ error: err })
+      res.json({ error: err.message })
     }
   })
 
