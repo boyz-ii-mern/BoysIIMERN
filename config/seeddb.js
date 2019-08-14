@@ -12,8 +12,8 @@ async function seedDatabase() {
         firstName: 'Joe',
         lastName: 'Man',
         superlative: 'Most Likely to Be Cool',
-
     })
+
     const user2 = await User.create({
         email: 'who@example.com',
         password: 'password',
@@ -21,12 +21,29 @@ async function seedDatabase() {
         lastName: 'Lady',
         superlative: 'Most Likely to Rob a Bank',
     })
+
     const user3 = await User.create({
         email: 'cando@example.com',
         password: 'password',
         firstName: 'Mister',
         lastName: 'Meeseeks',
         superlative: 'Most Likely to Get it DONE',
+    })
+
+    await User.create({
+        email: 'his@email.com',
+        password: 'password',
+        firstName: 'Monty',
+        lastName: 'Burns',
+        superlative: 'Most Likely to Be Rich',
+    })
+    
+    await User.create({
+        email: 'her@email.com',
+        password: 'password',
+        firstName: 'Minnie',
+        lastName: 'Mouse',
+        superlative: 'Most Likely to Be A Polka Dotted Mouse',
     })
 
     const image1 = await Image.create({

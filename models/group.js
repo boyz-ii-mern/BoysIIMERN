@@ -4,13 +4,13 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        bannerImage: {
+            type: DataTypes.STRING,
+            allowNull: true
+        }
     });
 
     Group.associate = function (models) {
-        Group.hasOne(models.Image, {
-            as: "Banner"
-        });
-
         Group.hasMany(models.Event, {
             onDelete: 'cascade'
         });

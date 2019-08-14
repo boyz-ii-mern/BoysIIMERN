@@ -35,7 +35,6 @@ router.route("/byUser/:userId")
 
 router.route("/byGroup/:groupId")
   .get((req, res) => {
-    // res.json(fakeDb.getEventsByGroup)
     const id = parseInt(req.params.groupId)
     models.Group.findByPk(id, {
       include: [{
