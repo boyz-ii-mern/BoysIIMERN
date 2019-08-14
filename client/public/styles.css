@@ -209,6 +209,26 @@ select {
 }
 
 
+/* ----------------- Superlatives Section ----------------- */
+.superlative-user-image {
+    width: 60px!important;
+    height: 60px!important;
+    margin-right: 10px;
+}
+
+.superlatives-form-container {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    margin: 0 auto;
+
+}
+
+.superlatives-form {
+    display: flex;
+    justify-content:space-between;
+    width: 100%;
+}
 
 /* -------------------------------- Create Event Form ----------------------------- */
 .create-form-row {

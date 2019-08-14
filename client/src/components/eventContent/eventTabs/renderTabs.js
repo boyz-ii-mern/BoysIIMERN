@@ -4,6 +4,7 @@ import Comments from '../Comments/commentSection';
 import AddComment from '../Comments/addComment';
 import Photos from '../../photoTasks/Photos';
 import Superlatives from '../Superlatives/superlatives';
+import SuperlativesForm from '../Superlatives/addSuperlativeForm';
 
 function RenderTabs(props) {
     // console.log("rendertabs", props)
@@ -18,6 +19,7 @@ function RenderTabs(props) {
                    <Photos />
                 </div>
                 <div label="Superlatives">
+                    <SuperlativesForm />
                     <Superlatives />
                 </div>
             </TabsTest>
