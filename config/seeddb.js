@@ -55,27 +55,27 @@ async function seedDatabase() {
         BannerId: image1.id
     })
 
-    const membership1 = await Membership.create({
+    await Membership.create({
         UserId: user1.id,
         GroupId: groupApple.id,
     })
-    const membership2 = await Membership.create({
+    await Membership.create({
         UserId: user2.id,
         GroupId: groupApple.id,
     })
-    const membership3 = await Membership.create({
+    await Membership.create({
         UserId: user3.id,
         GroupId: groupApple.id,
     })
 
-    const event = await Event.create({
+    const event1 = await Event.create({
         name: "Game Night",
         location: "MJ's House",
         date: "08/10/2019",
         isActive: true,
     })
-    groupApple.addEvent(event)
-    user1.addEvent(event)
+    await groupApple.addEvent(event1)
+    await user1.addEvent(event1)
 
     const event2 = await Event.create({
         name: "Dance Party",
@@ -83,16 +83,26 @@ async function seedDatabase() {
         date: "08/30/2019",
         isActive: true,
     })
-    groupApple.addEvent(event2)
-    user2.addEvent(event2)
+    await groupApple.addEvent(event2)
+    await user2.addEvent(event2)
 
     const eventPhoto1 = await EventPhoto.create({
+        url: "samplerphotouno.org",
+        date: "08/10/2019",
+    })
+    await event1.addEventPhoto(eventPhoto1)
+
+    const eventPhoto2 = await EventPhoto.create({
         url: "photos.org",
         date: "08/10/2019",
     })
+    await event2.addEventPhoto(eventPhoto2)
 
-    event.addEventPhoto(eventPhoto1)
-
+    const eventPhoto3 = await EventPhoto.create({
+        url: "samplephoto3.org",
+        date: "08/10/2019",
+    })
+    await event1.addEventPhoto(eventPhoto3)
 }
 
 models.sequelize.sync().then(() => {
