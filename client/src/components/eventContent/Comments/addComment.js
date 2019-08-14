@@ -4,7 +4,7 @@ import React, { Component } from "react";
 class AddComment extends Component {
     constructor(props) {
         super(props);
-        this.state = { value: "" };
+        this.state = { comment: "" };
     
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,9 +29,10 @@ class AddComment extends Component {
         return (
           <form onSubmit={this.handleSubmit}>
             <label>
-              What's on your mind?
               <input
                 type="text"
+                name="comment"
+                placeholder="Say something. Or don't."
                 value={this.state.value}
                 onChange={this.handleChange}
               />
