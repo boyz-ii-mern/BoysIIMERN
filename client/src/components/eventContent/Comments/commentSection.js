@@ -1,19 +1,16 @@
 import React, { Component } from "react";
 import CommentList from "./comment";
 
-class Comments extends Component {
+function Comments (props){
 
-
-  render () {
       return (
           <div>
               {/* //input form */}
               {/* //comment generator */}
-              <CommentList />
+              <CommentList comments={props.comments} />
           </div>
       )
   }
 
-}
 
 export default Comments;

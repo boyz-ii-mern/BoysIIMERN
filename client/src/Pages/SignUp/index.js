@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { IdentityContext } from "../../identity-context";
 
-import User from "../../components/User";
+// import User from "../../components/User";
 
 class SignUp extends Component {
     state = {
@@ -10,7 +10,7 @@ class SignUp extends Component {
         password: "",
         firstName: "",
         lastName: "",
-        photo: "",
+        avatar: "",
         superlative: "",
         user: {},
         loggedIn: false
@@ -40,45 +40,43 @@ class SignUp extends Component {
     signup = event => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         event.preventDefault();
-    
-        // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
-        alert(`Hello ${this.state.firstName} ${this.state.lastName}`);
 
-        
-        axios.post("/api/user/signup", { "email": this.state.username, 
-        "password": this.state.password, 
-        "firstName": this.state.firstName, 
-        "lastName": this.state.lastName, 
-        "photo": this.state.photo,
-        "superlative": this.state.superlative})
+        axios.post("/api/user/signup", {
+            "email": this.state.username,
+            "password": this.state.password,
+            "firstName": this.state.firstName,
+            "lastName": this.state.lastName,
+            "avatar": this.state.avatar,
+            "superlative": this.state.superlative
+        })
             .then((response) => {
-                let resOBJ =JSON.parse(response.config.data);
+                let resOBJ = JSON.parse(response.config.data);
                 console.log("this is resOBJ", resOBJ);
                 axios.post("/api/user/login", { "username": resOBJ.email, "password": resOBJ.password })
-                .then((response) => {
-                    console.log("this is login response: ", response)
-                    if (response.status == 200){
-                        this.setState({
-                            user: response.data,
-                            loggedIn: true,
-                            username: "",
-                            password: "",
-                            errorMessage: ""
-                        })
-                        window.location.href = "/";
-                    }
-                    
-                })
-                .catch(error => {
-                    console.log("LOGIN ERROR")
-                    this.setState({
-                        user: {},
-                        logginId: false,
-                        errorMessage: "Error logging in"
+                    .then((response) => {
+                        console.log("this is login response: ", response)
+                        if (response.status == 200) {
+                            this.setState({
+                                user: response.data,
+                                loggedIn: true,
+                                username: "",
+                                password: "",
+                                errorMessage: ""
+                            })
+                            window.location.href = "/home";
+                        }
+
                     })
+            })
+            .catch(error => {
+                console.log("LOGIN ERROR")
+                this.setState({
+                    user: {},
+                    logginId: false,
+                    errorMessage: "User Already Exists"
                 })
             })
-      };
+    };
 
     render() {
         return (
@@ -88,76 +86,68 @@ class SignUp extends Component {
                 login: this.login,
                 logout: this.logout
             }}>
-                <IdentityContext.Consumer>
-                    {({ user, logout }) => (
-                        <div>
-                            <span>{user.username}</span>
-                            <button onClick={logout}>Logout</button>
-                        </div>
-                    )}
-                </IdentityContext.Consumer>
                 <div className="Login">
-                    <h1>React-Passport-Context</h1>
                     <IdentityContext.Consumer>
-                        {({ user, loggedIn }) => (
-                            <h2>{this.state.errorMessage
+                    {({ user, loggedIn }) => (
+                            <h4>{this.state.errorMessage
                                 ? this.state.errorMessage
                                 : loggedIn
-                                    ? `${user.username} is logged in`
-                                    : "Logged Out"}</h2>
+                                    ? `Signed In!`
+                                    : ""}</h4>
                         )}
                     </IdentityContext.Consumer>
                     <IdentityContext.Consumer>
                         {({ user, loggedIn, login }) => (
-                            <form>
-                                <input
-                                    type="text"
-                                    name="username"
-                                    placeholder="Email"
-                                    value={this.state.username}
-                                    onChange={this.handleInputChange} /><br />
-                                <input
-                                    type="password"
-                                    name="password"
-                                    placeholder="Password"
-                                    value={this.state.password}
-                                    onChange={this.handleInputChange} /><br />
-                                <input
-                                    type="text"
-                                    name="firstName"
-                                    placeholder="First Name"
-                                    value={this.state.firstName}
-                                    onChange={this.handleInputChange} /><br />
-                                <input
-                                    type="text"
-                                    name="lastName"
-                                    placeholder="Last Name"
-                                    value={this.state.lastName}
-                                    onChange={this.handleInputChange} /><br />
-                                <input
-                                    type="text"
-                                    name="photo"
-                                    placeholder="Photo"
-                                    value={this.state.photo}
-                                    onChange={this.handleInputChange} /><br />
-                                <input
-                                    type="text"
-                                    name="superlative"
-                                    placeholder="Superlative"
-                                    value={this.state.superlative}
-                                    onChange={this.handleInputChange} /><br />
-                                <input
-                                    type="submit"
-                                    name="submit"
-                                    value="SignUp"
-                                    onClick={this.signup} />
-                            </form>
+                            <div className="row create-form-row">
+                                <div className="card col sm12 m10 l8 form-card">
+                                    <div className="card-header">
+                                        <h5>Create An Account</h5>
+                                    </div>
+                                    <form className="form create-event-form">
+                                        <input
+                                            type="text"
+                                            name="username"
+                                            placeholder="Email"
+                                            value={this.state.username}
+                                            onChange={this.handleInputChange} /><br />
+                                        <input
+                                            type="password"
+                                            name="password"
+                                            placeholder="Password"
+                                            value={this.state.password}
+                                            onChange={this.handleInputChange} /><br />
+                                        <input
+                                            type="text"
+                                            name="firstName"
+                                            placeholder="First Name"
+                                            value={this.state.firstName}
+                                            onChange={this.handleInputChange} /><br />
+                                        <input
+                                            type="text"
+                                            name="lastName"
+                                            placeholder="Last Name"
+                                            value={this.state.lastName}
+                                            onChange={this.handleInputChange} /><br />
+                                        <input
+                                            type="text"
+                                            name="avatar"
+                                            placeholder="Avatar"
+                                            value={this.state.avatar}
+                                            onChange={this.handleInputChange} /><br />
+                                        <input
+                                            type="text"
+                                            name="superlative"
+                                            placeholder="Superlative"
+                                            value={this.state.superlative}
+                                            onChange={this.handleInputChange} /><br />
+                                        <button className="waves-effect waves-light btn create-form-submit" type="submit" name="submit" value="SignUp" onClick={this.signup}>submit</button>
+                                    </form>
+                                </div>
+                            </div>
                         )}
                     </IdentityContext.Consumer>
                 </div>
-                <div>
-                    <User />
-                </div>
+
             </IdentityContext.Provider>
         );
     }

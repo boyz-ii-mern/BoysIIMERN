@@ -88,10 +88,8 @@ class Form extends Component {
     // Notice how each input has a `value`, `name`, and `onChange` prop
     return (
      <div className="row create-form-row">
-          <div className="card col sm12 m10 l8 form-card">
-          <div className="card-header">
-                <h5>Create A New Event</h5>
-            </div>
+          <div className="card col sm12 m10 l8 form-card sign-in-form-card">
+          <h3 className="sign-in-header">Create New Event</h3>
             <p>
               You're going to: {this.state.eventName} in {this.state.eventLocation} with {this.state.addFriends} on {this.state.date}
             </p>

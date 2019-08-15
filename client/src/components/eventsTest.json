@@ -4,7 +4,7 @@
     "event": "Ice Skating at Maggie Daley Park",
     "location": "Maggie Daley Park",
     "date": "08/15/2019",
-    "members": ["Daniel, Patricia, Maggie Jo, Steph"],
+    "members": ["Daniel", "Patricia", "Maggie Jo", "Steph"],
     "comments": [
       {"user": "Daniel",
        "message": "I hate ice skating!"

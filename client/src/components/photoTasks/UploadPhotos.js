@@ -1,7 +1,12 @@
+// UPLOAD PHOTOS
 // Import Necessary Libraries
 // React & ShortID
 import React, { Component } from "react";
 import shortid from 'shortid'
+
+// Pull from Events to get event ID for metadata and future img sorting
+import RenderEventID from "./EventPhotoID";
+
 
 // FilePond
 import { FilePond, registerPlugin, File } from "react-filepond";
@@ -13,30 +18,31 @@ import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 
 // Firebase
-import { storage, database } from "../firebase";
+import { storage, database } from "../../firebase";
 import "firebase/storage";
 import "firebase/database";
 
 // Register Filepond Plugins for Additional Functionality
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-
 // Start of Photobook Component
-class Photobook extends Component {
+class UploadPhotos extends Component {
     constructor(props) {
         super(props);
+
         // Reference Firebase 
         this.storageRef = storage;
         this.databaseRef = database;
-    }
-        state = {
-           files: [],
-           uploadValue: 0,
-           filesMetadata: [],
-           rows: [],
-        };
 
-    
+    }
+
+        state = {
+            files: [],
+            url: null,
+            uploadValue: 0,
+            metadataFile: [],
+            rows: [],
+        };
 
 
     // Handles our Image Storage
@@ -55,12 +61,12 @@ class Photobook extends Component {
 
         // Handle Uploading Here
             task.on(`state_changed` , (snap) => {
-                let percentage = (snap.bytesTransferred / snap.totalBytes) * 100;
-                console.log(percentage);
-                // Process
-                this.setState({
-                    uploadValue: percentage 
-                })
+                // let percentage = (snap.bytesTransferred / snap.totalBytes) * 100;
+                // console.log(percentage);
+                // // Process
+                // this.setState({
+                //     uploadValue: percentage 
+                // })
             }, (err) => {
                 // Log Error
                 console.log("error: %o", err);
@@ -69,7 +75,7 @@ class Photobook extends Component {
                 // Success
                 console.log("VICTORY");
                 this.setState({
-                    picture: task.snapshot.downloadURL
+                    url: task.snapshot.downloadURL
                 })
 
                 // Get Metadata
@@ -84,17 +90,20 @@ class Photobook extends Component {
                             contentType: metadata.contentType,
                             fullPath: metadata.fullPath,
                             downloadURL: url,
-                            id: id 
+                            id: id,
+                            // eventID: eventsTest.id,
+                            // comments: TO DO,
+                            // peepsTagged: TO DO
                         }
 
                     // Save Metadata
-                    this.databaseRef.child(`${file.url}`).push({ metadataFile });
+                    this.databaseRef.child('images').push({ metadataFile });
                         // this.databaseRef.child(`${file.url}`).child(`log`).push().set({
                         //     action: `${file.name} uploaded.`,
                         //     timestamp:new Date()
                         // });
                     })
-                    alert("Immortalized on the Internet FOREVER!")
+                    // alert("Immortalized on the Internet FOREVER!")
 
                 }).catch(function(error) {
                     console.log(error)
@@ -102,7 +111,7 @@ class Photobook extends Component {
         
         })
     }
-
+    
     handleInit() {
         console.log("FilePond ACTIVATED", this.pond);
     }
@@ -114,21 +123,15 @@ class Photobook extends Component {
             flexDirection: 'column'
         };
 
-        const arrayStyle = {
-            marginTop: '10rem',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center'
-        };
-
         return(
-            <div className="Photobook" style={uploadStyle}>
+            <div>
+            <RenderEventID />
+            <div style={uploadStyle}>
                 <FilePond
                     ref={ref => (this.pond = ref)}
                     files={this.state.files}
                     allowMultiple={true}
-                    maxFiles={5}
+                    maxFiles={10}
                     server={{process : this.handleProcessing.bind(this)}}
                     oninit={() => this.handleInit()}
                 >
@@ -136,14 +139,12 @@ class Photobook extends Component {
                         <File key = {file} source = {file}/>
                     ))}
                 </FilePond>
-                <div id="imgArray" style={arrayStyle}>
-                    <h4>Images Will Show Here</h4>
-                    <img></img>
-                </div>
-            </div>
-        )
-    }
 
+            </div>
+            </div>
+        );
+    }
 }
 
-export default Photobook;
+
+export default UploadPhotos;

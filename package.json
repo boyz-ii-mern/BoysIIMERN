@@ -27,6 +27,7 @@
     "filepond-plugin-image-exif-orientation": "^1.0.6",
     "filepond-plugin-image-preview": "^4.2.1",
     "firebase": "^6.3.4",
+    "firebase-app": "0.0.1",
     "if-env": "^1.0.4",
     "materialize": "^1.0.0",
     "mysql": "^2.17.1",
@@ -36,6 +37,7 @@
     "prop-types": "^15.7.2",
     "react-filepond": "^7.0.1",
     "react-images-upload": "^1.2.7",
+    "react-router": "^5.0.1",
     "sequelize": "^5.12.3",
     "session": "^0.1.0",
     "shortid": "^2.2.14"

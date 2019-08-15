@@ -8,12 +8,10 @@ import Navbar from "./components/Navbar";
 import Login from "./Pages/Login";
 import FormContainer from "./Pages/FormTest";
 import Form from "./Pages/FormTest";
-import Photobook from "./components/Photobook";
 import TabsTest from "./components/eventContent/eventTabs/tabContent";
 import RenderTabs from "./components/eventContent/eventTabs/renderTabs";
 import SignUp from "./Pages/SignUp"
-
-
+import Photos from "./components/photoTasks/Photos";
 // import Nav from "./components/Nav";
 
 function App() {
@@ -37,10 +35,11 @@ function App() {
         <Navbar />
         <div className="container">
           <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Login} />
+          <Route exact path="/home" component={Home} />
           <Route exact path="/events/:id" component={EventsTest} />
           <Route exact path="/events" component={Events} />
-          <Route exact path="/photobook" component={Photobook} />
+          <Route exact path="../:id" component={Photos} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/formtest" component={Form} />
           <Route exact path="/tabstest" component={RenderTabs} />

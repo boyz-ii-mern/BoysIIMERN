@@ -2,6 +2,14 @@
 body {
     background-color: #fafafa;
 }
+
+.likely-navbar {
+    background-image:
+    linear-gradient(
+      to bottom, 
+      rgb(95, 112, 130) 5%, #556270 95%
+    );
+}
 /* --------- Fonts --------- */
 h1 {
     color: blue;
@@ -13,6 +21,13 @@ h4 {
     margin: 0px;
     font-family: 'Open Sans', sans-serif;
     font-weight: 600;
+}
+
+.sign-in-header {
+    color:#fff;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700!important;
 }
 h5 {
     color: #ffffff;
@@ -42,9 +57,20 @@ a {
     font-weight: 700;
 }
 
+/* --------- Forms --------- */
+
+input {
+    background-color: #fff!important;
+    color: #556270!important;
+    border-radius: 5px!important;
+    padding-left: 30px!important;
+    margin-left: -30px!important;
+}
+
 button {
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
+    background: #FA8334!important;
 }
 
 form {
@@ -99,6 +125,16 @@ select {
     width: 100%;
     z-index: -10;
     padding-top: 20px;
+}
+
+.sign-in-form-card {
+    margin-top: 50px!important;
+    background-image:
+    linear-gradient(
+      to top, 
+      #FDC199, #FA8334
+    );
+    padding-top: 40px!important;
 }
 
 /* -------------------------------- User Card ----------------------------- */
@@ -208,6 +244,59 @@ select {
     font-size: 16px;
 }
 
+.add-comment-form {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+}
+
+.add-comment-input {
+    padding-left: 10px!important;
+    margin-left: 0px!important;
+}
+
+.add-comment-label {
+    width: 70%;
+}
+
+/* ----------------- Superlatives Section ----------------- */
+.superlative-user-image {
+    width: 60px!important;
+    height: 60px!important;
+    margin-right: 10px;
+}
+
+.superlatives-users-container {
+    justify-content: space-between;
+    margin: 0 auto;
+    padding-left: 30px;
+}
+
+.superlatives-form-container {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    margin-left: 0px!important;
+    margin-right: 0px!important;
+
+}
+
+.superlatives-form {
+    display: flex;
+    justify-content:space-evenly;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.superlatives-input, .superlatives-select {
+    margin-left: 0px!important;
+}
+
+.superlatives-select-input {
+    height: 30px!important;
+}
+
+
 
 
 /* -------------------------------- Create Event Form ----------------------------- */
@@ -224,13 +313,32 @@ select {
 .create-event-form {
     padding: 50px!important;
     text-align: center;
+    margin: 0 auto!important;
+    width: 80%;
 }
 
 .create-event-select {
     padding: 10px 10px 10px 10px!important;
-    margin-top: 10px!important;
+    /* margin-top: 10px!important; */
+    margin-bottom: 30px!important;
+    width: 100%!important;
 }
 
 .create-form-submit {
     width: 200px!important;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    background-color: #556270!important;
+}
+
+.create-event-form input {
+    margin-bottom: 30px!important;
+}
+
+
+/* -------------------------------- Sign In/Up Form ----------------------------- */
+.sign-up-button {
+    background-color: #fff!important;
+    color: #556270;
+    margin-top: 10px;
 }

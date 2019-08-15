@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import eventsTest from "./eventsTest.json"; //<--this is just a test variable object used to dynamically create each event
 
 
-console.log("this is eventsTest", eventsTest)
+// console.log("this is eventsTest", eventsTest)
 
 class Events extends Component {
     //set initial state

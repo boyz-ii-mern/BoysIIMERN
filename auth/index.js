@@ -1,34 +1,31 @@
 const passport = require("passport");
 // const user = require("../models/user").user
 const models = require("../models");
-var LocalStrategy = require("passport-local").Strategy;
+const LocalStrategy = require("passport-local").Strategy;
+// const jwt = require("jsonwebtoken")
 
 passport.use(new LocalStrategy(
     function (email, password, done) { // callback with email and password from our form
         console.log("this is email: ", email);
-
-        // user.userSearch(email, function (data) {
-        //     console.log("this is the mysql user data: ", data);
-        //     if (!data[0]) {
-        //         return console.log("Incorrect Email");
-        //     }
-        //     else if (data[0].password != password || !data[0]) {
-        //         return console.log("Incorrect Password");
-        //     }
-
-        //     let user = { username: data[0].email };
-        //     return done(null, user);
-
-        // });
+        console.log("this is email: ", password);
 
         models.User.findOne({
             where: {
-                "email": email
+                "email": email,
+                "password": password
             }
-        }).then(function(data){
-            // console.log(data);
-            let user = { username: data.email, firstName: data.firstName, superlative: data.superlative, photo: data.superlative}
-            return done(null,user);
+        }).then(function (data) {
+            if (data == null) {
+                return done(null)
+            } else {
+                let user = { username: data.email, firstName: data.firstName, superlative: data.superlative, avatar: data.avatar }
+                console.log("this is authenticated user object", user);
+                return done(null, user);
+            }
+
+        }).catch(err => {
+            console.log(err);
+            return done(err);
         })
 
     }
@@ -40,14 +37,47 @@ passport.use(new LocalStrategy(
 // passport needs methods to serialize and deseralize the user
 // this is a simple example, the serialzed user is the username -- which is stored in the session.
 passport.serializeUser(function (user, callback) {
-    callback(null, {username: user.username, firstName: user.firstName, superlative: user.superlative, photo: user.superlative});
+    callback(null, { username: user.username, firstName: user.firstName, superlative: user.superlative, avatar: user.avatar });
 });
 
 // the deserialized user is an object with a username property -- which is availabe as request.user
 passport.deserializeUser(function (user, callback) {
-    callback(null, { username: user.username, firstName: user.firstName, superlative: user.superlative, photo: user.superlative});
+    callback(null, { username: user.username, firstName: user.firstName, superlative: user.superlative, avatar: user.avatar });
 });
 
 
+function isAuthenticated(req, res, next) {
+    // if (req.user) {
+    //     return next();
+    // }
+    // return res.redirect("/");
+    return next()
+};
 
-module.exports = passport;
+
+// const generateToken = username => (req, res) => {
+//     const expiration = Date.now() + 3600000
+//     const token = jwt.sign({user: username}, process.env.AUTH_SECRET, {
+//         expiresIn: 3600
+//     })
+//     res.json({
+//         token: token,
+//         username: username,
+//         expiration: expiration
+//     })
+// }
+
+// const jwtAuth = (req, res, next) => {
+//     const token = req.headers['token']
+//     if (token)
+//         jwt.verify(token, process.env.AUTH_SECRET, (err, decode) => {
+//             if (err)
+//                 res.status(500).json({error: 'Invalid token'})
+//             else next()
+//         })
+//     else res.json({error: 'Must include token with requests'})
+// }
+
+
+
+module.exports = { passport, isAuthenticated }
