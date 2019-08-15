@@ -10,6 +10,10 @@ body {
       rgb(95, 112, 130) 5%, #556270 95%
     );
 }
+
+.brand-logo {
+    margin-top: 8px!important;
+}
 /* --------- Fonts --------- */
 h1 {
     color: blue;

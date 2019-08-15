@@ -41,7 +41,7 @@ class EventsTest extends Component {
           <GroupMembers member={this.state.staticEvent.members}/>
 
           {/* Currently commented out GroupEvents */}
-          {/* <GroupEvents /> */}
+          <GroupEvents />
         </div>
         <div className="col s12 m8 l9 event-content">
           <EventContainer comments={this.state.staticEvent.comments}/>

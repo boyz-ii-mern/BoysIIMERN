@@ -11,7 +11,7 @@ function GroupMembers (props) {
             //component for group member card
             <div className="card col">
                 <div className="card-header">
-                    <h5>Group Member List</h5>
+                    <h5>Members</h5>
                 </div>
    
             {currentMembers.map(gmember => (
