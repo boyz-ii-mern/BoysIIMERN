@@ -14,7 +14,7 @@ class UserProfile extends Component {
                             <div className="section">
                                 {/* update username to database */}
 
-                                <img src={user.photo != null ? `${user.photo}` : `../Images/avatar-01.png`} alt="" className="circle responsive-img profile-image" />
+                                <img src={user.avatar != null ? `${user.avatar}` : `../Images/avatar-01.png`} alt="" className="circle responsive-img profile-image" />
 
                                 <h4>{loggedIn ? `${user.firstName}` : `Username`}</h4>
 

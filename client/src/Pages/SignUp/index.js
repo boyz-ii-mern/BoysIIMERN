@@ -10,7 +10,7 @@ class SignUp extends Component {
         password: "",
         firstName: "",
         lastName: "",
-        photo: "",
+        avatar: "",
         superlative: "",
         user: {},
         loggedIn: false
@@ -46,7 +46,7 @@ class SignUp extends Component {
             "password": this.state.password,
             "firstName": this.state.firstName,
             "lastName": this.state.lastName,
-            "photo": this.state.photo,
+            "avatar": this.state.avatar,
             "superlative": this.state.superlative
         })
             .then((response) => {
@@ -130,9 +130,9 @@ class SignUp extends Component {
                                             onChange={this.handleInputChange} /><br />
                                         <input
                                             type="text"
-                                            name="photo"
-                                            placeholder="Photo"
-                                            value={this.state.photo}
+                                            name="avatar"
+                                            placeholder="Avatar"
+                                            value={this.state.avatar}
                                             onChange={this.handleInputChange} /><br />
                                         <input
                                             type="text"
