@@ -65,7 +65,7 @@ class Navbar extends Component {
         //    let buttonText = this.state.loggedIn ? "Log Out" : "Log In"
         //    console.log("this is the buttonText",buttonText);
         return (
-            <nav>
+            <nav className="likely-navbar">
                 <IdentityContext.Provider value={{
                     user: this.state.user,
                     loggedIn: this.state.loggedIn,
@@ -81,7 +81,7 @@ class Navbar extends Component {
                         <li><Link to='/formtest'>Create Event</Link></li>
                         <IdentityContext.Consumer>
                             {({ user, logout }) => (
-                                <button onClick={this.handleOnClick}>{this.state.loggedIn == true ? `Log Out` : `Login`}</button>
+                                <button className="waves-effect waves-light btn add-comment-submit" onClick={this.handleOnClick}>{this.state.loggedIn == true ? `Log Out` : `Login`}</button>
                             )}
                         </IdentityContext.Consumer>
 

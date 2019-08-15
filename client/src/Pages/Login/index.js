@@ -85,10 +85,8 @@ class Login extends Component {
                 login: this.login,
                 logout: this.logout
             }}>
-                <div className="card col sm12 m10 l8 form-card">
-                    <div className="card-header">
-                        <h5>Log In</h5>
-                    </div>
+                <div className="card col sm12 m10 l8 form-card sign-in-form-card">
+                    <h1 className="sign-in-header">Sign In</h1>
                     <IdentityContext.Consumer>
                         {({ user, loggedIn }) => (
                             <h4>{this.state.errorMessage
@@ -120,7 +118,7 @@ class Login extends Component {
                                     Submit
                                 </button>
                                 <p>Don't have an account?</p>
-                                <button onClick={this.handleSignUp} className="waves-effect waves-light btn sign-up-btn">Sign Up</button>
+                                <button onClick={this.handleSignUp} className="waves-effect waves-light btn sign-up-button">Sign Up</button>
                                
                             </form>
                         )}

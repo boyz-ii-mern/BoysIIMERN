@@ -2,6 +2,14 @@
 body {
     background-color: #fafafa;
 }
+
+.likely-navbar {
+    background-image:
+    linear-gradient(
+      to bottom, 
+      rgb(95, 112, 130) 5%, #556270 95%
+    );
+}
 /* --------- Fonts --------- */
 h1 {
     color: blue;
@@ -13,6 +21,13 @@ h4 {
     margin: 0px;
     font-family: 'Open Sans', sans-serif;
     font-weight: 600;
+}
+
+.sign-in-header {
+    color:#fff;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700!important;
 }
 h5 {
     color: #ffffff;
@@ -110,6 +125,16 @@ select {
     width: 100%;
     z-index: -10;
     padding-top: 20px;
+}
+
+.sign-in-form-card {
+    margin-top: 50px!important;
+    background-image:
+    linear-gradient(
+      to top, 
+      #FDC199, #FA8334
+    );
+    padding-top: 40px!important;
 }
 
 /* -------------------------------- User Card ----------------------------- */
@@ -294,11 +319,26 @@ select {
 
 .create-event-select {
     padding: 10px 10px 10px 10px!important;
-    margin-top: 10px!important;
+    /* margin-top: 10px!important; */
+    margin-bottom: 30px!important;
+    width: 100%!important;
 }
 
 .create-form-submit {
     width: 200px!important;
     margin-top: 40px;
     margin-bottom: 30px;
+    background-color: #556270!important;
+}
+
+.create-event-form input {
+    margin-bottom: 30px!important;
+}
+
+
+/* -------------------------------- Sign In/Up Form ----------------------------- */
+.sign-up-button {
+    background-color: #fff!important;
+    color: #556270;
+    margin-top: 10px;
 }

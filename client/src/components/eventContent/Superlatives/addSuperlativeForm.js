@@ -41,7 +41,7 @@ class SuperlativesForm extends Component {
                     <select className="superlatives-select-input" name="user" value={this.state.value} onChange={this.handleChange}>
                         {this.state.friends.map(friend => (
                         <option value={friend.name}>{friend.name}</option>
-                  ))}
+                        ))}
                     </select>
                 </label>
                 
