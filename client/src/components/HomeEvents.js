@@ -32,7 +32,6 @@ class HomeEvents extends Component {
         <div className="card col s12 m7">
           <div className="card-header my-events">
             <h5>My Events</h5>
-            <button className="create-event-btn">Create Event</button>
           </div>
           <div className="card-content">
             <div className="card-stacked">

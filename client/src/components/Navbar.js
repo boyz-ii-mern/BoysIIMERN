@@ -65,7 +65,7 @@ class Navbar extends Component {
         //    let buttonText = this.state.loggedIn ? "Log Out" : "Log In"
         //    console.log("this is the buttonText",buttonText);
         return (
-            <nav className="likely-navbar">
+            <nav className="likely-navbar row">
                 <IdentityContext.Provider value={{
                     user: this.state.user,
                     loggedIn: this.state.loggedIn,
@@ -74,7 +74,7 @@ class Navbar extends Component {
                 }}></IdentityContext.Provider>
 
                 <div className="nav-wrapper">
-                    <a href="/" className="brand-logo"><img src="../Images/logo.png" width="150px" /> </a>
+                    <a href="/" className="brand-logo"><img src="../Images/likely.png" width="100px" height="auto"/> </a>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         <li><Link to='/home'>Home</Link></li>
                         {/* <li><Link to='/events'>Events</Link></li> */}
