@@ -37,6 +37,7 @@
     "prop-types": "^15.7.2",
     "react-avatar-edit": "^0.8.3",
     "react-filepond": "^7.0.1",
+    "react-image-lightbox": "^5.1.0",
     "react-images": "^1.0.0",
     "react-images-upload": "^1.2.7",
     "react-photo-gallery": "6.2.1",
