@@ -45,7 +45,7 @@ router.route("/profile/:userId")
       })
     } catch (err) {
       console.log(err)
-      res.json({ error: err.toString() })
+      res.json({ error: err.message })
     }
   })
 
@@ -54,7 +54,7 @@ router
   .post(passport.authenticate("local"), (req, res) => {
     // console.log("this is req:", req)
     console.log("Authenticated User", req.user);
-    res.json(req.user);
+    res.json({ data: req.user });
   }
 
   );
@@ -73,15 +73,19 @@ router
           superlative: data.dataValues.superlative
         }
         console.log("this is the new user.username: ", user.username);
-        res.json(user.username);
+        res.json({ data: user.username });
       })
   })
 
 router
   .route("/logout")
   .post((req, res) => {
-    req.logout();
-    res.send("user logged out");
+    try {
+      req.logout();
+      res.json({ ok: true });
+    } catch (err) {
+      res.json({ error: err.message })
+    }
   })
 
 module.exports = router;

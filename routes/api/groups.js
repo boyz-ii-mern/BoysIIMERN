@@ -111,13 +111,6 @@ router
   .delete(async (req, res) => {
     try {
       const groupId = parseInt(req.params.groupId)
-      const userId = parseInt(req.body.deleteMember)
-      const deleteMembership = await models.Membership.destroy({
-        where: {
-          UserId: userId,
-          GroupId: groupId
-        }
-      })
       const memberQueries = await models.Membership.findAll({
         where: {
           GroupId: groupId
