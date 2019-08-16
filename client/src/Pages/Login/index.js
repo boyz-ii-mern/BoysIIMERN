@@ -20,7 +20,8 @@ class Login extends Component {
                     console.log("USER FROM API", response.data)
                     this.setState({
                         user: response.data,
-                        userStateInfo: `${response.data.username} is logged in`
+                        userStateInfo: `${response.data.username} is logged in`,
+                        loggedIn: true
                     })
                 }
             })

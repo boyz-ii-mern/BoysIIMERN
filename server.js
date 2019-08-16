@@ -5,7 +5,7 @@ const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const passport = require("./auth").passport;
-const config = require("./config/config");
+// const config = require("./config/config");
 const db = require("./models")
 
 // Define middleware here
