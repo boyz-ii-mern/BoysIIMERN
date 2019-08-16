@@ -39,7 +39,7 @@ function App() {
           <Route exact path="/home" component={Home} />
           <Route exact path="/events/:id" component={EventsTest} />
           <Route exact path="/events" component={Events} />
-          <Route exact path="../:id" component={Photos} />
+          <Route exact path="/events/photos/:eventId" component={Photos} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/createEvent" component={CreateEvent} />
           <Route exact path="/tabstest" component={RenderTabs} />

@@ -1,7 +1,8 @@
 // Import Necessary Libraries & Pages
 import React, { Component } from "react";
 import { render } from 'react-dom';
-import UploadPhotos from "./UploadPhotos";
+import StackGrid from "react-stack-grid";
+// import sizeMe from 'react-sizeme';
 
 // Firebase
 import { database, storage, firebase } from "../../firebase";
@@ -43,10 +44,11 @@ class Photos extends Component {
     
 
     render () {
+
         const imgStyle = {
-            maxHeight: "50%",
-            maxWidth: "50%",
-            padding: '1rem'
+            maxWidth: "100%",
+            maxHeight: "100%",
+            objectFit: "cover"
         };
 
         const imgDisplay = {
@@ -57,13 +59,16 @@ class Photos extends Component {
 
         return(
             <div>
-                <UploadPhotos />
-                <br/>
         
             <div className="imgDiv" style={imgDisplay}>
-                {this.state.images.map((url, i) => ( 
+            <StackGrid
+                 columnWidth={250}
+                 monitorImagesLoaded={true}
+                >
+                {this.state.images.reverse().map((url, i) => ( 
                 <img src={url} key={i} style={imgStyle}/>
                ))}
+            </StackGrid>
             </div>
         </div>
         );

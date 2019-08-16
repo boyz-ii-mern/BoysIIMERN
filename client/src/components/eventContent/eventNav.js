@@ -13,17 +13,7 @@ class EventNav extends Component {
 
                 <a href="">Comments</a>
 
-                {/* Testing to see if this will create a path to an event-linked photobook... */}
-                {/* This works in that the photobook/:id pops up, but needs fixing, as it maps the entire array rather than the single event we're in... Will use this now, for testing purposes. */}
-                <div>
-                     {this.state.eventsTest.map(thing => {
-                  return (
-                      <Link to={"/photos/" + thing.event} >
-                        Photo Gallery
-                      </Link>
-                  );
-                })}
-            </div>
+                <a href="">Photo Gallery</a>
 
                 <a href="">Superlatives</a>
 

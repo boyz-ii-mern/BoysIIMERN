@@ -5,7 +5,7 @@ import React, { Component } from "react";
 import shortid from 'shortid'
 
 // Pull from Events to get event ID for metadata and future img sorting
-import RenderEventID from "./EventPhotoID";
+import eventsTest from "../../components/eventsTest.json";
 
 
 // FilePond
@@ -42,13 +42,21 @@ class UploadPhotos extends Component {
             uploadValue: 0,
             metadataFile: [],
             rows: [],
+            // uploadEventId: "",
         };
 
+    // componentDidMount() { 
+    //     let uploadEventId = this.props.match.params.eventId;
+    //     console.log(uploadEventId); 
 
+    //     // this.setState({ uploadEventId: this.props.match.params.eventId });
+    //     // console.log(this.state); 
+    // };
+    
+        
     // Handles our Image Storage
     handleProcessing(fieldName, file, metadata, load, error, progress, abort) {
         // Logs for Testing
-        console.log("FILE UPLOADED HERE");
         console.log(this.storageRef.child(file.name).fullPath);
 
         const fileUpload = file;
@@ -56,20 +64,16 @@ class UploadPhotos extends Component {
         // ShortID 
         const id = shortid.generate();
 
-        const task = this.storageRef.child(file.name).put(fileUpload, {
+        const task = this.storageRef.child(`images/${file.name}`).put(fileUpload, {
             shortID: id});
 
         // Handle Uploading Here
-            task.on(`state_changed` , (snap) => {
-                // let percentage = (snap.bytesTransferred / snap.totalBytes) * 100;
-                // console.log(percentage);
-                // // Process
-                // this.setState({
-                //     uploadValue: percentage 
-                // })
+            task.on(`state_changed` , (snapshot) => {
+                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log('Upload is ' + progress + '% done');
             }, (err) => {
                 // Log Error
-                console.log("error: %o", err);
+                console.log(err);
                 error(err.message);
             }, () => {
                 // Success
@@ -79,10 +83,10 @@ class UploadPhotos extends Component {
                 })
 
                 // Get Metadata
-                this.storageRef.child(file.name).getMetadata().then((metadata) => {
+                this.storageRef.child(`images/${file.name}`).getMetadata().then((metadata) => {
                     // Metadata for 'filepond/${file.name}' contained
-                    let downloadURL = '';
-                    this.storageRef.child(file.name).getDownloadURL().then(url => {
+                    // let downloadURL = '';
+                    this.storageRef.child(`images/${file.name}`).getDownloadURL().then(url => {
                         console.log(url)
                         let metadataFile = {
                             name: metadata.name,
@@ -91,19 +95,11 @@ class UploadPhotos extends Component {
                             fullPath: metadata.fullPath,
                             downloadURL: url,
                             id: id,
-                            // eventID: eventsTest.id,
-                            // comments: TO DO,
-                            // peepsTagged: TO DO
+                            // eventId: this.uploadEventId,
                         }
-
                     // Save Metadata
                     this.databaseRef.child('images').push({ metadataFile });
-                        // this.databaseRef.child(`${file.url}`).child(`log`).push().set({
-                        //     action: `${file.name} uploaded.`,
-                        //     timestamp:new Date()
-                        // });
                     })
-                    // alert("Immortalized on the Internet FOREVER!")
 
                 }).catch(function(error) {
                     console.log(error)
@@ -117,6 +113,7 @@ class UploadPhotos extends Component {
     }
 
     render() {
+
         const uploadStyle = {
             marginTop: '2rem',
             display: 'flex',
@@ -125,7 +122,7 @@ class UploadPhotos extends Component {
 
         return(
             <div>
-            <RenderEventID />
+            {/* <RenderEventId /> */}
             <div style={uploadStyle}>
                 <FilePond
                     ref={ref => (this.pond = ref)}
