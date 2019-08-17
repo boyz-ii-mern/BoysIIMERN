@@ -172,7 +172,7 @@ select {
 }
 
 .profile-card {
-    background-color: #556270;
+    background-color: #556270!important;
 }
 /* -------------------------------- Group Events Card ----------------------------- */
 .events-card {
@@ -311,7 +311,7 @@ select {
 }
 
 .form-card {
-    margin: 0 auto;
+    margin: 0 auto!important;
 }
 
 .create-event-form {
