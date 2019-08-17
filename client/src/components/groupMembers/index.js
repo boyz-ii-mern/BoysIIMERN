@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import User from "./UserCard";
 
 function GroupMembers (props) {
-    // console.log("this is members props", props)
+    console.log("this is members props", props)
     let currentMembers = props.member
     console.log("currentMembers", currentMembers)
 

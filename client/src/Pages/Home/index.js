@@ -17,43 +17,56 @@ class Home extends Component {
     username: "",
     password: "",
     user: {},
-    loggedIn: false
+    loggedIn: false,
+    groups: "" || ["no members"]
   };
-  
+
   componentDidMount() {
     // check for logged in user
-    axios.get("/api/user")
-      .then(response => {
-        if (response.data) {
-          console.log("USER FROM API", response.data)
+    axios.get("/api/user").then(response => {
+      if (response.data) {
+        console.log("USER FROM API", response.data);
+        this.setState({
+          user: response.data,
+          userStateInfo: `${response.data.username} is logged in`,
+          loggedIn: true
+        });
+
+        axios.get("/api/groups/byUser/" + response.data.userId).then(next => {
+          if (next.data) {
+            console.log("get group data", next.data.data.groups);
           this.setState({
-            user: response.data,
-            userStateInfo: `${response.data.username} is logged in`,
-            loggedIn: true
+            groups: next.data.data.groups
           })
-        }
-      })
+          }
+        });
+      }
+    });
   }
 
   render() {
-    console.log('this is first load state', this.state);
+    console.log("this is first load state", this.state);
+    // console.log("this groups state", this.state.groups)
     return (
-      <IdentityContext.Provider value={{
-        user: this.state.user,
-        loggedIn: this.state.loggedIn
-      }}> 
-      <div>
-        <div className="row">
-          <div className="col s12 m5 side-content">
-
-            <UserProfile />
-            <Groups />
-
+      <IdentityContext.Provider
+        value={{
+          user: this.state.user,
+          loggedIn: this.state.loggedIn
+        }}
+      >
+        <div>
+          <div className="row">
+            <div className="col s12 m5 side-content">
+              <UserProfile />
+              {this.state.groups.map(groupName => (
+                <Groups 
+                group={groupName} />
+              ))}
+      
+            </div>
+            <HomeEvents />
           </div>
-          <HomeEvents />
-
         </div>
-      </div>
       </IdentityContext.Provider>
     );
   }

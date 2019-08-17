@@ -17,7 +17,6 @@ class EventsTest extends Component {
     
   state = {
     staticEvent: eventsTest[0] || []
-
   };
 
   componentDidMount() {
