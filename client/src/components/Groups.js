@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { IdentityContext } from "../identity-context";
 import axios from "axios";
-import GroupsList from "./GroupsList";
+// import GroupsList from "./GroupsList";
 
 
 function Groups (props) {
