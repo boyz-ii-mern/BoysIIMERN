@@ -2,6 +2,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { IdentityContext } from "../../identity-context";
+import 'materialize-css/dist/css/materialize.min.css';
+import M from "materialize-css";
 // import friends from "./users.json"
 
 
@@ -19,6 +21,15 @@ class Form extends Component {
         photolink: "",
     };
     componentDidMount() {
+
+        M.AutoInit();
+        //initialize materialize form plugin
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     // var elems = document.querySelectorAll('select');
+        //     // var instances = M.FormSelect.init(elems, options);
+        //     M.AutoInit();
+        //   });
+
     // check for logged in user
         axios.get("/api/user")
         .then(response => {
@@ -90,6 +101,9 @@ class Form extends Component {
     console.log("group name: ", this.state.groupName)
     console.log("group memberes: ", this.state.users)
 
+    //materialize code for getting values from select array -- maybe this is useful??
+    // instance.getSelectedValues();
+
 
     // // this is the post to create the event
     // axios.post("/api/events", {
@@ -141,12 +155,23 @@ class Form extends Component {
                     placeholder="Group Name"
                   />
                
-                  <select className="custom-select create-event-select" id="group-select" name="users" multiple onChange={this.handleInputChange}>
-                    {this.state.users.map(groups => (
+                  <div className="input-field">
+                      <select className="browser-default custom-select create-event-select" id="user-select" name="users" multiple onChange={this.handleInputChange}>
+                      <option value="" disabled selected>Choose your option</option>
+
+                        {/* {this.state.users.map(groups => (
+                          <option value={this.state.users}>User Name</option>
+                      ))} */}
+
+                      {/* fake data for testing -- remove for api calls */}
                       <option value={this.state.users}>User Name</option>
-                  ))}
-                    {/* <option value={this.state.groupId}>{this.state.group}</option> */}
-                  </select>
+                      <option value={this.state.users}>User Name</option>
+                      <option value={this.state.users}>User Name</option>
+
+
+                        {/* <option value={this.state.groupId}>{this.state.group}</option> */}
+                      </select>
+                  </div>
                   <input
                     // the value of form elements is tied to the state -- this means react will only update what you see on the page when the state is updated
                     value={this.state.photolink}
