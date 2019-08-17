@@ -89,7 +89,9 @@ class Navbar extends Component {
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         <li><Link to='/home'>Home</Link></li>
                         {/* <li><Link to='/events'>Events</Link></li> */}
+                        <li><Link to='/createGroup'>Create Group</Link></li>
                         <li><Link to='/createEvent'>Create Event</Link></li>
+                        
                         <IdentityContext.Consumer>
                             {({ user, logout }) => (
                                 <button className="waves-effect waves-light btn add-comment-submit" onClick={this.handleOnClick}>{this.state.loggedIn == true ? `Log Out` : `Login`}</button>
@@ -100,7 +102,9 @@ class Navbar extends Component {
 
                     <ul class="collapsible sidenav" id="mobile-demo">
                         <li><Link to='/home'>Home</Link></li>
+                        <li><Link to='/createGroup'>Create Group</Link></li>
                         <li><Link to='/createEvent'>Create Event</Link></li>
+
                         <li>
                             <IdentityContext.Consumer>
                                 {({ user, logout }) => (
