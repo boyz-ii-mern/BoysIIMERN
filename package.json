@@ -30,6 +30,7 @@
     "firebase-app": "0.0.1",
     "if-env": "^1.0.4",
     "materialize": "^1.0.0",
+    "materialize-css": "^1.0.0-rc.2",
     "mysql": "^2.17.1",
     "mysql2": "^1.6.5",
     "passport": "^0.4.0",

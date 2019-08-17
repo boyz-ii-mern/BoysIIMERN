@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"; //<!super important to get router to work 
 import axios from "axios";
 import { IdentityContext } from "../identity-context";
+import 'materialize-css/dist/css/materialize.min.css';
+import M from "materialize-css";
 
 class Navbar extends Component {
     state = {
@@ -12,6 +14,13 @@ class Navbar extends Component {
     }
 
     componentDidMount() {
+        M.AutoInit();
+        // initialize materialize plugin for mobile menu???
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            // var instances = M.Sidenav.init(elems, options);
+          });
+
         // check for logged in user
         axios.get("/api/user")
             .then(response => {
@@ -75,6 +84,8 @@ class Navbar extends Component {
 
                 <div className="nav-wrapper">
                     <a href="/" className="brand-logo"><img src="../Images/likely.png" width="100px" height="auto"/> </a>
+                    <a href="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
+
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         <li><Link to='/home'>Home</Link></li>
                         {/* <li><Link to='/events'>Events</Link></li> */}
@@ -85,6 +96,18 @@ class Navbar extends Component {
                             )}
                         </IdentityContext.Consumer>
 
+                    </ul>
+
+                    <ul class="collapsible sidenav" id="mobile-demo">
+                        <li><Link to='/home'>Home</Link></li>
+                        <li><Link to='/createEvent'>Create Event</Link></li>
+                        <li>
+                            <IdentityContext.Consumer>
+                                {({ user, logout }) => (
+                                    <button className="waves-effect waves-light btn add-comment-submit" onClick={this.handleOnClick}>{this.state.loggedIn == true ? `Log Out` : `Login`}</button>
+                                )}
+                            </IdentityContext.Consumer>
+                        </li>
                     </ul>
                 </div>
             </nav>
