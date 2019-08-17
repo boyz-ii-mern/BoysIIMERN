@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import User from "./UserCard";
 
 function GroupMembers (props) {
-    console.log("this is members props", props)
-    let currentMembers = props.member
-    console.log("currentMembers", currentMembers)
+    // console.log("this is members props", props)
+    // let currentMembers = props.member
+    // console.log("currentMembers", currentMembers)
 
 
         return(
@@ -14,11 +14,12 @@ function GroupMembers (props) {
                     <h5>Members</h5>
                 </div>
    
-            {currentMembers.map(gmember => (
+            {/* {currentMembers.map(gmember => (
         //   <User member={gmember}/>
              <User>{gmember} </User>
 
-            ))}
+            )
+            )} */}
 
                         
             </div>
