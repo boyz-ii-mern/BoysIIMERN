@@ -1,32 +1,28 @@
-import React, { Component } from "react";
-import eventsTest from "../../components/eventsTest.json";
+// import React, { Component } from "react";
+// import eventsTest from "../../components/eventsTest.json";
 
-class RenderEventId extends Component {
-    constructor(props) {
-        super(props);
-    }
+// class RenderEventId extends Component {
 
-    state = {
-        eventPath: eventsTest[0] || []
-    };
+//     state = {
+//         eventPath: eventsTest[0] || []
+//     };
 
-    componentDidMount() {
-        // console.log(this.props.children.event);
-        // // const actualPath = JSON.stringify(this.props.match.params.id);
-        // // console.log(actualPath);
+//     componentDidMount() {
+//         console.log("TEST", this.props.match.params.eventId);
+//         const eventPath = JSON.stringify(this.props.match.params.eventId);
+//         console.log(eventPath);
 
-        this.setState({
-            eventPath: eventsTest[0]
-        });
-    }
+//         // const eventPlop = JSON.stringify(this.state.eventPath.props.match.params.id);
+//         // console.log(eventPlop);
+//     }
 
-    render() {
-      return (
-          <div>
-              {this.state.eventPath.event}
-          </div>
-        )
-    }
-}
+//     render() {
+//       return (
+//           <div>
+//               {this.state.eventPath.event}
+//           </div>
+//         )
+//     }
+// }
 
-export default RenderEventId;
+// export default RenderEventId;

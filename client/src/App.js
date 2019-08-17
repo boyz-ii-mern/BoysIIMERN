@@ -6,8 +6,9 @@ import EventsTest from "./Pages/EventsTest"
 import NoMatch from "./Pages/NoMatch";
 import Navbar from "./components/Navbar";
 import Login from "./Pages/Login";
-import FormContainer from "./Pages/FormTest";
-import Form from "./Pages/FormTest";
+import FormContainer from "./Pages/CreateEvent";
+import CreateEvent from "./Pages/CreateEvent";
+import CreateGroup from "./Pages/CreateGroup";
 import TabsTest from "./components/eventContent/eventTabs/tabContent";
 import RenderTabs from "./components/eventContent/eventTabs/renderTabs";
 import SignUp from "./Pages/SignUp"
@@ -39,9 +40,10 @@ function App() {
           <Route exact path="/home" component={Home} />
           <Route exact path="/events/:id" component={EventsTest} />
           <Route exact path="/events" component={Events} />
-          <Route exact path="../:id" component={Photos} />
+          <Route exact path="/events/photos/:eventId" component={Photos} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/formtest" component={Form} />
+          <Route exact path="/createGroup" component={CreateGroup} />
+          <Route exact path="/createEvent" component={CreateEvent} />
           <Route exact path="/tabstest" component={RenderTabs} />
           <Route exact path="/signup" component={SignUp} />
 

@@ -3,6 +3,7 @@ import TabsTest from './tabContent';
 import Comments from '../Comments/commentSection';
 import AddComment from '../Comments/addComment';
 import Photos from '../../photoTasks/Photos';
+import UploadPhotos from "../../photoTasks/UploadPhotos"
 import Superlatives from '../Superlatives/superlatives';
 import SuperlativesForm from '../Superlatives/addSuperlativeForm';
 
@@ -15,9 +16,12 @@ function RenderTabs(props) {
                     <AddComment />
                     <Comments comments={props.comments}/>
                 </div>
+                
                 <div label="Photo Gallery">
-                   <Photos />
+                    <UploadPhotos />
+                    <Photos />
                 </div>
+
                 <div label="Superlatives">
                     <SuperlativesForm />
                     <Superlatives />

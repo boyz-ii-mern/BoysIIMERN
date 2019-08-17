@@ -12,7 +12,9 @@ router.route("/")
         name: req.body.name,
         location: req.body.location,
         date: req.body.date,
-        isActive: true
+        isActive: true,
+        GroupId: req.body.GroupId,
+        UserId: req.body.UserId
       })
       const setGroup = event.setGroup(groupId)
       const setAdmin = event.setUser(userId)

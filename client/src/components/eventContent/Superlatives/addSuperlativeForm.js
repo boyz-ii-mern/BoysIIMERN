@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import friends from "../../../Pages/FormTest/users.json"
+import friends from "../../../Pages/CreateEvent/users.json"
 
 class SuperlativesForm extends Component {
     constructor(props) {

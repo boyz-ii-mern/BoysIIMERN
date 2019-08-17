@@ -1,37 +1,46 @@
 import React, { Component } from "react";
+import { IdentityContext } from "../identity-context";
+import axios from "axios";
+// import GroupsList from "./GroupsList";
 
-class Groups extends Component {
-    render () {
+
+function Groups (props) {
+    // console.log("this is propsz", props.group.name);
+  
         return (
-            //add some kind of mapping to add a card for every group you're in
-            
+ 
                 <div className="card col">
                     <div className="card-header">
                         <h5>Groups I'm In</h5>
                     </div>
                         <div className="card-content">
                         <div className="card-stacked">
+    
                                 <div className="section">
-                                <h6>Leon</h6>
-                                <p>Most likely to use puns</p>
-                                <div className="divider"></div>
-                                </div>
-                                <div className="section">
-                                <h6>Leon</h6>
-                                <p>Most likely to use puns</p>
-                                <div className="divider"></div>
-                                </div>
-                                <div className="section">
-                                <h6>Leon</h6>
-                                <p>Most likely to use puns</p>
+                            <h6>{props.group.name}</h6>
+                           
                                 <div className="divider"></div>
                                 </div>
                             </div>
                             </div>
                 </div>
+
+
+// function TodoList({ items }) {
+//     return items.map(item => (
+//         <h1>{item.name}</h1>
+//     ));
+// }
+
+
+// {currentMembers.map(gmember => (
+//     //   <User member={gmember}/>
+//          <User>{gmember} </User>
+
+//         ))}
           
         )
     }
-}
+
 
 export default Groups

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { IdentityContext } from "../../identity-context";
+import api from '../../api'
 
 import User from "../../components/User";
 
@@ -20,7 +21,8 @@ class Login extends Component {
                     console.log("USER FROM API", response.data)
                     this.setState({
                         user: response.data,
-                        userStateInfo: `${response.data.username} is logged in`
+                        userStateInfo: `${response.data.username} is logged in`,
+                        loggedIn: true
                     })
                 }
             })
@@ -40,12 +42,19 @@ class Login extends Component {
 
     login = event => {
         event.preventDefault();
-        axios.post("/api/user/login", { "username": this.state.username, "password": this.state.password })
-            .then(response => {
-                console.log("this is login response: ", response)
-                if (response.status == 200){
+        api.user.login(this.state.username, this.state.password)
+            .then(userData => {
+                if (userData.error) {
+                    console.log(userData.error)
                     this.setState({
-                        user: response.data,
+                        user: {},
+                        logginId: false,
+                        errorMessage: "Invalid Login, please try again"
+                    })
+                } else {
+                    console.log("this is login response: ", userData)
+                    this.setState({
+                        user: userData,
                         loggedIn: true,
                         username: "",
                         password: "",
@@ -53,10 +62,9 @@ class Login extends Component {
                     })
                     window.location.href = "/home";
                 }
-                
             })
             .catch(error => {
-                // console.log("LOGIN ERROR")
+                console.log(error.message)
                 this.setState({
                     user: {},
                     logginId: false,
@@ -67,10 +75,14 @@ class Login extends Component {
 
     logout = event => {
         event.preventDefault();
-        axios.post("/api/user/logout")
-            .then(response => {
+        api.user.logout()
+            .then(data => {
+                let errorMessage = ""
+                if (data.error) {
+                    errorMessage = data.error
+                }
                 this.setState({
-                    errorMessage: "",
+                    errorMessage: errorMessage,
                     user: {},
                     loggedIn: false
                 })
@@ -79,7 +91,7 @@ class Login extends Component {
 
     render() {
         return (
-        <IdentityContext.Provider value={{
+            <IdentityContext.Provider value={{
                 user: this.state.user,
                 loggedIn: this.state.loggedIn,
                 login: this.login,
@@ -111,7 +123,7 @@ class Login extends Component {
                                     placeholder="Password"
                                     value={this.state.password}
                                     onChange={this.handleInputChange} /><br />
-                                <button className="waves-effect waves-light btn create-form-submit"type="submit"
+                                <button className="waves-effect waves-light btn create-form-submit" type="submit"
                                     name="submit"
                                     value="Login"
                                     onClick={login}>
@@ -119,7 +131,7 @@ class Login extends Component {
                                 </button>
                                 <p>Don't have an account?</p>
                                 <button onClick={this.handleSignUp} className="waves-effect waves-light btn sign-up-button">Sign Up</button>
-                               
+
                             </form>
                         )}
                     </IdentityContext.Consumer>

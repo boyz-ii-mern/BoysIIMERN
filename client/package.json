@@ -10,7 +10,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "react-images-upload": "^1.2.7",
+    "react-image-lightbox": "^5.1.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^2.1.1"
   },
