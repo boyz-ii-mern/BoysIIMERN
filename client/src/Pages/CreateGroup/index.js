@@ -11,64 +11,32 @@ import M from "materialize-css";
 //extending component instead of react.component
 class Form extends Component {
   // Setting the component's initial state with two properties
-    state = {
-        username: "",
-        password: "",
-        user: {},
-        loggedIn: false,
-        groupName: "",
-        users: "" || ["there are no users", "something went wrong", "make some friends loser"],
-        photolink: "",
-    };
-    componentDidMount() {
-
-        M.AutoInit();
-        //initialize materialize form plugin
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     // var elems = document.querySelectorAll('select');
-        //     // var instances = M.FormSelect.init(elems, options);
-        //     M.AutoInit();
-        //   });
-
+  state = {
+    username: "",
+    password: "",
+    user: {},
+    loggedIn: false,
+    groupName: "",
+    members: [],
+    photolink: "",
+  };
+  componentDidMount() {
+    M.AutoInit();
     // check for logged in user
-        axios.get("/api/user")
-        .then(response => {
-            if (response.data) {
-            console.log("USER FROM API", response.data)
-            this.setState({
-                user: response.data,
-                userStateInfo: `${response.data.username} is logged in`,
-                loggedIn: true
-            })
-            console.log("this is create events this.state", this.state);
-            axios.get("/api/groups/byUser/" + response.data.userId)
-                .then(response => {
+    axios.get("/api/user")
+      .then(response => {
+        if (response.data) {
+          console.log("USER FROM API", response.data)
+          this.setState({
+            user: response.data,
+            userStateInfo: `${response.data.username} is logged in`,
+            loggedIn: true
+          })
 
-                if (response.data) {
-                    console.log("this is groups response:", response.data);
-                    console.log("this is groups response array:", response.data.data.groups);
-                    let responseArr = response.data.data.groups
-                    console.log("this is responseArr", responseArr);
-                    // let groupNameArr = [];
-                    // let groupIdArr = [];
+        }
 
-                    // responseArr.forEach(function(element){
-                    //   console.log("this is element", element);
-                    //   groupNameArr.push(element.name);
-                    //   groupIdArr.push(element.id);
-                    // })
-                    // console.log("this is groupNameArr", groupNameArr);
-                    // console.log("this is is groupIdArr", groupIdArr);
-
-                    this.setState({
-                    groups: responseArr
-                    })
-                }
-                })
-
-            }
-        })
-    }
+      })
+  }
 
   handleSelectChange = event => {
     // Getting the value and name of the input which triggered the change
@@ -87,44 +55,47 @@ class Form extends Component {
     // Getting the value and name of the input which triggered the change
     const { name, value } = event.target;
 
-    // Updating the input's state
-    this.setState({
-      //this is how we can reference a property name from a variable
-      //[] notation takes the value of that variable as the property name
-      [name]: value
-    });
+      this.setState({
+        //this is how we can reference a property name from a variable
+        //[] notation takes the value of that variable as the property name
+        [name]: value
+      });
+  };
+  handleInputSelect = event => {
+    // Getting the value and name of the select to push into array
+    
+      var options = event.target.options;
+      console.log("this is options", options);
+      var memArr = [];
+      for (var i = 0, l = options.length; i < l; i++) {
+        if (options[i].selected) {
+          memArr.push(options[i].value);
+        }
+      }
+      this.setState({
+        members: memArr,
+      });
+    
   };
 
   handleFormSubmit = event => { //takes in "event" as its parameter
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
     console.log("group name: ", this.state.groupName)
-    console.log("group memberes: ", this.state.users)
+    console.log("group members: ", this.state.members)
 
-    //materialize code for getting values from select array -- maybe this is useful??
-    // instance.getSelectedValues();
+    axios.post("/api/groups/", {
+      "name": this.state.groupName,
+      "bannerImage": this.state.photolink,
+      "members": this.state.members
+    })
+      .then(response => {
+        console.log("this is create groups response:", response);
+        // if (response.status == 200 ) {
 
 
-    // // this is the post to create the event
-    // axios.post("/api/events", {
-    //   "name": this.state.eventName,
-    //   "groupId": this.state.groupId,
-    //   "userId": this.state.user.userId
-    // }).then((response) => {
-    //   console.log("this is create Event response", response);
-    //   if (response.status == 200) {
-        
-    //     window.location.href = "/home";
-    // }
-    // })
-
-    // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
-    alert(`You're going to: ${this.state.eventName} in ${this.state.eventLocation}`); //use string literal notation to include {} javascript expressions in a string
-    this.setState({
-      eventName: "",
-      eventLocation: "",
-      eventDate: ""
-    });
+        // }
+      })
   };
 
   render() {
@@ -154,24 +125,14 @@ class Form extends Component {
                     type="text"
                     placeholder="Group Name"
                   />
-               
-                  <div className="input-field">
-                      <select className="browser-default custom-select create-event-select" id="user-select" name="users" multiple onChange={this.handleInputChange}>
-                      <option value="" disabled selected>Choose your option</option>
 
-                        {/* {this.state.users.map(groups => (
-                          <option value={this.state.users}>User Name</option>
-                      ))} */}
-
-                      {/* fake data for testing -- remove for api calls */}
-                      <option value={this.state.users}>User Name</option>
-                      <option value={this.state.users}>User Name</option>
-                      <option value={this.state.users}>User Name</option>
-
-
-                        {/* <option value={this.state.groupId}>{this.state.group}</option> */}
-                      </select>
-                  </div>
+                  <select className="custom-select create-event-select" id="group-select" name="members" multiple={true} onChange={this.handleInputSelect}>
+                    {/* {this.state.members.map(member => (
+                      <option value={member.users}>User Name</option>
+                  ))} */}
+                    <option value={"1"}>Member</option>
+                    <option value={"2"}>Member</option>
+                  </select>
                   <input
                     // the value of form elements is tied to the state -- this means react will only update what you see on the page when the state is updated
                     value={this.state.photolink}

@@ -10,11 +10,17 @@ router
     res.json(req.user);
   })
 
-router
-  .route("/all")
+  router.route("/all")
   // get all users in order to create a group
-  .get(isAuthenticated, (req, res) => {
-    res.json({ data: 'users' })
+  .get(isAuthenticated, async (req, res) => {
+    try {
+      const users = await models.User.findAll(req.body)
+      res.json({ data: users })
+    } catch (err) {
+      console.log(err)
+      res.json({ error: err.message })
+    }
+    
   })
 
 // for user profile
