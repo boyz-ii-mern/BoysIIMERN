@@ -5,14 +5,8 @@ import GroupsList from "./GroupsList";
 
 
 function Groups (props) {
-    console.log("this is propsz", props.group.name);
-    // let groups = props.group
-    // console.log("this is groups", groups)
-    // console.log(Object.keys({ test: '', test2: ''}))
-    // console.log("")
-
-
-
+    // console.log("this is propsz", props.group.name);
+  
         return (
  
                 <div className="card col">

@@ -18,7 +18,8 @@ class Home extends Component {
     password: "",
     user: {},
     loggedIn: false,
-    groups: "" || ["no members"]
+    groups: "" || ["no members", "get some friends, loser"],
+    events: "" || ["no events", "get out nerd"]
   };
 
   componentDidMount() {
@@ -32,14 +33,26 @@ class Home extends Component {
           loggedIn: true
         });
 
+        //call to grab all 'groups' associated to user, then display to main page. sets groups key/value to state.
         axios.get("/api/groups/byUser/" + response.data.userId).then(next => {
           if (next.data) {
-            console.log("get group data", next.data.data.groups);
-          this.setState({
-            groups: next.data.data.groups
-          })
+            // console.log("get group data", next.data.data.groups);
+            this.setState({
+              groups: next.data.data.groups
+            });
           }
         });
+
+        //call to grab all 'events' associated to user, then display to main page. sets groups key/value to state.
+        axios.get("/api/events/byUser/" + response.data.userId).then(next => {
+          if (next.data) {
+            console.log("get events data", next.data.data);
+            this.setState({
+              events: next.data.data
+            });
+          }
+        });
+
       }
     });
   }
@@ -59,12 +72,19 @@ class Home extends Component {
             <div className="col s12 m5 side-content">
               <UserProfile />
               {this.state.groups.map(groupName => (
-                <Groups 
-                group={groupName} />
+                <Groups group={groupName} />
               ))}
-      
             </div>
-            <HomeEvents />
+
+            {this.state.events.map(event =>(
+                <HomeEvents 
+                eventId={event.id}
+                eventName={event.name}
+
+                />
+
+
+            ))}
           </div>
         </div>
       </IdentityContext.Provider>
