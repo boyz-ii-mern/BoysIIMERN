@@ -17,22 +17,48 @@ class Form extends Component {
     eventName: "",
     eventLocation: "",
     eventDate: "",
-    group: ""
+    groups: "" || ["no members", "get some friends, loser"],
   };
   componentDidMount() {
     // check for logged in user
     axios.get("/api/user")
-        .then(response => {
-            if (response.data) {
-                console.log("USER FROM API", response.data)
+      .then(response => {
+        if (response.data) {
+          console.log("USER FROM API", response.data)
+          this.setState({
+            user: response.data,
+            userStateInfo: `${response.data.username} is logged in`,
+            loggedIn: true
+          })
+          console.log("this is create events this.state", this.state);
+          axios.get("/api/groups/byUser/" + response.data.userId)
+            .then(response => {
+
+              if (response.data) {
+                console.log("this is groups response:", response.data);
+                console.log("this is groups response array:", response.data.data.groups);
+                let responseArr = response.data.data.groups
+                console.log("this is responseArr", responseArr);
+                // let groupNameArr = [];
+                // let groupIdArr = [];
+
+                // responseArr.forEach(function(element){
+                //   console.log("this is element", element);
+                //   groupNameArr.push(element.name);
+                //   groupIdArr.push(element.id);
+                // })
+                // console.log("this is groupNameArr", groupNameArr);
+                // console.log("this is is groupIdArr", groupIdArr);
+
                 this.setState({
-                    user: response.data,
-                    userStateInfo: `${response.data.username} is logged in`,
-                    loggedIn: true
+                  groups: responseArr
                 })
-            }
-        })
-}
+              }
+            })
+
+        }
+      })
+  }
 
   handleSelectChange = event => {
     // Getting the value and name of the input which triggered the change
@@ -98,10 +124,14 @@ class Form extends Component {
       "name": this.state.eventName,
       "location": this.state.eventLocation,
       "date": this.state.eventDate,
-      "groupId": this.state.group,
+      "groupId": this.state.groupId,
       "userId": this.state.user.userId
     }).then((response) => {
       console.log("this is create Event response", response);
+      if (response.status == 200) {
+        
+        window.location.href = "/home";
+    }
     })
 
     // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
@@ -109,7 +139,6 @@ class Form extends Component {
     this.setState({
       eventName: "",
       eventLocation: "",
-      addFriends: [],
       eventDate: ""
     });
   };
@@ -130,7 +159,7 @@ class Form extends Component {
               You're going to: {this.state.eventName} in {this.state.eventLocation} with {this.state.group} on {this.state.date}
             </p>
             <IdentityContext.Consumer>
-              {({ user, loggedIn, login }) => (
+              {({ user }) => (
                 <form className="form create-event-form">
                   <input
                     // the value of form elements is tied to the state -- this means react will only update what you see on the page when the state is updated
@@ -148,11 +177,11 @@ class Form extends Component {
                     type="text"
                     placeholder="Event Location"
                   />
-                  <select className="custom-select create-event-select" id="user-select" name="group" multiple onChange={this.handleInputChange}>
-                    {/* {this.state.friends.map(friend => (
-                      <option value={friend.name}>{friend.name}</option>
-                  ))} */}
-                    <option value={"1"}>Group 1</option>
+                  <select className="custom-select create-event-select" id="user-select" name="groupId" multiple onChange={this.handleInputChange}>
+                    {this.state.groups.map(groups => (
+                      <option value={groups.id}>{groups.name}</option>
+                  ))}
+                    {/* <option value={this.state.groupId}>{this.state.group}</option> */}
                   </select>
                   <input value={this.state.eventDate} name="eventDate" onChange={this.handleInputChange} type="date" />
                   <button className="waves-effect waves-light btn create-form-submit" onClick={this.handleFormSubmit}>Create Event</button>
