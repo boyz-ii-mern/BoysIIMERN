@@ -99,28 +99,19 @@
         - "ok" status
 
 ## Superlatives
-### /api/superlatives
-* GET - get all superlatives
+
+### /api/superlatives/byEvent/:eventId
+* GET - get all superlatives for event
 * POST - add new superlative
     - *Request Body*
         - req.body.text (str)
-        - req.body.eventId
         - req.body.userId
     - *Returns*
         - new superlative
-### /api/superlatives/byEvent/:eventId
-* GET - get all superlatives for event
 ### /api/superlatives/byUser/:userId
 * GET - get all superlatives for a user
 ### /api/superlatives/detail/:superlativeId
 * GET - get superlative details
-* PUT - update a superlative
-    - *Request Body*
-        - req.body.text (str)
-        - req.body.eventId
-        - req.body.userId
-    - *Returns*
-        - updated superlative
 * DELETE - delete superlative
     - *Request Body*
         - req.body.superlativeId
