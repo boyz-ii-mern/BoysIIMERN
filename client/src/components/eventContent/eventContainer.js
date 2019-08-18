@@ -6,7 +6,7 @@ import RenderTabs from "./eventTabs/renderTabs";
 // import TabsTest from "./tabContent";
 
 function EventContainer (props) {
-    console.log("comments", props)
+    // console.log("comments", props)
         return (
             <div className="card col s12 m8 l9 events-card">
             <div className="card-header">

@@ -1,24 +1,24 @@
 import React, { Component } from "react";
 
 function User (props) {
-    let usercardVar = usercardVar
-    console.log("usercard", props)
+    // let usercardVar = usercardVar
+    // console.log("usercard", props)
 
     
         return (
             
             <div className="section user-section valign-wrapper">
                 {/* update source to database */}
-                <img src="../Images/avatar-01.png" alt="" className="circle responsive-img user-image"/>
+                <img src={props.avatar} alt="" className="circle responsive-img user-image"/>
                 <div className="section">
                     {/* update username to database */}
       
-                    {/* <h6>{props.member}</h6> */}
+                    <h6>{props.name} {props.lastName}</h6>
                     {/* pass as children to re-use the component! */}
-                    <h6>{props.children}</h6>
+                    {/* <h6>{props.children}</h6> */}
             
                     {/* update superlative to database */}
-                    <p>Most Likely to Do Something</p>
+                    <p>{props.superlative}</p>
                 </div>
                 <div className="divider"></div>
                 

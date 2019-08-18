@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import GroupMembers from "../../components/groupMembers/index";
-import GroupEvents from "../../components/eventsInGroup/index";
 import EventContainer from "../../components/eventContent/eventContainer";
 // import DeleteBtn from "../components/DeleteBtn";
 // import Jumbotron from "../components/Jumbotron";
@@ -61,8 +60,6 @@ class EventsTest extends Component {
             });
           }
         });
-        
-
       }
     });
   }
@@ -86,10 +83,14 @@ class EventsTest extends Component {
               <div className="col s12 m4 l3 side-content">
                 <h3 />
 
-                <GroupMembers />
+
+            <GroupMembers
+              members={this.state.members}
+            />
+                
 
                 {/* Currently commented out GroupEvents */}
-                <GroupEvents />
+                {/* <GroupEvents /> */}
               </div>
               <div className="col s12 m8 l9 event-content">
                 {/* <EventContainer comments={this.state.staticEvent.comments}/> */}
