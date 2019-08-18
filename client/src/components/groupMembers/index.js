@@ -2,13 +2,9 @@ import React, { Component } from "react";
 import User from "./UserCard";
 
 function GroupMembers (props) {
-    // console.log("this is members props", props)
-    // let currentMembers = props.member
-    // console.log("currentMembers", currentMembers)
 
-    // console.log("this be da membas", props.members)
     let gmember = props.members.members || []
-   //Console Log gmember will show the below object example being passed in
+   //Console Log gmember will show the below object example being passed in. Must set initial array value as [] or it will not map. 
     // avatar: null
     // email: "my@email.com"
     // firstName: "Joe"

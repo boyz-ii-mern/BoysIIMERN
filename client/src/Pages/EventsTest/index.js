@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 import GroupMembers from "../../components/groupMembers/index";
 import EventContainer from "../../components/eventContent/eventContainer";
-// import DeleteBtn from "../components/DeleteBtn";
-// import Jumbotron from "../components/Jumbotron";
-// import API from "../utils/API";
-// import { Link } from "react-router-dom";
-// import { Col, Row, Container } from "../components/Grid";
-// import { List, ListItem } from "../components/List";
 // import { Input, TextArea, FormBtn } from "../components/Form";
 import { IdentityContext } from "../../identity-context";
 import axios from "axios";
@@ -23,17 +17,19 @@ class EventsTest extends Component {
     password: "",
     user: {},
     loggedIn: false,
-    groupId: "",
+    groupId: "" || ["no group id"],
     events: "" || ["no events", "get out nerd"],
-    members: "" || ["starting"]
+    members: "" || ["starting"],
+    comments: "" || ["no starting comments cuz i have no friends"]
   };
 
   componentDidMount() {
+    //REALLY IMPORTANT, {ID} below for the EVENT getting pulled from URL
     const { id } = this.props.match.params;
     // check for logged in user
     axios.get("/api/user").then(response => {
       if (response.data) {
-        console.log("USER FROM API", response.data);
+        // console.log("USER FROM API", response.data);
         this.setState({
           user: response.data,
           userStateInfo: `${response.data.username} is logged in`,
@@ -41,23 +37,36 @@ class EventsTest extends Component {
         });
 
         // console.log("this be req.params", id)
-        //call to grab all 'events' associated to user, then display to main page. sets groups key/value to state.
+        //call to grab all 'events' associated to user. 'id' is grabbed from the URL  then display to main page. sets groups key/value to state.
         axios.get("/api/events/detail/" + id).then(next => {
           if (next.data) {
             console.log("get events daniel", next.data.data);
-            
+
             this.setState({
               events: next.data.data,
               groupId: next.data.data.GroupId
             });
-            axios.get("/api/groups/members/" + next.data.data.GroupId).then(next => {
+
+          //call to grab all members associated by group id
+            axios
+              .get("/api/groups/members/" + next.data.data.GroupId)
+              .then(next => {
+                if (next.data) {
+                  // console.log("get group members", next.data.data);
+                  this.setState({
+                    members: next.data.data
+                  });
+                }
+              });
+
+            axios.get("/api/events/comments/" + id).then(next => {
               if (next.data) {
-                console.log("get group members", next.data.data);
+                console.log("did get messages work?", next.data)
                 this.setState({
-                  members: next.data.data
-                });
+                  comments: next.data.data.comments
+                })
               }
-            });
+            })  
           }
         });
       }
@@ -83,11 +92,7 @@ class EventsTest extends Component {
               <div className="col s12 m4 l3 side-content">
                 <h3 />
 
-
-            <GroupMembers
-              members={this.state.members}
-            />
-                
+                <GroupMembers members={this.state.members} />
 
                 {/* Currently commented out GroupEvents */}
                 {/* <GroupEvents /> */}
