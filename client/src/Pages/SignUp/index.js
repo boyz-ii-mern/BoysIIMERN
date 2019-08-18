@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { IdentityContext } from "../../identity-context";
+import AvatarLoad from "./avatarLoad";
 
 // import User from "../../components/User";
 
 class SignUp extends Component {
+    constructor(props) {
+        super(props);
+        this.childHandler = this.childHandler.bind(this);
+    };
+
     state = {
         username: "",
         password: "",
@@ -28,14 +34,21 @@ class SignUp extends Component {
                         loggedIn: true
                     })
                 }
-            })
+            });
+    }
+
+    // Receive information from avatarLoad
+    childHandler(avatarLink){
+        this.setState({
+            avatar: avatarLink
+        },() => console.log("Updated State: ", this.state.avatar));
     }
 
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
-        })
+        });
     }
 
     signup = event => {
@@ -105,6 +118,16 @@ class SignUp extends Component {
                                         <h5>Create An Account</h5>
                                     </div>
                                     <form className="form create-event-form">
+                                        <AvatarLoad
+                                            action={this.childHandler}
+                                        />
+                                        <input
+                                            type="hidden"
+                                            name="avatar"
+                                            value={this.state.avatar} 
+                                            onChange={this.handleInputChange}
+                                            />
+                                        <br />
                                         <input
                                             type="text"
                                             name="username"
@@ -129,12 +152,12 @@ class SignUp extends Component {
                                             placeholder="Last Name"
                                             value={this.state.lastName}
                                             onChange={this.handleInputChange} /><br />
-                                        <input
+                                        {/* <input
                                             type="text"
                                             name="avatar"
                                             placeholder="Avatar"
                                             value={this.state.avatar}
-                                            onChange={this.handleInputChange} /><br />
+                                            onChange={this.handleInputChange} /><br /> */}
                                         <input
                                             type="text"
                                             name="superlative"
