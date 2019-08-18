@@ -116,6 +116,18 @@ async function seedDatabase() {
      await event1.addComment(comment2)
      await user2.addComment(comment2)
 
+    const superlative1  = await Superlative.create({
+        text: "Most Likely to Finish the Treasure Hunt"
+    }) 
+    await event1.addSuperlative(superlative1)
+    await user1.addEventSuperlative(superlative1)
+
+    const superlative2  = await Superlative.create({
+        text: "Most Likely to Drink all the Whiskey"
+    }) 
+    await event1.addSuperlative(superlative2)
+    await user2.addEventSuperlative(superlative2)
+
 }
 
 models.sequelize.sync().then(() => {

@@ -61,6 +61,10 @@ module.exports = function userModel(sequelize, DataTypes) {
         User.hasMany(models.Comment, {
             onDelete: "cascade"
         })
+        User.hasMany(models.Superlative, {
+            as: "EventSuperlative",
+            onDelete: "cascade"
+        })
     }
 
     User.prototype.validPassword = function (password) {
