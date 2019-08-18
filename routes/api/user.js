@@ -6,11 +6,11 @@ router
   .route("/")
   .get((req, res) => {
     // console.log("this is req:", req)
-    console.log("Authenticated User", req.user);
+    // console.log("Authenticated User", req.user);
     res.json(req.user);
   })
 
-  router.route("/all")
+router.route("/all")
   // get all users in order to create a group
   .get(isAuthenticated, async (req, res) => {
     try {
@@ -20,7 +20,7 @@ router
       console.log(err)
       res.json({ error: err.message })
     }
-    
+
   })
 
 // for user profile

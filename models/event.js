@@ -33,6 +33,10 @@ module.exports = function (sequelize, DataTypes) {
         Event.hasMany(models.Comment, {
             onDelete: "cascade"
         });
+        
+        Event.hasMany(models.Superlative, {
+            onDelete: "cascade"
+        })
     }
 
     return Event
