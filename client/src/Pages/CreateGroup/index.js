@@ -24,6 +24,7 @@ class Form extends Component {
     groupName: "",
     members: [],
     photolink: "",
+    allUsers: "" || ["No Users Available"]
   };
   componentDidMount() {
     M.AutoInit();
@@ -40,6 +41,15 @@ class Form extends Component {
 
         }
 
+      })
+    axios.get("/api/user/all")
+      .then(response => {
+        if(response.data){
+          console.log("this is all users", response.data.data);
+          this.setState({
+            allUsers: response.data.data
+          })
+        }
       })
   }
 
@@ -75,10 +85,9 @@ class Form extends Component {
   };
   handleInputSelect = event => {
     // Getting the value and name of the select to push into array
-    
+      let userId = this.state.user.userId;
       var options = event.target.options;
-      console.log("this is options", options);
-      var memArr = [];
+      var memArr = [userId];
       for (var i = 0, l = options.length; i < l; i++) {
         if (options[i].selected) {
           memArr.push(options[i].value);
@@ -139,11 +148,9 @@ class Form extends Component {
                   />
 
                   <select className="custom-select create-event-select" id="group-select" name="members" multiple={true} onChange={this.handleInputSelect}>
-                    {/* {this.state.members.map(member => (
-                      <option value={member.users}>User Name</option>
-                  ))} */}
-                    <option value={"1"}>Member</option>
-                    <option value={"2"}>Member</option>
+                  {this.state.allUsers.map(user => (
+                      <option value={user.id}>{user.firstName}</option>
+                  ))}
                   </select>
                   <br />
                   <BannerLoad
