@@ -9,7 +9,7 @@ class ImageHeader extends Component {
         <div className="row valign-wrapper">
             <div className="events-header col s12 m12 l12"> 
             {/* <h1>Group Name</h1> */}
-            <img src="../Images/testphoto.jpg" alt="" className="events-header-image"/>  
+            <img src={this.props.dataFromParent} alt="" className="events-header-image"/>  
             </div>
         </div>
         )

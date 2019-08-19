@@ -5,11 +5,16 @@ import { IdentityContext } from "../../identity-context";
 import 'materialize-css/dist/css/materialize.min.css';
 import M from "materialize-css";
 // import friends from "./users.json"
+import BannerLoad from "./bannerLoad";
 
 
 
 //extending component instead of react.component
 class Form extends Component {
+  constructor(props) {
+    super(props);
+    this.childHandler = this.childHandler.bind(this);
+  };
   // Setting the component's initial state with two properties
   state = {
     username: "",
@@ -37,6 +42,13 @@ class Form extends Component {
 
       })
   }
+
+  // Receive information from bannerLoad
+  childHandler(bannerLink){
+    this.setState({
+        photolink: bannerLink
+    },() => console.log("Updated State: ", this.state.photolink));
+}
 
   handleSelectChange = event => {
     // Getting the value and name of the input which triggered the change
@@ -133,7 +145,17 @@ class Form extends Component {
                     <option value={"1"}>Member</option>
                     <option value={"2"}>Member</option>
                   </select>
+                  <br />
+                  <BannerLoad
+                    action={this.childHandler}
+                  />
                   <input
+                    type="hidden"
+                    name="photolink"
+                    value={this.state.photolink} 
+                    onChange={this.handleInputChange}
+                  />
+                  {/* <input
                     // the value of form elements is tied to the state -- this means react will only update what you see on the page when the state is updated
                     value={this.state.photolink}
                     name="photolink"
@@ -141,7 +163,7 @@ class Form extends Component {
                     onChange={this.handleInputChange}
                     type="text"
                     placeholder="Link to Photo"
-                  />
+                  /> */}
                   <button className="waves-effect waves-light btn create-form-submit" onClick={this.handleFormSubmit}>Create Group</button>
                 </form>
               )}

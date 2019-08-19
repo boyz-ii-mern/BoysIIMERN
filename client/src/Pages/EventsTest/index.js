@@ -8,7 +8,6 @@ import ImageHeader from "../../components/eventContent/Comments/imageHeader";
 
 class EventsTest extends Component {
   state = {
-
     username: "",
     password: "",
     user: {},
@@ -16,7 +15,8 @@ class EventsTest extends Component {
     groupId: "" || ["no group id"],
     events: "" || ["no events", "get out nerd"],
     members: "" || ["starting"],
-    comments: "" || ["no starting comments cuz i have no friends"]
+    comments: "" || ["no starting comments cuz i have no friends"],
+    bannerImage: "" || ["no group banner"]
   };
 
   componentDidMount() {
@@ -55,6 +55,18 @@ class EventsTest extends Component {
                 }
               });
 
+            //call to grab group banner associated by group id
+            axios
+            .get("/api/groups/detail/" + id)
+            .then(next => {
+              if (next.data) {
+                console.log("get banner", next.data.data.groupInfo.bannerImage);
+                this.setState({
+                  bannerImage: next.data.data.groupInfo.bannerImage
+                });
+              }
+            });
+
             axios.get("/api/events/comments/" + id).then(next => {
               if (next.data) {
                 // console.log("did get messages work?", next.data)
@@ -85,6 +97,7 @@ class EventsTest extends Component {
           {({ user }) => (
             <div className="row">
               <ImageHeader
+                dataFromParent={this.state.bannerImage}
               />
               <div className="col s12 m4 l3 side-content">
                 <h3 />
