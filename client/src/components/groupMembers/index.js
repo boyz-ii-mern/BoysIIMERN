@@ -12,7 +12,7 @@ function GroupMembers (props) {
     // lastName: "Man"
     // password: "password"
     // superlative: "Most Likely to Be Cool"
-    console.log ("this be da membas", gmember)
+    // console.log ("this be da membas", gmember)
 
         return(
      

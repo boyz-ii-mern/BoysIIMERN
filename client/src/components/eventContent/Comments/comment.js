@@ -16,11 +16,10 @@ function CommentList (props){
         // Lots of trouble mapping props.User object, so passing this object onto userCard2.js
 // ----------------------------------------------
 
-    console.log("props for comments", props);
+    // console.log("props for comments", props);
     let commentList = props.comments || []
 
-
-    console.log("this is commentList", commentList)
+    // console.log("this is commentList", commentList)
         return(
             <div className="comment-list">
                 <div>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 function User (props) {
-    // let usercardVar = usercardVar
+
     // console.log("usercard", props)
     // console.log("this is working? for comment user", props)
 

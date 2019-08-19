@@ -4,14 +4,10 @@ import EventContainer from "../../components/eventContent/eventContainer";
 // import { Input, TextArea, FormBtn } from "../components/Form";
 import { IdentityContext } from "../../identity-context";
 import axios from "axios";
-
-// import eventsTest from "../../components/eventsTest.json";
 import ImageHeader from "../../components/eventContent/Comments/imageHeader";
 
-// console.log("did i grab this?", eventsTest[0]);
 class EventsTest extends Component {
   state = {
-    // staticEvent: eventsTest[0] || []
 
     username: "",
     password: "",
@@ -40,7 +36,7 @@ class EventsTest extends Component {
         //call to grab all 'events' associated to user. 'id' is grabbed from the URL  then display to main page. sets groups key/value to state.
         axios.get("/api/events/detail/" + id).then(next => {
           if (next.data) {
-            console.log("get events daniel", next.data.data);
+            // console.log("get events daniel", next.data.data);
 
             this.setState({
               events: next.data.data,
@@ -61,7 +57,7 @@ class EventsTest extends Component {
 
             axios.get("/api/events/comments/" + id).then(next => {
               if (next.data) {
-                console.log("did get messages work?", next.data)
+                // console.log("did get messages work?", next.data)
                 this.setState({
                   comments: next.data.data.comments
                 })
@@ -88,7 +84,8 @@ class EventsTest extends Component {
         <IdentityContext.Consumer>
           {({ user }) => (
             <div className="row">
-              <ImageHeader />
+              <ImageHeader
+              />
               <div className="col s12 m4 l3 side-content">
                 <h3 />
 
@@ -101,6 +98,7 @@ class EventsTest extends Component {
                 {/* <EventContainer comments={this.state.staticEvent.comments}/> */}
                 <EventContainer 
                   comments={this.state.comments}
+                  events={this.state.events}
 
                 />
               </div>
