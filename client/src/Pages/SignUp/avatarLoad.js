@@ -1,7 +1,7 @@
 // Pages and Packages
 import React, { Component } from "react";
 // import Avatar from 'react-avatar-edit';
-// import ImageUploader from 'react-images-upload';
+import ImageUploader from 'react-images-upload';
 
 // Firebase
 import { storage, database } from "./../../firebase/index";
@@ -11,25 +11,32 @@ import "firebase/database";
 class AvatarLoad extends Component {
   constructor(props) {
     super(props);
+    this.onDrop = this.onDrop.bind(this);
   }
 
   state = { 
-    selectedFile: null,
-    files: [],
+    pictures: [],
     url: '',
     metadataFile: [],
     avatarLink: ''
   };
 
-fileChangedHandler = (event) => {
-  this.setState({ selectedFile: event.target.files[0] })
-  console.log(event.target.files[0])
+
+onDrop(picture) {
+  this.setState({
+      pictures: this.state.pictures.concat(picture)
+  });
 }
+
+// fileChangedHandler = (event) => {
+//   this.setState({ selectedFile: event.target.files[0] })
+//   console.log(event.target.files[0])
+// }
 
 uploadHandler = (e) => {
   e.preventDefault();
 
-  const file = this.state.selectedFile;
+  const file = this.state.pictures[0];
   console.log(file);
 
   // Logs for Testing
@@ -99,20 +106,17 @@ render() {
       <div>
           <p>Who's Most Likely to upload a profile pic?! YOU ARE!</p>
           <br />
-          <input type="file" onChange={this.fileChangedHandler}/>
-          <button onClick={this.uploadHandler}>Upload!</button>
-
-          {/* <ImageUploader
-              withIcon={true}
-              buttonText='Choose an Image'
-              onChange={this.onDrop}
-              withPreview={true}
-              singleImage={true}
-              imgExtension={['.jpg', '.gif', '.png', '.gif']}
-              maxFileSize={5242880}
-          /> */}
-          {/* <button onClick={this.onUpload}>Save Image</button>
-          <br /> */}
+          <ImageUploader
+                withIcon={true}
+                buttonText='Choose Image'
+                onChange={this.onDrop}
+                imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                maxFileSize={5242880}
+                singleImage={true}
+                withPreview={true}
+            />
+          {/* <input type="file" onChange={this.fileChangedHandler}/> */}
+          <button onClick={this.uploadHandler}>Confirm Image</button>
       </div>
     ); 
   }
