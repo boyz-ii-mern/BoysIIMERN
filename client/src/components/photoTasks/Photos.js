@@ -14,7 +14,6 @@ import "firebase/storage";
 class Photos extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             // user: this.props.user,
             // eventID: to-do...
@@ -25,9 +24,7 @@ class Photos extends Component {
             photoIndex: 0,
             isOpen: false,
         };
-
     }
-
 
     async componentDidMount() {
         const imgRef = database.child('images');
@@ -38,18 +35,11 @@ class Photos extends Component {
             console.log(Object.keys(child.val()));
 
             this.setState({images: Object.keys(child.val()).reverse().map(key => child.val()[key].metadataFile.downloadURL)});
-
          })
     }
     
-
     render () {
         const { photoIndex, isOpen } = this.state;
-
-        const imageClick = () => {
-            this.setState({ isOpen: true });
-            console.log('Click');
-          } 
 
         const imgStyle = {
             maxWidth: "100%",
@@ -62,9 +52,9 @@ class Photos extends Component {
             flexDirection: 'column'
         };
 
-
         return(
             <div>
+
             <div className="imgDiv" style={imgDisplay}>
             <StackGrid
                  columnWidth={250}
@@ -72,7 +62,9 @@ class Photos extends Component {
                 >
                 {this.state.images.map((url, i) => ( 
                     <img src={url} photoIndex={i} style={imgStyle} 
-                    onClick={() => imageClick()}/>
+                    onClick={() => this.setState({ 
+                        isOpen: true
+                    })}/>
                 ))}  
             </StackGrid>
             </div>
@@ -84,7 +76,6 @@ class Photos extends Component {
                 prevSrc={this.state.images[(photoIndex + this.state.images.length - 1) % this.state.images.length]}
                 onCloseRequest={() => this.setState({ isOpen: false })}
                 enableZoom={false}
-
                 onMovePrevRequest={() =>
                     this.setState({
                     photoIndex: (photoIndex + this.state.images.length - 1) % this.state.images.length,
@@ -97,7 +88,7 @@ class Photos extends Component {
                 }
                 />
             )}
-
+            
         </div>
         );
     }
