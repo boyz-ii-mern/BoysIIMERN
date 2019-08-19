@@ -99,7 +99,10 @@ class EventsTest extends Component {
               </div>
               <div className="col s12 m8 l9 event-content">
                 {/* <EventContainer comments={this.state.staticEvent.comments}/> */}
-                <EventContainer />
+                <EventContainer 
+                  comments={this.state.comments}
+
+                />
               </div>
             </div>
           )}
