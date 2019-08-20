@@ -206,7 +206,7 @@ class Form extends Component {
                       <form>
                         <input
                           value={this.state.phoneNumber}
-                          name="phoneNumbers"
+                          name="phoneNumber"
                           //the onChange is what tells React to update the DOM
                           onChange={this.handleInputChange}
                           type="text"
