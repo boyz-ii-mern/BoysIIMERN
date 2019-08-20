@@ -25,8 +25,7 @@ class Form extends Component {
     members: [],
     photolink: "",
     allUsers: "" || ["No Users Available"],
-    phoneNumbers: "",
-
+    phoneNumber: ""
   };
   componentDidMount() {
     M.AutoInit();
@@ -121,6 +120,23 @@ class Form extends Component {
       })
   };
 
+  handleInvite = event => { //takes in "event" as its parameter
+    // Preventing the default behavior of the form submit (which is to refresh the page)
+    event.preventDefault();
+    console.log("number: ", this.state.phoneNumber);
+
+    axios.post("/api/twilio/", {
+      "to": this.state.phoneNumber
+    })
+      .then(response => {
+        console.log("this is invite friend response:", response);
+        // if (response.status == 200 ) {
+
+        //   alert("Your friend has been invited!")
+        // }
+      })
+  };
+
   render() {
     // Notice how each input has a `value`, `name`, and `onChange` prop
     return (
@@ -175,6 +191,7 @@ class Form extends Component {
                     type="text"
                     placeholder="Link to Photo"
                   /> */}
+                  
                   <button className="waves-effect waves-light btn create-form-submit" onClick={this.handleFormSubmit}>Create Group</button>
                   <p className="form-p">Don't see your friends? Invite them!</p>
                   {/* <!-- Modal Trigger --> */}
@@ -187,7 +204,7 @@ class Form extends Component {
                       <p>Add phone numbers to invite your friends to Likely</p>
                       <form>
                       <input
-                    value={this.state.phoneNumbers}
+                    value={this.state.phoneNumber}
                     name="phoneNumbers"
                     //the onChange is what tells React to update the DOM
                     onChange={this.handleInputChange}
@@ -197,7 +214,7 @@ class Form extends Component {
                       </form>
                     </div>
                     <div class="modal-footer">
-                      <button href="#!" class="modal-close waves-effect waves-green btn-flat modal-submit-button" type="submit">Submit</button>
+                      <button href="#!" class="modal-close waves-effect waves-green btn-flat modal-submit-button" onClick={this.handleInvite}>Submit</button>
                       <button href="#!" class="modal-close waves-effect waves-green btn-flat modal-cancel-btn">Cancel</button>
 
                     </div>
