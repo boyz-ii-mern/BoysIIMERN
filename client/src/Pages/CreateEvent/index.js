@@ -52,13 +52,9 @@ class Form extends Component {
   handleSelectChange = event => {
     // Getting the value and name of the input which triggered the change
     const { name, value } = event.target;
-
-
-
     //this is the same as writing:
     //const name = event.target.name;
     //const value = event.target.value;
-
 
     // Updating the input's state
     this.setState({
@@ -71,7 +67,6 @@ class Form extends Component {
   handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
     const { name, value } = event.target;
-
     //this is the same as writing:
     //const name = event.target.name;
     //const value = event.target.value;
@@ -89,13 +84,6 @@ class Form extends Component {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
 
-    console.log("this is event date", this.state.eventDate)
-    console.log("this is event name", this.state.eventName);
-    console.log("this is groups:", this.state.group);
-    console.log("this is event location", this.state.eventLocation);
-    console.log("this is user Id", this.state.user.userId);
-
-
     // this is the post to create the event
     axios.post("/api/events", {
       "name": this.state.eventName,
@@ -110,9 +98,8 @@ class Form extends Component {
         window.location.href = "/home";
     }
     })
-
-    // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
-    alert(`You're going to: ${this.state.eventName} in ${this.state.eventLocation}`); //use string literal notation to include {} javascript expressions in a string
+     // clearing the inputs
+    
     this.setState({
       eventName: "",
       eventLocation: "",
@@ -132,9 +119,6 @@ class Form extends Component {
         <div className="row create-form-row">
           <div className="card col sm12 m10 l8 form-card sign-in-form-card">
             <h3 className="sign-in-header">Create New Event</h3>
-            <p>
-              You're going to: {this.state.eventName} in {this.state.eventLocation} with {this.state.group} on {this.state.date}
-            </p>
             <IdentityContext.Consumer>
               {({ user }) => (
                 <form className="form create-event-form">

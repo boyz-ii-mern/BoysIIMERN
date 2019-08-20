@@ -131,9 +131,7 @@ class Form extends Component {
         <div className="row create-form-row">
           <div className="card col sm12 m10 l8 form-card sign-in-form-card">
             <h3 className="sign-in-header">Create New Group</h3>
-            <p>
-              You're going to: {this.state.groupName}
-            </p>
+
             <IdentityContext.Consumer>
               {({ user }) => (
                 <form className="form create-event-form">
@@ -148,7 +146,11 @@ class Form extends Component {
                   />
 
                   <select className="custom-select create-event-select" id="group-select" name="members" multiple={true} onChange={this.handleInputSelect}>
-                  {this.state.allUsers.map(user => (
+                  {
+                    this.state.allUsers.filter((self) => {
+                      return self.id != this.state.user.userId
+                    })
+                    .map(user => (
                       <option value={user.id}>{user.firstName}</option>
                   ))}
                   </select>

@@ -76,16 +76,16 @@ class Home extends Component {
               ))}
             </div>
 
-      <div className="card-header my-events">
-        <h5>My Events</h5>
-      </div>
+            <div className="card-header my-events">
+              <h5>My Events</h5>
+            </div>
 
-            {this.state.events.map(event =>(
-                <HomeEvents 
+            {this.state.events.map(event => (
+              <HomeEvents
                 eventId={event.id}
                 eventName={event.name}
 
-                />
+              />
             ))}
           </div>
         </div>
