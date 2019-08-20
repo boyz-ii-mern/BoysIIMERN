@@ -13,7 +13,9 @@ function RenderTabs(props) {
         <div>
             <TabsTest>
                 <div label="Comments">
-                    <AddComment />
+                    <AddComment
+                    action={props.action}
+                    />
                     <Comments comments={props.comments}/>
                 </div>
                 

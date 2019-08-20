@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import User from "../../groupMembers/UserCard";
 import User2 from "../../groupMembers/UserCard2";
+import Moment from 'react-moment';
+
 
 function CommentList (props){
 // ----------------------------------------------
@@ -30,6 +32,8 @@ function CommentList (props){
                      comment={comment}
                    />
                    <p className="comment-content">{comment.body}</p>
+                   <Moment format={"MMM Do YYYY"}>{props.date}</Moment>
+
                 </div>
                  ))}   
 

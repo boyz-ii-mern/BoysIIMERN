@@ -21,6 +21,7 @@ function EventContainer (props) {
               />  
             </div>
             <RenderTabs comments={props.comments}
+                action={props.action}
             />
             {/* <EventNav />
             <Comments /> */}

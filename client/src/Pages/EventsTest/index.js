@@ -5,8 +5,50 @@ import EventContainer from "../../components/eventContent/eventContainer";
 import { IdentityContext } from "../../identity-context";
 import axios from "axios";
 import ImageHeader from "../../components/eventContent/Comments/imageHeader";
+import api from '../../api'
+import AddComment from "../../components/eventContent/Comments/addComment";
 
 class EventsTest extends Component {
+//----------------------testing-----------------------------
+  constructor(props) {
+    super(props);
+    this.childHandler = this.childHandler.bind(this);
+};
+
+
+childHandler(commentReceived){
+  const { id } = this.props.match.params;
+
+// console.log("this is sidd", id)
+console.log("am i grabbing this", this.state.user.userId)
+
+  axios.post("/api/events/comments/"+ id, {
+    "body": commentReceived,
+    "userId": this.state.user.userId,
+  }).then((response)=>{
+    // console.log("Leons response", response);
+    // window.location.reload()
+    //call componentDidMount again to re-render after posting to mySQL
+    this.componentDidMount();
+
+  })
+  console.log("dennis test", commentReceived)
+
+//   - req.body.body (str)
+//   - req.body.userId
+// - *Returns*
+//   - all comments for event (updated)
+
+  
+  // this.state.comments.push(commentReceived)
+  // ///insertComment 
+  // this.setState({
+  //     comments: this.state.comments
+  // },() => console.log("Updated comments: ", this.state.comments));
+}
+//----------------------testing-----------------------------
+
+  
   state = {
     username: "",
     password: "",
@@ -49,7 +91,7 @@ class EventsTest extends Component {
               .get("/api/groups/members/" + next.data.data.GroupId)
               .then(next => {
                 if (next.data) {
-                  // console.log("get group members", next.data.data);
+                  console.log("get group members", next.data.data);
                   this.setState({
                     members: next.data.data
                   });
@@ -111,6 +153,10 @@ class EventsTest extends Component {
               <div className="col s12 m8 l9 event-content">
                 {/* <EventContainer comments={this.state.staticEvent.comments}/> */}
                 <EventContainer 
+                  //----------------------testing-----------------------------
+                  action={this.childHandler}
+                  //----------------------testing-----------------------------
+
                   comments={this.state.comments}
                   events={this.state.events}
 
