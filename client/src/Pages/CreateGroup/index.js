@@ -157,7 +157,7 @@ class Form extends Component {
                
                   <div className="input-field">
                       <select className="browser-default custom-select create-event-select" id="user-select" name="users" multiple onChange={this.handleInputChange}>
-                      <option value="" disabled selected>Choose your option</option>
+                      <option value="" disabled defaultValue>Who do you want in this group?</option>
 
                         {/* {this.state.users.map(groups => (
                           <option value={this.state.users}>User Name</option>

@@ -177,7 +177,9 @@ class Form extends Component {
                     type="text"
                     placeholder="Event Location"
                   />
-                  <select className="custom-select create-event-select" id="user-select" name="groupId" multiple onChange={this.handleInputChange}>
+                  <select className="browser-default create-event-select" id="user-select" name="groupId" multiple onChange={this.handleInputChange}>
+                  <option value="" disabled defaultValue>Choose Groups to Invite</option>
+
                     {this.state.groups.map(groups => (
                       <option value={groups.id}>{groups.name}</option>
                   ))}

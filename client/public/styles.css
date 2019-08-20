@@ -86,6 +86,7 @@ select {
     height: auto!important;
     color: #556270!important;
     padding: 10px!important;
+    width: 100%!important;
 }
 
 /* ---------------------- Container Styling ------------------------- */

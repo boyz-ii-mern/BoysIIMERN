@@ -41,7 +41,7 @@ module.exports = {
   },
   "test": {
     "username": "root",
-    "password": process.env.TEST_DB_PASSWORD,
+    "password": "Ginger998!",
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
