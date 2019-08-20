@@ -10,7 +10,8 @@
     "client": "cd client && npm run start",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "server": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -31,6 +32,7 @@
     "if-env": "^1.0.4",
     "materialize": "^1.0.0",
     "materialize-css": "^1.0.0-rc.2",
+    "moment": "^2.24.0",
     "mysql": "^2.17.1",
     "mysql2": "^1.6.5",
     "passport": "^0.4.0",

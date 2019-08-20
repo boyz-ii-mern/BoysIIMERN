@@ -1,40 +1,31 @@
 import React, { Component } from "react";
 import GroupMembers from "../../components/groupMembers/index";
-import GroupEvents from "../../components/eventsInGroup/index";
 import EventContainer from "../../components/eventContent/eventContainer";
-// import DeleteBtn from "../components/DeleteBtn";
-// import Jumbotron from "../components/Jumbotron";
-// import API from "../utils/API";
-// import { Link } from "react-router-dom";
-// import { Col, Row, Container } from "../components/Grid";
-// import { List, ListItem } from "../components/List";
 // import { Input, TextArea, FormBtn } from "../components/Form";
 import { IdentityContext } from "../../identity-context";
 import axios from "axios";
-
-// import eventsTest from "../../components/eventsTest.json";
 import ImageHeader from "../../components/eventContent/Comments/imageHeader";
 
-// console.log("did i grab this?", eventsTest[0]);
 class EventsTest extends Component {
   state = {
-    // staticEvent: eventsTest[0] || []
-
     username: "",
     password: "",
     user: {},
     loggedIn: false,
-    groupId: "",
+    groupId: "" || ["no group id"],
     events: "" || ["no events", "get out nerd"],
-    members: "" || ["starting"]
+    members: "" || ["starting"],
+    comments: "" || ["no starting comments cuz i have no friends"],
+    bannerImage: "" || ["no group banner"]
   };
 
   componentDidMount() {
+    //REALLY IMPORTANT, {ID} below for the EVENT getting pulled from URL
     const { id } = this.props.match.params;
     // check for logged in user
     axios.get("/api/user").then(response => {
       if (response.data) {
-        console.log("USER FROM API", response.data);
+        // console.log("USER FROM API", response.data);
         this.setState({
           user: response.data,
           userStateInfo: `${response.data.username} is logged in`,
@@ -42,27 +33,50 @@ class EventsTest extends Component {
         });
 
         // console.log("this be req.params", id)
-        //call to grab all 'events' associated to user, then display to main page. sets groups key/value to state.
+        //call to grab all 'events' associated to user. 'id' is grabbed from the URL  then display to main page. sets groups key/value to state.
         axios.get("/api/events/detail/" + id).then(next => {
           if (next.data) {
-            console.log("get events daniel", next.data.data);
-            
+            // console.log("get events daniel", next.data.data);
+
             this.setState({
               events: next.data.data,
               groupId: next.data.data.GroupId
             });
-            axios.get("/api/groups/members/" + next.data.data.GroupId).then(next => {
+
+          //call to grab all members associated by group id
+            axios
+              .get("/api/groups/members/" + next.data.data.GroupId)
+              .then(next => {
+                if (next.data) {
+                  // console.log("get group members", next.data.data);
+                  this.setState({
+                    members: next.data.data
+                  });
+                }
+              });
+
+            //call to grab group banner associated by group id
+            axios
+            .get("/api/groups/detail/" + id)
+            .then(next => {
               if (next.data) {
-                console.log("get group members", next.data.data);
+                console.log("get banner", next.data.data.groupInfo.bannerImage);
                 this.setState({
-                  members: next.data.data
+                  bannerImage: next.data.data.groupInfo.bannerImage
                 });
               }
             });
+
+            axios.get("/api/events/comments/" + id).then(next => {
+              if (next.data) {
+                // console.log("did get messages work?", next.data)
+                this.setState({
+                  comments: next.data.data.comments
+                })
+              }
+            })  
           }
         });
-        
-
       }
     });
   }
@@ -82,18 +96,24 @@ class EventsTest extends Component {
         <IdentityContext.Consumer>
           {({ user }) => (
             <div className="row">
-              <ImageHeader />
+              <ImageHeader
+                dataFromParent={this.state.bannerImage}
+              />
               <div className="col s12 m4 l3 side-content">
                 <h3 />
 
-                <GroupMembers />
+                <GroupMembers members={this.state.members} />
 
                 {/* Currently commented out GroupEvents */}
-                <GroupEvents />
+                {/* <GroupEvents /> */}
               </div>
               <div className="col s12 m8 l9 event-content">
                 {/* <EventContainer comments={this.state.staticEvent.comments}/> */}
-                <EventContainer />
+                <EventContainer 
+                  comments={this.state.comments}
+                  events={this.state.events}
+
+                />
               </div>
             </div>
           )}

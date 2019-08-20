@@ -1,6 +1,5 @@
 // Pages and Packages
 import React, { Component } from "react";
-// import Avatar from 'react-avatar-edit';
 import ImageUploader from 'react-images-upload';
 
 // Firebase
@@ -8,7 +7,7 @@ import { storage, database } from "./../../firebase/index";
 import "firebase/storage";
 import "firebase/database";
 
-class AvatarLoad extends Component {
+class BannerLoad extends Component {
   constructor(props) {
     super(props);
     this.onDrop = this.onDrop.bind(this);
@@ -18,7 +17,7 @@ class AvatarLoad extends Component {
     pictures: [],
     url: '',
     metadataFile: [],
-    avatarLink: ''
+    bannerLink: ''
   };
 
 
@@ -42,7 +41,7 @@ uploadHandler = (e) => {
   // Logs for Testing
   console.log(storage.child(file.name).fullPath);
 
-  const uploadTask = storage.child('avatars/' + file.name).put(file);
+  const uploadTask = storage.child('banners/' + file.name).put(file);
   
   uploadTask.on(`state_changed`, (snapshot) => {
       // Progress
@@ -74,9 +73,9 @@ uploadHandler = (e) => {
       });
 
       // Get File Firebase Storage Metadata
-      storage.child(`avatars/${file.name}`).getMetadata()
+      storage.child(`banners/${file.name}`).getMetadata()
       .then((metadata) => {
-        storage.child('avatars/' + file.name)
+        storage.child('banners/' + file.name)
         .getDownloadURL().then(url => {
           console.log(url)
           let metadataFile = {
@@ -85,14 +84,14 @@ uploadHandler = (e) => {
             contentType: metadata.contentType
           }
           this.setState({
-            avatarLink: url
+            bannerLink: url
           });
 
-          // Send avatarLink to log in SignUp Index
-          this.props.action(`${this.state.avatarLink}`);
+          // Send bannerLink to log in CreateGroup Index
+          this.props.action(`${this.state.bannerLink}`);
           
         // Save Metadata in Firebase Database
-        database.child('avatars').push({ metadataFile });
+        database.child('banners').push({ metadataFile });
         })
       }).catch(function(error) {
         console.log(error)
@@ -104,7 +103,7 @@ render() {
 
     return (
       <div>
-          <p>Who's Most Likely to upload a profile pic?! YOU ARE!</p>
+          <p>Upload a Picture of Your Group!</p>
           <br />
           <ImageUploader
                 withIcon={true}
@@ -122,4 +121,4 @@ render() {
   }
 }
 
-export default AvatarLoad;
+export default BannerLoad;

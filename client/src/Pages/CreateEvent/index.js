@@ -39,17 +39,6 @@ class Form extends Component {
                 console.log("this is groups response array:", response.data.data.groups);
                 let responseArr = response.data.data.groups
                 console.log("this is responseArr", responseArr);
-                // let groupNameArr = [];
-                // let groupIdArr = [];
-
-                // responseArr.forEach(function(element){
-                //   console.log("this is element", element);
-                //   groupNameArr.push(element.name);
-                //   groupIdArr.push(element.id);
-                // })
-                // console.log("this is groupNameArr", groupNameArr);
-                // console.log("this is is groupIdArr", groupIdArr);
-
                 this.setState({
                   groups: responseArr
                 })
@@ -99,18 +88,6 @@ class Form extends Component {
   handleFormSubmit = event => { //takes in "event" as its parameter
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
-
-    //push friends into addFriends array
-    // this.state.addFriends.push(event.target.value);
-    // var fld = document.getElementById('user-select');
-    // var values = [];
-    // for (var i = 0; i < fld.options.length; i++) {
-    // if (fld.options[i].selected) {
-    // this.state.addFriends.push(fld.options[i].value);
-    // }
-    // }
-    // console.log(values);
-    // this.state.addFriends.push(values);
 
     console.log("this is event date", this.state.eventDate)
     console.log("this is event name", this.state.eventName);

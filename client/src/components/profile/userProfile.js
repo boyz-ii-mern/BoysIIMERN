@@ -18,7 +18,6 @@ class UserProfile extends Component {
                                 <img src={user.avatar != null ? `${user.avatar}` : `../Images/avatar-01.png`} alt="" className="circle responsive-img profile-image" />
 
                                 <h4>{loggedIn ? `${user.firstName}` : `Username`}</h4>
-                                <p>{`Testing this is user ID${user.userId}`}</p>
                                 <p>{loggedIn ? `${user.superlative}` : `Most Likely to Do Something`}</p>
 
                             </div>

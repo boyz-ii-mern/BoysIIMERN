@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-class EventTitle extends Component {
-    render() {
+function EventTitle (props) {
+    console.log("passed in time and headres", props)
         return (
             <div className="event-title">
                <div className="event-title-container valign-wrapper">
@@ -10,14 +10,13 @@ class EventTitle extends Component {
                         <h4 className="event-date-month">JULY</h4>
                     </div>
                     <div className="event-name-location">
-                        <h4>Ice Skating at the Park</h4>
-                        <p>Maggie Daley Park</p>
+                        <h4>{props.name}</h4>
+                        <p>{props.location}</p>
                     </div>
                </div>
                 <hr className="event-divider"></hr>
             </div>
         )
     }
-}
 
 export default EventTitle;
