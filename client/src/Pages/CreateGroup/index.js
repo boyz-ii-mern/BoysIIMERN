@@ -213,7 +213,7 @@ class Form extends Component {
                           placeholder="ex: 8008765309"
                         />
                          <div className="modal-footer">
-                          <a data-target="modal1" className="modal-close waves-effect waves-green btn-flat modal-submit-button" type="submit">Submit</a>
+                          <a data-target="modal1" className="modal-close waves-effect waves-green btn-flat modal-submit-button" type="submit" onClick={this.handleInvite}>Submit</a>
                           <a data-target="modal1" className="modal-close waves-effect waves-green btn-flat modal-cancel-btn" type="button">Cancel</a>
                         </div>
                       </form>
