@@ -92,7 +92,15 @@ async function getComments(eventId) {
 
 async function addComment(eventId, body, userId) {
     try {
-        // const res = await axios.post
+        const res = await axios.post(`/api/events/comments/${eventId}`, {
+            "userId": userId,
+            "body": body
+        })
+        if (res.data) {
+            return res.data
+        } else {
+            return res
+        }
     } catch (err) {
         console.error(err)
         return { error: err.message }
