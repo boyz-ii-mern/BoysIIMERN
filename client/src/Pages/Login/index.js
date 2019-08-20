@@ -104,7 +104,7 @@ class Login extends Component {
                             <h4>{this.state.errorMessage
                                 ? this.state.errorMessage
                                 : loggedIn
-                                    ? `Logged In!`
+                                    ? ``
                                     : ""}</h4>
                         )}
                     </IdentityContext.Consumer>

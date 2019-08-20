@@ -112,10 +112,10 @@ class Form extends Component {
     })
       .then(response => {
         console.log("this is create groups response:", response);
-        // if (response.status == 200 ) {
+        if (response.status == 200 ) {
 
-
-        // }
+          window.location.href = "/home";
+        }
       })
   };
 
