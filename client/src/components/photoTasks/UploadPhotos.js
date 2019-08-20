@@ -7,6 +7,10 @@ import shortid from 'shortid'
 // Pull from Events to get event ID for metadata and future img sorting
 import eventsTest from "../../components/eventsTest.json";
 
+// Firebase
+import { storage, database } from "../../firebase";
+import "firebase/storage";
+import "firebase/database";
 
 // FilePond
 import { FilePond, registerPlugin, File } from "react-filepond";
@@ -16,11 +20,6 @@ import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 // FilePond CSS
 import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-
-// Firebase
-import { storage, database } from "../../firebase";
-import "firebase/storage";
-import "firebase/database";
 
 // Register Filepond Plugins for Additional Functionality
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
@@ -44,15 +43,6 @@ class UploadPhotos extends Component {
             rows: [],
             // uploadEventId: "",
         };
-
-    // componentDidMount() { 
-    //     let uploadEventId = this.props.match.params.eventId;
-    //     console.log(uploadEventId); 
-
-    //     // this.setState({ uploadEventId: this.props.match.params.eventId });
-    //     // console.log(this.state); 
-    // };
-    
         
     // Handles our Image Storage
     handleProcessing(fieldName, file, metadata, load, error, progress, abort) {

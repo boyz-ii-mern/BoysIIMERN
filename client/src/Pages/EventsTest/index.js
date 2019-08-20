@@ -42,6 +42,7 @@ class EventsTest extends Component {
               events: next.data.data,
               groupId: next.data.data.GroupId
             });
+            console.log("Group ID: ", next.data.data.GroupId)
 
           //call to grab all members associated by group id
             axios
@@ -57,7 +58,7 @@ class EventsTest extends Component {
 
             //call to grab group banner associated by group id
             axios
-            .get("/api/groups/detail/" + id)
+            .get("/api/groups/detail/" + next.data.data.GroupId)
             .then(next => {
               if (next.data) {
                 console.log("get banner", next.data.data.groupInfo.bannerImage);
