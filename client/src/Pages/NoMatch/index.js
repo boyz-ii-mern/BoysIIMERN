@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ErrorPage from "../../components/404";
 // import DeleteBtn from "../components/DeleteBtn";
 // import Jumbotron from "../components/Jumbotron";
 // import API from "../utils/API";
@@ -15,9 +16,9 @@ class NoMatch extends Component {
 
   render() {
     return (
-        <div>
-            <h1>404. Sorry Mario but your princess is in another castle</h1>
-        </div>
+      <div className="error-container valign-wrapper">
+        <ErrorPage />
+      </div>
     );
   }
 }

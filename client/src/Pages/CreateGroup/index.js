@@ -24,7 +24,9 @@ class Form extends Component {
     groupName: "",
     members: [],
     photolink: "",
-    allUsers: "" || ["No Users Available"]
+    allUsers: "" || ["No Users Available"],
+    phoneNumbers: "",
+
   };
   componentDidMount() {
     M.AutoInit();
@@ -174,6 +176,32 @@ class Form extends Component {
                     placeholder="Link to Photo"
                   /> */}
                   <button className="waves-effect waves-light btn create-form-submit" onClick={this.handleFormSubmit}>Create Group</button>
+                  <p className="form-p">Don't see your friends? Invite them!</p>
+                  {/* <!-- Modal Trigger --> */}
+                  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">invite friends</a>
+
+                  {/* <!-- Modal Structure --> */}
+                  <div id="modal1" class="modal">
+                    <div class="modal-content">
+                      <h4>Invite Friends</h4>
+                      <p>Add phone numbers to invite your friends to Likely</p>
+                      <form>
+                      <input
+                    value={this.state.phoneNumbers}
+                    name="phoneNumbers"
+                    //the onChange is what tells React to update the DOM
+                    onChange={this.handleInputChange}
+                    type="text"
+                    placeholder="ex: 8008765309"
+                  />
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button href="#!" class="modal-close waves-effect waves-green btn-flat modal-submit-button" type="submit">Submit</button>
+                      <button href="#!" class="modal-close waves-effect waves-green btn-flat modal-cancel-btn">Cancel</button>
+
+                    </div>
+                  </div>
                 </form>
               )}
             </IdentityContext.Consumer>
