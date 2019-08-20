@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const models = require("../../models");
 const { throwIfNull } = require("../../utils");
-const accountSid = 'AC57694dd1e70b59334ea16a35d0720d3c';
+const accountSid = process.env.TWILIO_SID;
 const authToken = process.env.TWILIO_PW;
 const client = require('twilio')(accountSid, authToken);
 
