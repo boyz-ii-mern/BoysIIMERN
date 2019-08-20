@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { IdentityContext } from "../../identity-context";
 import 'materialize-css/dist/css/materialize.min.css';
+// import { Modal, Button } from 'react-materialize';
 import M from "materialize-css";
 // import friends from "./users.json"
 import BannerLoad from "./bannerLoad";
@@ -178,11 +179,11 @@ class Form extends Component {
                   <button className="waves-effect waves-light btn create-form-submit" onClick={this.handleFormSubmit}>Create Group</button>
                   <p className="form-p">Don't see your friends? Invite them!</p>
                   {/* <!-- Modal Trigger --> */}
-                  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">invite friends</a>
+                  <a className="waves-effect waves-light btn modal-trigger" href="#modal1">invite friends</a>
 
                   {/* <!-- Modal Structure --> */}
-                  <div id="modal1" class="modal">
-                    <div class="modal-content">
+                  <div id="modal1" className="modal twilio-modal">
+                    <div className="modal-content">
                       <h4>Invite Friends</h4>
                       <p>Add phone numbers to invite your friends to Likely</p>
                       <form>
@@ -196,9 +197,9 @@ class Form extends Component {
                   />
                       </form>
                     </div>
-                    <div class="modal-footer">
-                      <button href="#!" class="modal-close waves-effect waves-green btn-flat modal-submit-button" type="submit">Submit</button>
-                      <button href="#!" class="modal-close waves-effect waves-green btn-flat modal-cancel-btn">Cancel</button>
+                    <div className="modal-footer">
+                      <button data-target="modal1" className="modal-close waves-effect waves-green btn-flat modal-submit-button" type="submit">Submit</button>
+                      <button data-target="modal1" className="modal-close waves-effect waves-green btn-flat modal-cancel-btn">Cancel</button>
 
                     </div>
                   </div>
