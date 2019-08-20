@@ -196,7 +196,7 @@ class Form extends Component {
                   <button className="waves-effect waves-light btn create-form-submit" onClick={this.handleFormSubmit}>Create Group</button>
                   <p className="form-p">Don't see your friends? Invite them!</p>
                   {/* <!-- Modal Trigger --> */}
-                  <a className="waves-effect waves-light btn modal-trigger" href="#modal1">invite friends</a>
+                  <a className="waves-effect waves-light btn modal-trigger" data-target="modal1">invite friends</a>
 
                   {/* <!-- Modal Structure --> */}
                   <div id="modal1" className="modal twilio-modal">
@@ -212,13 +212,13 @@ class Form extends Component {
                           type="text"
                           placeholder="ex: 8008765309"
                         />
+                         <div className="modal-footer">
+                          <a data-target="modal1" className="modal-close waves-effect waves-green btn-flat modal-submit-button" type="submit" onClick={this.handleInvite}>Submit</a>
+                          <a data-target="modal1" className="modal-close waves-effect waves-green btn-flat modal-cancel-btn" type="button">Cancel</a>
+                        </div>
                       </form>
                     </div>
-                    <div className="modal-footer">
-                      <button data-target="modal1" className="modal-close waves-effect waves-green btn-flat modal-submit-button" type="submit">Submit</button>
-                      <button data-target="modal1" className="modal-close waves-effect waves-green btn-flat modal-cancel-btn">Cancel</button>
-
-                    </div>
+                   
                   </div>
                 </form>
               )}
