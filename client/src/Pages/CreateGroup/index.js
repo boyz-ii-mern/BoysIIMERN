@@ -45,7 +45,7 @@ class Form extends Component {
       })
     axios.get("/api/user/all")
       .then(response => {
-        if(response.data){
+        if (response.data) {
           console.log("this is all users", response.data.data);
           this.setState({
             allUsers: response.data.data
@@ -55,11 +55,11 @@ class Form extends Component {
   }
 
   // Receive information from bannerLoad
-  childHandler(bannerLink){
+  childHandler(bannerLink) {
     this.setState({
-        photolink: bannerLink
-    },() => console.log("Updated State: ", this.state.photolink));
-}
+      photolink: bannerLink
+    }, () => console.log("Updated State: ", this.state.photolink));
+  }
 
   handleSelectChange = event => {
     // Getting the value and name of the input which triggered the change
@@ -78,26 +78,26 @@ class Form extends Component {
     // Getting the value and name of the input which triggered the change
     const { name, value } = event.target;
 
-      this.setState({
-        //this is how we can reference a property name from a variable
-        //[] notation takes the value of that variable as the property name
-        [name]: value
-      });
+    this.setState({
+      //this is how we can reference a property name from a variable
+      //[] notation takes the value of that variable as the property name
+      [name]: value
+    });
   };
   handleInputSelect = event => {
     // Getting the value and name of the select to push into array
-      let userId = this.state.user.userId;
-      var options = event.target.options;
-      var memArr = [userId];
-      for (var i = 0, l = options.length; i < l; i++) {
-        if (options[i].selected) {
-          memArr.push(options[i].value);
-        }
+    let userId = this.state.user.userId;
+    var options = event.target.options;
+    var memArr = [userId];
+    for (var i = 0, l = options.length; i < l; i++) {
+      if (options[i].selected) {
+        memArr.push(options[i].value);
       }
-      this.setState({
-        members: memArr,
-      });
-    
+    }
+    this.setState({
+      members: memArr,
+    });
+
   };
 
   handleFormSubmit = event => { //takes in "event" as its parameter
@@ -113,7 +113,7 @@ class Form extends Component {
     })
       .then(response => {
         console.log("this is create groups response:", response);
-        if (response.status == 200 ) {
+        if (response.status == 200) {
 
           window.location.href = "/home";
         }
@@ -164,13 +164,13 @@ class Form extends Component {
                   />
 
                   <select className="custom-select create-event-select" id="group-select" name="members" multiple={true} onChange={this.handleInputSelect}>
-                  {
-                    this.state.allUsers.filter((self) => {
-                      return self.id != this.state.user.userId
-                    })
-                    .map(user => (
-                      <option value={user.id}>{user.firstName}</option>
-                  ))}
+                    {
+                      this.state.allUsers.filter((self) => {
+                        return self.id != this.state.user.userId
+                      })
+                        .map(user => (
+                          <option value={user.id}>{user.firstName}</option>
+                        ))}
                   </select>
                   <br />
                   <BannerLoad
@@ -179,7 +179,7 @@ class Form extends Component {
                   <input
                     type="hidden"
                     name="photolink"
-                    value={this.state.photolink} 
+                    value={this.state.photolink}
                     onChange={this.handleInputChange}
                   />
                   {/* <input
@@ -191,7 +191,7 @@ class Form extends Component {
                     type="text"
                     placeholder="Link to Photo"
                   /> */}
-                  
+
                   <button className="waves-effect waves-light btn create-form-submit" onClick={this.handleFormSubmit}>Create Group</button>
                   <p className="form-p">Don't see your friends? Invite them!</p>
                   {/* <!-- Modal Trigger --> */}
@@ -203,14 +203,14 @@ class Form extends Component {
                       <h4>Invite Friends</h4>
                       <p>Add phone numbers to invite your friends to Likely</p>
                       <form>
-                      <input
-                    value={this.state.phoneNumber}
-                    name="phoneNumbers"
-                    //the onChange is what tells React to update the DOM
-                    onChange={this.handleInputChange}
-                    type="text"
-                    placeholder="ex: 8008765309"
-                  />
+                        <input
+                          value={this.state.phoneNumber}
+                          name="phoneNumbers"
+                          //the onChange is what tells React to update the DOM
+                          onChange={this.handleInputChange}
+                          type="text"
+                          placeholder="ex: 8008765309"
+                        />
                       </form>
                     </div>
                     <div class="modal-footer">
