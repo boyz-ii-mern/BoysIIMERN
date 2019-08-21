@@ -19,7 +19,7 @@ function EventTitle (props) {
                         </h4>
                     </div>
                     <div className="event-name-location">
-                        <h4>{props.name}</h4>
+                        <h4 className="event-location">{props.name}</h4>
                         <p>{props.location}</p>
                     </div>
                </div>

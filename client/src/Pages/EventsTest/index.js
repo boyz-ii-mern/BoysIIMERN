@@ -121,7 +121,7 @@ class EventsTest extends Component {
             <div className="row">
               <ImageHeader dataFromParent={this.state.bannerImage} />
               <div className="col s12 m4 l3 side-content">
-                <h3 />
+                {/* <h3 /> */}
 
                 <GroupMembers members={this.state.members} />
 

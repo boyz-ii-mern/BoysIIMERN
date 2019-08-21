@@ -237,6 +237,12 @@ select {
     color: #556270;
 }
 
+.event-date-day, .event-date-month, .event-location {
+    padding: 0px;
+    margin: 0px;
+}
+
+
 /* ----------------- Tabs Section ----------------- */
 .tab-list {
     border-bottom: 1px solid #ccc;
