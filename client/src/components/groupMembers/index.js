@@ -3,7 +3,7 @@ import User from "./UserCard";
 
 function GroupMembers (props) {
 
-    let gmember = props.members.members || []
+    let gmember = props.members || []
    //Console Log gmember will show the below object example being passed in. Must set initial array value as [] or it will not map. 
     // avatar: null
     // email: "my@email.com"

@@ -2,22 +2,18 @@ import React, { Component } from 'react';
 import SuperlativeUser from './superlativeUser';
 import SuperlativesForm from './addSuperlativeForm';
 
-class Superlatives extends Component {
-    render() {
-        return(
-            <div className="row">
-                <div className="superlatives-users-container">
-                    {/* TODO: loop/map over however many users are in a group and create a superlative user for each of them */}
-                    <SuperlativeUser />
-                    <SuperlativeUser />
-                    <SuperlativeUser />
-                    <SuperlativeUser />
-                    <SuperlativeUser />
-                    <SuperlativeUser />
-                </div>
+function Superlatives(props) {
+    return (
+        <div className="row">
+            <div className="superlatives-users-container">
+                { props.superlatives  && props.superlatives.map((s, i) => {
+                    return (
+                        <SuperlativeUser key={i} superlative={s} />
+                    )
+                })}
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default Superlatives

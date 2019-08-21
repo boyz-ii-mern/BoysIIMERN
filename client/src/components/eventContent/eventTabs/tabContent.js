@@ -4,10 +4,6 @@ import PropTypes from 'prop-types';
 import Tab from './tabs';
 
 class TabsTest extends Component {
-  // static propTypes = {
-  //   children: PropTypes.instanceOf(Array).isRequired,
-  // }
-
   constructor(props) {
     super(props);
 
@@ -50,7 +46,6 @@ class TabsTest extends Component {
         <div className="tab-content">
           {children.map((child) => {
             if (child.props.label !== activeTab) {
-              console.log(child.props.label)
               return undefined;
             }
             return child;
