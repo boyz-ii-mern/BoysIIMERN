@@ -1,14 +1,18 @@
 import React, { Component } from "react";
-import friends from "../../../Pages/CreateEvent/users.json"
+import api from '../../../api';
+
 
 class SuperlativesForm extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
-            comment: "",
-            user: "",
-            friends
-         };
+        this.props = props
+        this.eventId = props.eventId
+        this.userId = props.userId
+        this.friends = props.friends || []
+        this.state = {
+            superlativeInput: "",
+            selectedUser: this.friends[0].id
+        }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,45 +24,53 @@ class SuperlativesForm extends Component {
         const name = target.name;
 
         this.setState({
-        [name]: value
+            [name]: value
         });
-    } 
+    }
 
-    handleSubmit(event) {
-        alert(this.state.user +"'s New Superlative: " + this.state.comment);
-
-        //TODO: update user information to include new superlative
-
-        event.preventDefault();
+    async handleSubmit(event) {
+        event.preventDefault()
+        const res = await api.superlative.addSuperlative(this.eventId, this.state.superlativeInput, this.state.selectedUser)
+        if (res.error) {
+            console.log(res)
+        } else {
+            this.setState({
+                superlativeInput: "",
+                selectedUser: this.friends[0].id
+            })
+            this.props.update(res.data.superlatives)
+        }
     }
 
     render() {
         return (
-        <div className="row superlatives-form-container">
-            <form onSubmit={this.handleSubmit} className="superlatives-form">
-                <label className="col s12 m4 superlatives-select">
-                    Choose a group member
-                    <select className="superlatives-select-input" name="user" value={this.state.value} onChange={this.handleChange}>
-                        {this.state.friends.map(friend => (
-                        <option value={friend.name}>{friend.name}</option>
-                        ))}
-                    </select>
-                </label>
-                
-                <label className="col s9 m6 superlatives-input">
-                    <input
-                        className="add-comment-input"
-                        type="text"
-                        name="comment"
-                        placeholder="Say something. Or don't."
-                        value={this.state.value}
-                        onChange={this.handleChange}
-                    />
-                </label>
-                
-                <button type="submit" value="Submit" className="waves-effect waves-light btn add-comment-submit">submit</button>
-            </form>
-        </div>
+            <div className="row superlatives-form-container">
+                <form onSubmit={this.handleSubmit} className="superlatives-form">
+                    <label className="col s12 m4 superlatives-select">
+                        Choose a group member
+                    <select className="superlatives-select-input" name="selectedUser" value={this.state.selectedUser} onChange={this.handleChange}>
+                            {this.friends && this.friends.map((friend, i) => {
+                                return (
+                                    <option key={i} value={friend.id}>{friend.firstName} {friend.lastName}</option>
+                                )
+                            })}
+                        </select>
+                    </label>
+
+                    <label className="col s9 m6 superlatives-input">
+                        <input
+                            className="add-comment-input"
+                            type="text"
+                            name="superlativeInput"
+                            placeholder="Say something. Or don't."
+                            value={this.state.superlativeInput}
+                            onChange={this.handleChange}
+                        />
+                    </label>
+
+                    <button type="submit" value="Submit" className="waves-effect waves-light btn add-comment-submit">submit</button>
+                </form>
+            </div>
         );
     }
 }

@@ -99,18 +99,12 @@ class Login extends Component {
             }}>
                 <div className="card col sm12 m10 l8 form-card sign-in-form-card">
                     <h1 className="sign-in-header">Sign In</h1>
-                    <IdentityContext.Consumer>
-                        {({ user, loggedIn }) => (
-                            <h4>{this.state.errorMessage
-                                ? this.state.errorMessage
-                                : loggedIn
-                                    ? `Logged In!`
-                                    : ""}</h4>
-                        )}
-                    </IdentityContext.Consumer>
+                    
                     <IdentityContext.Consumer>
                         {({ user, loggedIn, login }) => (
+
                             <form className="form create-event-form">
+                                <h5 class="center-align red-text text-darken-3">{this.state.errorMessage ? this.state.errorMessage : loggedIn}</h5>
                                 <input
                                     type="text"
                                     name="username"

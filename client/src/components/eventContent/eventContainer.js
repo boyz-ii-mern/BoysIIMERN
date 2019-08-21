@@ -5,25 +5,33 @@ import Comments from "./Comments/commentSection";
 import RenderTabs from "./eventTabs/renderTabs";
 // import TabsTest from "./tabContent";
 
-function EventContainer (props) {
-    console.log("comments", props)
-        return (
-            <div className="card col s12 m8 l9 events-card">
+function EventContainer(props) {
+    console.log("eventContainer", props)
+    return (
+        <div className="card col s12 m8 l9 events-card">
             <div className="card-header">
                 <h5>Event Recap</h5>
             </div>
             <div className="events-section">
-              <EventTitle />  
+                <EventTitle
+                    name={props.event.name}
+                    location={props.event.location}
+                    date={props.event.date}
+                />
             </div>
             <RenderTabs comments={props.comments}
+                eventId={props.event.id}
+                userId={props.userId}
+                friends={props.members}
+                action={props.action}
             />
             {/* <EventNav />
             <Comments /> */}
             {/* <TabsTest /> */}
-            
+
             {/* event date/title component */}
             {/* event nav component */}
-            
+
             {/* -------- ROUTING LINKS? ---------- */}
             {/* ------------":groupname/comments" --------------
             leave comment Component
@@ -45,12 +53,12 @@ function EventContainer (props) {
             other users in group vote to accept or reject new superlative???
             */}
 
-            
-            
-          
+
+
+
         </div>
-        )
-    }
+    )
+}
 
 
 export default EventContainer;

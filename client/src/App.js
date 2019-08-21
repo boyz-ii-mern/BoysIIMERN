@@ -1,4 +1,5 @@
 import React from "react";
+
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"; //<!super important to get router to work 
 import Home from "./Pages/Home";
 import Events from "./Pages/Events";

@@ -63,9 +63,30 @@ async function signUp(email, password, firstName, lastName, avatar, superlative)
     }
 }
 
+async function allEventsAttending(userId) {
+    try {
+        const res = await axios.get(`/api/groups/byUser/${userId}`)
+        if (res.data) {
+            const events = res.data.data.groups.flatMap(group => {
+                return group.Events
+            })
+            return {
+                data: events
+            }
+        } else {
+            return res
+        }
+    } catch (err) {
+        console.error(err)
+        return { error: err.message }
+    }
+}
+
+
 export default {
     login,
     logout,
     getProfile,
     signUp,
+    allEventsAttending
 }

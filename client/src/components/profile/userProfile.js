@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { IdentityContext } from "../../identity-context";
-// import axios from "axios";
+import api from '../../api'
+api.user.allEventsAttending(1).then(console.log).catch(console.log)
 
 class UserProfile extends Component {
     render() {
@@ -18,7 +19,6 @@ class UserProfile extends Component {
                                 <img src={user.avatar != null ? `${user.avatar}` : `../Images/avatar-01.png`} alt="" className="circle responsive-img profile-image" />
 
                                 <h4>{loggedIn ? `${user.firstName}` : `Username`}</h4>
-                                <p>{`Testing this is user ID${user.userId}`}</p>
                                 <p>{loggedIn ? `${user.superlative}` : `Most Likely to Do Something`}</p>
 
                             </div>

@@ -100,7 +100,7 @@ class Navbar extends Component {
 
                     </ul>
 
-                    <ul class="collapsible sidenav" id="mobile-demo">
+                    <ul className="collapsible sidenav" id="mobile-demo">
                         <li><Link to='/home'>Home</Link></li>
                         <li><Link to='/createGroup'>Create Group</Link></li>
                         <li><Link to='/createEvent'>Create Event</Link></li>

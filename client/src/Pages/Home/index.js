@@ -3,6 +3,7 @@ import Groups from "../../components/Groups";
 import HomeEvents from "../../components/HomeEvents";
 import UserProfile from "../../components/profile/userProfile";
 import { IdentityContext } from "../../identity-context";
+import api from '../../api'
 import axios from "axios";
 // import DeleteBtn from "../components/DeleteBtn";
 // import Jumbotron from "../components/Jumbotron";
@@ -18,8 +19,8 @@ class Home extends Component {
     password: "",
     user: {},
     loggedIn: false,
-    groups: "" || ["no members", "get some friends, loser"],
-    events: "" || ["no events", "get out nerd"]
+    groups: [],
+    events: []
   };
 
   componentDidMount() {
@@ -44,11 +45,11 @@ class Home extends Component {
         });
 
         //call to grab all 'events' associated to user, then display to main page. sets groups key/value to state.
-        axios.get("/api/events/byUser/" + response.data.userId).then(next => {
+        api.user.allEventsAttending(response.data.userId).then(next => {
           if (next.data) {
-            console.log("get events data", next.data.data);
+            console.log("get events data", next.data);
             this.setState({
-              events: next.data.data
+              events: next.data
             });
           }
         });
@@ -76,16 +77,16 @@ class Home extends Component {
               ))}
             </div>
 
-      <div className="card-header my-events">
-        <h5>My Events</h5>
-      </div>
+            <div className="card-header my-events">
+              <h5>My Events</h5>
+            </div>
 
-            {this.state.events.map(event =>(
-                <HomeEvents 
+            {this.state.events.map(event => (
+              <HomeEvents
                 eventId={event.id}
                 eventName={event.name}
 
-                />
+              />
             ))}
           </div>
         </div>
