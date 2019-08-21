@@ -17,7 +17,8 @@ class Form extends Component {
     eventName: "",
     eventLocation: "",
     eventDate: "",
-    groups: "" || ["no members", "get some friends, loser"],
+    groupId: "",
+    groups: "" || []
   };
   componentDidMount() {
     // check for logged in user
@@ -84,27 +85,29 @@ class Form extends Component {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
 
-    // this is the post to create the event
-    axios.post("/api/events", {
-      "name": this.state.eventName,
-      "location": this.state.eventLocation,
-      "date": this.state.eventDate,
-      "groupId": this.state.groupId,
-      "userId": this.state.user.userId
-    }).then((response) => {
-      console.log("this is create Event response", response);
-      if (response.status == 200) {
-        
-        window.location.href = "/home";
+    if (this.state.eventName == "" || this.state.eventLocation == "" || this.state.eventDate == "" || this.state.groupId == "") {
+      window.scrollTo(0, 0);
+      this.setState({
+        errorMessage: "There is an Error"
+      })
+    } else {
+      // this is the post to create the event
+      axios.post("/api/events", {
+        "name": this.state.eventName,
+        "location": this.state.eventLocation,
+        "date": this.state.eventDate,
+        "groupId": this.state.groupId,
+        "userId": this.state.user.userId
+      }).then((response) => {
+        console.log("this is create Event response", response);
+        if (response.status == 200) {
+
+          window.location.href = "/home";
+        }
+      })
     }
-    })
-     // clearing the inputs
-    
-    this.setState({
-      eventName: "",
-      eventLocation: "",
-      eventDate: ""
-    });
+
+
   };
 
   render() {
@@ -122,6 +125,7 @@ class Form extends Component {
             <IdentityContext.Consumer>
               {({ user }) => (
                 <form className="form create-event-form">
+                  <h5 class="center-align red-text text-darken-3">{this.state.errorMessage && this.state.eventName == "" ? "Choose an Event Name!" : ""}</h5>
                   <input
                     // the value of form elements is tied to the state -- this means react will only update what you see on the page when the state is updated
                     value={this.state.eventName}
@@ -131,6 +135,7 @@ class Form extends Component {
                     type="text"
                     placeholder="Event Name"
                   />
+                  <h5 class="center-align red-text text-darken-3">{this.state.errorMessage && this.state.eventLocation == "" ? "Choose a place!" : ""}</h5>
                   <input
                     value={this.state.eventLocation}
                     name="eventLocation"
@@ -138,14 +143,19 @@ class Form extends Component {
                     type="text"
                     placeholder="Event Location"
                   />
+                  <h5 class="center-align red-text text-darken-3">{this.state.errorMessage && this.state.groupId == "" ? "Choose a group!" : ""}</h5>
                   <select className="browser-default create-event-select" id="user-select" name="groupId" multiple onChange={this.handleInputChange}>
-                  <option value="" disabled defaultValue>Choose Groups to Invite</option>
-
-                    {this.state.groups.map(groups => (
-                      <option value={groups.id}>{groups.name}</option>
-                  ))}
-                    {/* <option value={this.state.groupId}>{this.state.group}</option> */}
+                    <option value="" disabled defaultValue>Choose Groups to Invite</option>
+                    {
+                      this.state.groups.length == 0 ? 
+                        <option value="" disabled defaultValue>You have no groups, go create one!</option> 
+                        :
+                        this.state.groups.map(groups => (
+                          <option value={groups.id}>{groups.name}</option>
+                      
+                    ))}
                   </select>
+                  <h5 class="center-align red-text text-darken-3">{this.state.errorMessage && this.state.eventDate == "" ? "Set a date!" : ""}</h5>
                   <input value={this.state.eventDate} name="eventDate" onChange={this.handleInputChange} type="date" />
                   <button className="waves-effect waves-light btn create-form-submit" onClick={this.handleFormSubmit}>Create Event</button>
                 </form>

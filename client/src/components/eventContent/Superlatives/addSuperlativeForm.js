@@ -1,32 +1,21 @@
 import React, { Component } from "react";
-import friends from "../../../Pages/CreateEvent/users.json"
-import api from '../../../api'
+import api from '../../../api';
+
 
 class SuperlativesForm extends Component {
     constructor(props) {
         super(props);
+        this.props = props
         this.eventId = props.eventId
         this.userId = props.userId
+        this.friends = props.friends || []
         this.state = {
-            superlatives: [],
             superlativeInput: "",
-            selectedUser: null
-        };
+            selectedUser: this.friends[0].id
+        }
 
-        this.getSuperlatives()
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    async getSuperlatives() {
-        const res = await api.superlative.getEventSuperlatives(1)
-        if (res.error) {
-            console.log(res)
-        } else {
-            this.setState({
-                superlatives: res.data.data.superlatives
-            })
-        }
     }
 
     handleChange(event) {
@@ -39,12 +28,18 @@ class SuperlativesForm extends Component {
         });
     }
 
-    handleSubmit(event) {
-        alert(this.state.user + "'s New Superlative: " + this.state.comment);
-
-        //TODO: update user information to include new superlative
-
-        event.preventDefault();
+    async handleSubmit(event) {
+        event.preventDefault()
+        const res = await api.superlative.addSuperlative(this.eventId, this.state.superlativeInput, this.state.selectedUser)
+        if (res.error) {
+            console.log(res)
+        } else {
+            this.setState({
+                superlativeInput: "",
+                selectedUser: this.friends[0].id
+            })
+            this.props.update(res.data.superlatives)
+        }
     }
 
     render() {
@@ -53,10 +48,12 @@ class SuperlativesForm extends Component {
                 <form onSubmit={this.handleSubmit} className="superlatives-form">
                     <label className="col s12 m4 superlatives-select">
                         Choose a group member
-                    <select className="superlatives-select-input" name="user" value={this.state.value} onChange={this.handleChange}>
-                            {this.state.friends.map(friend => (
-                                <option value={friend.name}>{friend.name}</option>
-                            ))}
+                    <select className="superlatives-select-input" name="selectedUser" value={this.state.selectedUser} onChange={this.handleChange}>
+                            {this.friends && this.friends.map((friend, i) => {
+                                return (
+                                    <option key={i} value={friend.id}>{friend.firstName} {friend.lastName}</option>
+                                )
+                            })}
                         </select>
                     </label>
 
@@ -64,9 +61,9 @@ class SuperlativesForm extends Component {
                         <input
                             className="add-comment-input"
                             type="text"
-                            name="comment"
+                            name="superlativeInput"
                             placeholder="Say something. Or don't."
-                            value={this.state.value}
+                            value={this.state.superlativeInput}
                             onChange={this.handleChange}
                         />
                     </label>

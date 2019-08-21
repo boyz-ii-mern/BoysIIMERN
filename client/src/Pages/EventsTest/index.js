@@ -19,7 +19,6 @@ class EventsTest extends Component {
     const { id } = this.props.match.params;
 
     // console.log("this is sidd", id)
-    console.log("am i grabbing this", this.state.user.userId);
 
     axios
       .post("/api/events/comments/" + id, {
@@ -41,7 +40,7 @@ class EventsTest extends Component {
     loggedIn: false,
     groupId: "" || ["no group id"],
     events: "" || ["no events", "get out nerd"],
-    members: "" || ["starting"],
+    members: [],
     comments: "" || ["no starting comments cuz i have no friends"],
     bannerImage: "" || ["no group banner"]
   };
@@ -69,16 +68,14 @@ class EventsTest extends Component {
               events: next.data.data,
               groupId: next.data.data.GroupId
             });
-            console.log("Group ID: ", next.data.data.GroupId);
 
             //call to grab all members associated by group id
             axios
               .get("/api/groups/members/" + next.data.data.GroupId)
               .then(next => {
                 if (next.data) {
-                  console.log("get group members", next.data.data);
                   this.setState({
-                    members: next.data.data
+                    members: next.data.data.members
                   });
                 }
               });
@@ -88,10 +85,6 @@ class EventsTest extends Component {
               .get("/api/groups/detail/" + next.data.data.GroupId)
               .then(next => {
                 if (next.data) {
-                  console.log(
-                    "get banner",
-                    next.data.data.groupInfo.bannerImage
-                  );
                   this.setState({
                     bannerImage: next.data.data.groupInfo.bannerImage
                   });
@@ -113,7 +106,6 @@ class EventsTest extends Component {
   }
 
   render() {
-    console.log("this is eventsTest state", this.state);
 
     return (
       <IdentityContext.Provider
@@ -142,9 +134,10 @@ class EventsTest extends Component {
                   //----------------------testing-----------------------------
                   action={this.childHandler}
                   //----------------------testing-----------------------------
-
+                  userId={this.state.user.userId}
+                  members={this.state.members}
                   comments={this.state.comments}
-                  events={this.state.events}
+                  event={this.state.events}
                 />
               </div>
             </div>
