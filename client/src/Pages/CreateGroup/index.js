@@ -183,15 +183,6 @@ class Form extends Component {
                     value={this.state.photolink}
                     onChange={this.handleInputChange}
                   />
-                  {/* <input
-                    // the value of form elements is tied to the state -- this means react will only update what you see on the page when the state is updated
-                    value={this.state.photolink}
-                    name="photolink"
-                    //the onChange is what tells React to update the DOM
-                    onChange={this.handleInputChange}
-                    type="text"
-                    placeholder="Link to Photo"
-                  /> */}
 
                   <button className="waves-effect waves-light btn create-form-submit" onClick={this.handleFormSubmit}>Create Group</button>
                   <p className="form-p">Don't see your friends? Invite them!</p>

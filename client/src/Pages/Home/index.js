@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import Groups from "../../components/Groups";
+// import Groups from "../../components/Groups";
 import HomeEvents from "../../components/HomeEvents";
 import UserProfile from "../../components/profile/userProfile";
 import { IdentityContext } from "../../identity-context";
 import api from '../../api'
 import axios from "axios";
+import GroupsImIn from "../../components/GroupsImIn";
 // import DeleteBtn from "../components/DeleteBtn";
 // import Jumbotron from "../components/Jumbotron";
 // import API from "../utils/API";
@@ -72,9 +73,26 @@ class Home extends Component {
           <div className="row">
             <div className="col s12 m5 side-content">
               <UserProfile />
-              {this.state.groups.map(groupName => (
-                <Groups group={groupName} />
-              ))}
+
+              {/* --------- Groups I'm In section ----------- */}
+              <div className="card col">
+                    <div className="card-header">
+                        <h5>Groups I'm In</h5>
+                    </div>
+                        <div className="card-content">
+                        <div className="card-stacked">
+    
+                        {this.state.groups.map(groupName => (
+                        <GroupsImIn group={groupName} />
+                        ))}
+                            </div>
+                            </div>
+                </div>
+
+
+              {/* {this.state.groups.map(groupName => (
+                <GroupsImIn group={groupName} />
+              ))} */}
             </div>
 
             <div className="card-header my-events">
