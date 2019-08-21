@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { IdentityContext } from "../../identity-context";
-// import axios from "axios";
+import api from '../../api'
+api.user.allEventsAttending(1).then(console.log).catch(console.log)
 
 class UserProfile extends Component {
     render() {

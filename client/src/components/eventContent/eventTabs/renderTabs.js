@@ -1,34 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import TabsTest from './tabContent';
-import Comments from '../Comments/commentSection';
-import AddComment from '../Comments/addComment';
-import Photos from '../../photoTasks/Photos';
-import UploadPhotos from "../../photoTasks/UploadPhotos"
-import Superlatives from '../Superlatives/superlatives';
-import SuperlativesForm from '../Superlatives/addSuperlativeForm';
+import PhotoTab from './photoTab';
+import CommentTab from './commentTab';
+import SuperlativeTab from './superlativeTab';
+
+
 
 function RenderTabs(props) {
     // console.log("rendertabs", props)
     return (
         <div>
             <TabsTest>
-                <div label="Comments">
-                <AddComment
-                    action={props.action}
-                    />
-                    <Comments comments={props.comments}/>
-                 
-                </div>
-                
-                <div label="Photo Gallery">
-                    <UploadPhotos />
-                    <Photos />
-                </div>
-
-                <div label="Superlatives">
-                    <SuperlativesForm />
-                    <Superlatives />
-                </div>
+                <CommentTab label="Comments" action={props.action} comments={props.comments} />
+                <PhotoTab label="Photo Gallery" />
+                <SuperlativeTab label="Superlatives" />
             </TabsTest>
         </div>
     );

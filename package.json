@@ -11,7 +11,8 @@
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "reset-local-db": "NODE_ENV=test mysql -uroot -e \"drop schema if exists database_test; create schema database_test;\" -p database_test && node config/seeddb.js"
   },
   "author": "",
   "license": "ISC",
