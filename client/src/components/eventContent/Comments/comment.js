@@ -18,20 +18,25 @@ function CommentList (props){
         // Lots of trouble mapping props.User object, so passing this object onto userCard2.js
 // ----------------------------------------------
 
-    // console.log("props for comments", props);
+    // console.log("props for comments", props.comments);
+    //--------------------------------------------
+    //! 'reverse' array has latest comments on top. if this is causing issues, use commentList instead
     let commentList = props.comments || []
-
+    let reverse = commentList.slice(0).reverse()
+    //--------------------------------------------
+    // console.log("reverse comments", reverse)
     // console.log("this is commentList", commentList)
         return(
             <div className="comment-list">
                 <div>
             {/* use comments.user */}
-                 {commentList.map(comment => ( 
+                 {reverse.map(comment => ( 
                 <div>
                    <User2
+                 
                      comment={comment}
                    />
-                   <p className="comment-content">{comment.body}</p>
+                   <p className="comment-content" >{comment.body}</p>
                    <Moment format={"MMM Do YYYY"}>{props.date}</Moment>
 
                 </div>
@@ -44,3 +49,4 @@ function CommentList (props){
 
 
 export default CommentList;
+

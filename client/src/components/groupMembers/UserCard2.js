@@ -12,19 +12,16 @@ function User2 (props) {
         return (
             <div className="section user-section valign-wrapper">
                 <div className="section">
-
-                  
+  
                 <User
                     avatar={userThing.avatar}
                     name={userThing.firstName}
                     lastName={userThing.lastName}
                     superlative={userThing.superlative}
                 />
-                    {/* update superlative to database */}
+        
                   
                 </div>
-                {/* <p className="comment-content">testerooni</p> */}
-
                 <div className="divider"></div>
                 
             </div>
