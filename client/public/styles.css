@@ -162,10 +162,11 @@ select {
 }
 
 .profile-image {
-    width: 80px!important;
-    height: 80px!important;
+    width: 100px!important;
+    height: 100px!important;
     margin-right: 10px;
     background-size: cover; 
+    border: 5px solid #fff;
 }
 
 .profile-section {
@@ -180,6 +181,16 @@ select {
 .profile-card {
     background-color: #556270!important;
     margin: 0px 0px 10px 0px!important;
+}
+
+.profile-name {
+    font-weight: 700!important;
+    font-size: 2.2rem;
+    margin: 5px 0px 5px 0px;
+}
+
+.profile-superlative {
+    color: #fff;
 }
 /* -------------------------------- Group Events Card ----------------------------- */
 .events-card {

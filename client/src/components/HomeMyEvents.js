@@ -16,7 +16,7 @@ function HomeMyEvents(props) {
                 {props.eventName}
               </h6>
             </Link>
-            <hr className="divider" />
+            <div className="divider"></div>
           </div>
   );
 }
