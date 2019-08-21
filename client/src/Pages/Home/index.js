@@ -6,6 +6,7 @@ import { IdentityContext } from "../../identity-context";
 import api from '../../api'
 import axios from "axios";
 import GroupsImIn from "../../components/GroupsImIn";
+import HomeMyEvents from "../../components/HomeMyEvents";
 // import DeleteBtn from "../components/DeleteBtn";
 // import Jumbotron from "../components/Jumbotron";
 // import API from "../utils/API";
@@ -95,17 +96,32 @@ class Home extends Component {
               ))} */}
             </div>
 
-            <div className="card-header my-events">
-              <h5>My Events</h5>
+            <div className="card col s12 m7 my-events-card">
+              <div className="card-header my-events">
+                <h5>My Events</h5>
+              </div>
+              <div className="card-content">
+                <div className="card-stacked">
+                {this.state.events.map(event => (
+                  <HomeMyEvents
+                    eventId={event.id}
+                    eventName={event.name}
+                  />
+                ))}
+                </div>
+              </div>
             </div>
 
-            {this.state.events.map(event => (
+
+            
+
+            {/* {this.state.events.map(event => (
               <HomeEvents
                 eventId={event.id}
                 eventName={event.name}
 
               />
-            ))}
+            ))} */}
           </div>
         </div>
       </IdentityContext.Provider>

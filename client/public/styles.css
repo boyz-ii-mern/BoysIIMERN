@@ -36,7 +36,8 @@ h4 {
 h5 {
     color: #ffffff;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
+    font-weight: 700!important;
+    font-size: 1.4rem!important;
 }
 
 h6 {
@@ -117,6 +118,10 @@ select {
     justify-content: space-between;
 }
 
+.my-events-card {
+    margin: 0px 0px 10px 0px!important;
+}
+
 .events-header {
     max-height: 300px;
     min-height: 100px;
@@ -174,7 +179,7 @@ select {
 
 .profile-card {
     background-color: #556270!important;
-    margin: 0!important;
+    margin: 0px 0px 10px 0px!important;
 }
 /* -------------------------------- Group Events Card ----------------------------- */
 .events-card {
