@@ -4,6 +4,7 @@ const { throwIfNull } = require("../../utils");
 const accountSid = process.env.TWILIO_SID;
 const authToken = process.env.TWILIO_PW;
 const client = require('twilio')(accountSid, authToken);
+require("dotenv").config();
 
 router.route("/")
     .post((req, res) => {
