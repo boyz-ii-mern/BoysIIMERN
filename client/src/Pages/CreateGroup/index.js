@@ -28,6 +28,7 @@ class Form extends Component {
     allUsers: "" || ["No Users Available"],
     phoneNumber: "",
   };
+
   componentDidMount() {
     M.AutoInit();
     // check for logged in user
@@ -85,6 +86,7 @@ class Form extends Component {
       [name]: value
     });
   };
+
   handleInputSelect = event => {
     // Getting the value and name of the select to push into array
     let userId = this.state.user.userId;
@@ -104,21 +106,29 @@ class Form extends Component {
   handleFormSubmit = event => { //takes in "event" as its parameter
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
-    console.log("group name: ", this.state.groupName)
-    console.log("group members: ", this.state.members)
-
-    axios.post("/api/groups/", {
-      "name": this.state.groupName,
-      "bannerImage": this.state.photolink,
-      "members": this.state.members
-    })
-      .then(response => {
-        console.log("this is create groups response:", response);
-        if (response.status == 200) {
-
-          window.location.href = "/home";
-        }
+    if (this.state.groupName == "" || this.state.members == 0) {
+      window.scrollTo(0, 0);
+      this.setState({
+        errorMessage: "There is an Error"
       })
+    } else {
+      console.log("group name: ", this.state.groupName)
+      console.log("group members: ", this.state.members)
+
+      axios.post("/api/groups/", {
+        "name": this.state.groupName,
+        "bannerImage": this.state.photolink,
+        "members": this.state.members
+      })
+        .then(response => {
+          console.log("this is create groups response:", response);
+          if (response.status == 200) {
+
+            window.location.href = "/home";
+          }
+        })
+    }
+
   };
 
   handleInvite = event => { //takes in "event" as its parameter
@@ -131,10 +141,10 @@ class Form extends Component {
     })
       .then(response => {
         console.log("this is invite friend response:", response);
-        // if (response.status == 200 ) {
+        if (response.status == 200 ) {
 
-        //   alert("Your friend has been invited!")
-        // }
+          alert("Your friend has been invited!")
+        }
       })
   };
 
@@ -154,6 +164,7 @@ class Form extends Component {
             <IdentityContext.Consumer>
               {({ user }) => (
                 <form className="form create-event-form">
+                  <h5 class="center-align red-text text-darken-3">{this.state.errorMessage && this.state.groupName == "" ? "Group Name is Empty" : ""}</h5>
                   <input
                     // the value of form elements is tied to the state -- this means react will only update what you see on the page when the state is updated
                     value={this.state.groupName}
@@ -163,7 +174,7 @@ class Form extends Component {
                     type="text"
                     placeholder="Group Name"
                   />
-
+                  <h5 class="center-align red-text text-darken-3">{this.state.errorMessage && this.state.members.length == 0 ? "You didn't invite any friends :(" : ""}</h5>
                   <select className="custom-select create-event-select" id="group-select" name="members" multiple={true} onChange={this.handleInputSelect}>
                     {
                       this.state.allUsers.filter((self) => {
@@ -212,13 +223,13 @@ class Form extends Component {
                           type="text"
                           placeholder="ex: 8008765309"
                         />
-                         <div className="modal-footer">
+                        <div className="modal-footer">
                           <a data-target="modal1" className="modal-close waves-effect waves-green btn-flat modal-submit-button" type="submit" onClick={this.handleInvite}>Submit</a>
                           <a data-target="modal1" className="modal-close waves-effect waves-green btn-flat modal-cancel-btn" type="button">Cancel</a>
                         </div>
                       </form>
                     </div>
-                   
+
                   </div>
                 </form>
               )}

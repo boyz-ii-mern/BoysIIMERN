@@ -81,6 +81,10 @@ router
         console.log("this is the new user.username: ", user.username);
         res.json({ data: user.username });
       })
+      .catch(error => {
+        console.log("Sign Up ERROR", error)
+        res.json({ error: error.message })
+    })
   })
 
 router
