@@ -26,9 +26,6 @@ class EventsTest extends Component {
         userId: this.state.user.userId
       })
       .then(response => {
-        // console.log("Leons response", response);
-        // window.location.reload()
-        //call componentDidMount again to re-render after posting to mySQL
         this.componentDidMount();
       });
   }
@@ -47,6 +44,7 @@ class EventsTest extends Component {
 
   componentDidMount() {
     //REALLY IMPORTANT, {ID} below for the EVENT getting pulled from URL
+    // console.log("this is state", this.state)
     const { id } = this.props.match.params;
     // check for logged in user
     axios.get("/api/user").then(response => {
@@ -66,24 +64,111 @@ class EventsTest extends Component {
 
             this.setState({
               events: next.data.data,
-              groupId: next.data.data.GroupId,
-              bannerImage: next.data.data.bannerImage
+              groupId: next.data.data.GroupId
             });
-            //call to grab group banner associated by group id
-
 
             //call to grab all members associated by group id
             axios
               .get("/api/groups/members/" + next.data.data.GroupId)
               .then(next => {
                 if (next.data) {
+                  console.log("members data", next.data);
                   this.setState({
                     members: next.data.data.members
                   });
+
+                  //!Begin --------Logic to randomize superlative-----------------------------------------------------------
+
+                  let memberS = this.state.members;
+                  let memberSuperlatives = memberS.map(thing => {
+                    return {
+                      id: thing.id,
+                      superlative: thing.superlative
+                    };
+                  });
+
+                  axios.get("/api/superlatives/byEvent/" + id).then(nextt => {
+                    if (nextt.data) {
+                      // console.log("these are the superlatives by event ID", next.data)
+                      let superlativeList = nextt.data.data.superlatives;
+                      console.log("these are superlativeList", superlativeList);
+                      let newSuperlativeApi = superlativeList.map(thing => {
+                        return {
+                          id: thing.UserId,
+                          superlative: thing.text
+                        };
+                      });
+
+                      var output = [];
+
+                      newSuperlativeApi.forEach(function(item) {
+                        var existing = output.filter(function(v, i) {
+                          return v.id == item.id;
+                        });
+                        if (existing.length) {
+                          var existingIndex = output.indexOf(existing[0]);
+                          output[existingIndex].superlative = output[
+                            existingIndex
+                          ].superlative.concat(item.superlative);
+                        } else {
+                          if (typeof item.superlative == "string")
+                            item.superlative = [item.superlative];
+                          output.push(item);
+                        }
+                      });
+
+                      let arr3 = [];
+
+                      memberS.forEach((itm, i) => {
+                        arr3.push(Object.assign({}, itm, output[i]));
+                      });
+
+                      console.log("new array", arr3);
+                      console.log("tester", arr3[0].superlative);
+                      let testerSup = arr3[0].superlative;
+                      let randomTest =
+                        testerSup[Math.floor(Math.random() * testerSup.length)];
+                      console.log("random supppp", randomTest);
+                      //no way this works---
+
+                      let randomArr3 = arr3.map(superlative => {
+                        return {
+                          avatar: superlative.avatar,
+                          email: superlative.email,
+                          firstName: superlative.firstName,
+                          id: superlative.id,
+                          lastName: superlative.lastName,
+                          password: superlative.password,
+                          superlative:
+                            superlative.superlative[
+                              Math.floor(
+                                Math.random() * superlative.superlative.length
+                              )
+                            ]
+                        };
+                      });
+                      console.log("this is randomArr3", randomArr3);
+
+                      this.setState({
+                        members: randomArr3
+                      });
+                      console.log("latest members state", this.state);
+                    }
+                  });
+                  //!End --------Logic to randomize superlative-----------------------------------------------------------
                 }
               });
 
-
+            //call to grab group banner associated by group id
+            axios
+              .get("/api/groups/detail/" + next.data.data.GroupId)
+              .then(next => {
+                if (next.data) {
+                  this.setState({
+                    bannerImage: next.data.data.groupInfo.bannerImage
+                  });
+                }
+              });
 
             axios.get("/api/events/comments/" + id).then(next => {
               if (next.data) {
@@ -100,7 +185,7 @@ class EventsTest extends Component {
   }
 
   render() {
-
+    console.log("latest state", this.state);
     return (
       <IdentityContext.Provider
         value={{

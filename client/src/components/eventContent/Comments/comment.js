@@ -23,11 +23,8 @@ function CommentList (props){
     //! 'reverse' array has latest comments on top. if this is causing issues, use commentList instead
     let commentList = props.comments || []
     let reverse = commentList.slice(0).reverse()
-    console.log("reverse", reverse)
-    // console.log("props date", props)
-    //--------------------------------------------
-    // console.log("reverse comments", reverse)
-    // console.log("this is commentList", commentList)
+  
+  
         return(
             <div className="comment-list">
                 <div>

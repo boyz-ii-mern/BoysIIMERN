@@ -32,17 +32,10 @@ class AddComment extends Component {
         // alert("Your Comment: " + this.state.comments);
         this.props.action(this.state.comments);
 
-<<<<<<< HEAD
-        this.setState({
-          comments: ""
-        })
-       console.log("whats this",this)
-=======
         // this.setState({
         //   comments: ""
         // })
         
->>>>>>> 9211dae8dcac5d1faeaa6813f76040c8a34f23c0
       }
     
       render() {
