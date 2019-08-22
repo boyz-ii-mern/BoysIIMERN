@@ -22,6 +22,7 @@ class AddComment extends Component {
 
           [name]: value
         });
+        this.forceUpdate();
       }
     
       handleSubmit(event) {
@@ -31,7 +32,7 @@ class AddComment extends Component {
         this.setState({
           comments: ""
         })
-        event.preventDefault();
+       console.log("whats this",this)
       }
     
       render() {
