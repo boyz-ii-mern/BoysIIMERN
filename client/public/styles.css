@@ -68,8 +68,8 @@ input {
     background-color: #fff!important;
     color: #556270!important;
     border-radius: 5px!important;
-    padding-left: 30px!important;
-    margin-left: -30px!important;
+    /* padding-left: 10px!important; */
+    /* margin-left: -30px!important; */
 }
 
 button {
@@ -360,7 +360,7 @@ select {
 }
 
 .create-event-form input {
-    margin-bottom: 30px!important;
+    margin: 0px 0px 30px 0px!important;
 }
 
 .create-group-select{
