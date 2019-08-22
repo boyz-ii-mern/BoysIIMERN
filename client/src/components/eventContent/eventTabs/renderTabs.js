@@ -6,7 +6,7 @@ import SuperlativeTab from './superlativeTab';
 
 
 function RenderTabs(props) {
-    console.log("renderTabs props", props)
+    // console.log("renderTabs props", props)
     return (
         <div>
             <TabsTest>

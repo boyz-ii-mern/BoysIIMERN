@@ -91,7 +91,7 @@ class EventsTest extends Component {
                     if (nextt.data) {
                       // console.log("these are the superlatives by event ID", next.data)
                       let superlativeList = nextt.data.data.superlatives;
-                      console.log("these are superlativeList", superlativeList);
+                      // console.log("these are superlativeList", superlativeList);
                       let newSuperlativeApi = superlativeList.map(thing => {
                         return {
                           id: thing.UserId,
@@ -123,12 +123,11 @@ class EventsTest extends Component {
                         arr3.push(Object.assign({}, itm, output[i]));
                       });
 
-                      console.log("new array", arr3);
-                      console.log("tester", arr3[0].superlative);
+                      // console.log("new array", arr3);
+                      // console.log("tester", arr3[0].superlative);
                       let testerSup = arr3[0].superlative;
-                      let randomTest =
-                        testerSup[Math.floor(Math.random() * testerSup.length)];
-                      console.log("random supppp", randomTest);
+        
+                      // console.log("random supppp", randomTest);
                       //no way this works---
 
                       let randomArr3 = arr3.map(superlative => {
@@ -147,12 +146,12 @@ class EventsTest extends Component {
                             ]
                         };
                       });
-                      console.log("this is randomArr3", randomArr3);
+                      // console.log("this is randomArr3", randomArr3);
 
                       this.setState({
                         members: randomArr3
                       });
-                      console.log("latest members state", this.state);
+                      // console.log("latest members state", this.state);
                     }
                   });
                   //!End --------Logic to randomize superlative-----------------------------------------------------------
