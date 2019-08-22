@@ -2,6 +2,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { IdentityContext } from "../../identity-context";
+import 'materialize-css/dist/css/materialize.min.css';
+// import { Modal, Button } from 'react-materialize';
+// import M from "materialize-css";
+import 'materialize-css/dist/css/materialize.min.css'
+import M from 'materialize-css/dist/js/materialize.min.js'
 // import friends from "./users.json"
 
 
@@ -21,6 +26,7 @@ class Form extends Component {
     groups: "" || []
   };
   componentDidMount() {
+    M.AutoInit();
     // check for logged in user
     axios.get("/api/user")
       .then(response => {
@@ -44,6 +50,8 @@ class Form extends Component {
                   groups: responseArr
                 })
               }
+              var elems = document.querySelectorAll('select');
+              var instances = M.FormSelect.init(elems, this.state.groups);
             })
 
         }
@@ -144,8 +152,19 @@ class Form extends Component {
                     placeholder="Event Location"
                   />
                   <h5 class="center-align red-text text-darken-3">{this.state.errorMessage && this.state.groupId == "" ? "Choose a group!" : ""}</h5>
-                  <select className="browser-default create-event-select" id="user-select" name="groupId" multiple onChange={this.handleInputChange}>
+                  {/* <select className="browser-default create-event-select" id="user-select" name="groupId" multiple onChange={this.handleInputChange}>
                     <option value="" disabled defaultValue>Choose Groups to Invite</option>
+                    {
+                      this.state.groups.length == 0 ? 
+                        <option value="" disabled defaultValue>You have no groups, go create one!</option> 
+                        :
+                        this.state.groups.map(groups => (
+                          <option value={groups.id}>{groups.name}</option>
+                      
+                    ))}
+                  </select> */}
+                  <select className="custom-select create-group-select" id="group-select" name="members" onChange={this.handleInputSelect}>
+                  <option defaultValue>Choose Groups to Invite</option>
                     {
                       this.state.groups.length == 0 ? 
                         <option value="" disabled defaultValue>You have no groups, go create one!</option> 

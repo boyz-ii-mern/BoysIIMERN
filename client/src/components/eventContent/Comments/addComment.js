@@ -25,18 +25,21 @@ class AddComment extends Component {
       }
     
       handleSubmit(event) {
+        event.preventDefault();
+        document.getElementById("comment-form").reset();
+
         // alert("Your Comment: " + this.state.comments);
         this.props.action(this.state.comments);
 
-        this.setState({
-          comments: ""
-        })
-        event.preventDefault();
+        // this.setState({
+        //   comments: ""
+        // })
+        
       }
     
       render() {
         return (
-          <form onSubmit={this.handleSubmit} className="add-comment-form">
+          <form onSubmit={this.handleSubmit} className="add-comment-form" id="comment-form">
           {/* // <form onSubmit={()=this.props.action} className="add-comment-form"> */}
  
            <label className="add-comment-label">

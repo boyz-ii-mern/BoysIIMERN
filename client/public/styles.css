@@ -363,7 +363,9 @@ select {
     margin-bottom: 30px!important;
 }
 
-
+.create-group-select{
+    display: none!important;
+}
 /* -------------------------------- Sign In/Up Form ----------------------------- */
 .sign-up-button {
     background-color: #fff!important;
