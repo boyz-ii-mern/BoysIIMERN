@@ -64,7 +64,7 @@ class Navbar extends Component {
             home = <li><Link to='/home'>Home</Link></li>;
             createEvent = <li><Link to='/createGroup'>Create Group</Link></li>;
             createGroup = <li><Link to='/createEvent'>Create Event</Link></li>;
-        }
+        } 
 
         return (
             <nav className="likely-navbar row">
@@ -76,7 +76,7 @@ class Navbar extends Component {
                 }}></IdentityContext.Provider>
 
                 <div className="nav-wrapper">
-                    <a href="/" className="brand-logo"><img src="../Images/likely.png" width="100px" height="auto" /> </a>
+                    <a href={this.state.loggedIn ? "/home" : "/"} className="brand-logo"><img src="../Images/likely.png" width="100px" height="auto" /> </a>
                     <a href="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
 
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
