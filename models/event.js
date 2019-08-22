@@ -12,6 +12,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.DATE,
             allowNull: false,
         },
+        bannerImage: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         isActive: {
             type: DataTypes.BOOLEAN,
         }

@@ -7,12 +7,17 @@ import 'materialize-css/dist/css/materialize.min.css';
 // import M from "materialize-css";
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css/dist/js/materialize.min.js'
+import BannerLoad from "./bannerLoad";
 // import friends from "./users.json"
 
 
 
 //extending component instead of react.component
 class Form extends Component {
+  constructor(props) {
+    super(props);
+    this.childHandler = this.childHandler.bind(this);
+  };
   // Setting the component's initial state with two properties
   state = {
     username: "",
@@ -22,6 +27,7 @@ class Form extends Component {
     eventName: "",
     eventLocation: "",
     eventDate: "",
+    photolink: "",
     groupId: "",
     groups: "" || []
   };
@@ -56,6 +62,13 @@ class Form extends Component {
 
         }
       })
+  }
+
+  // Receive information from bannerLoad
+  childHandler(bannerLink) {
+    this.setState({
+      photolink: bannerLink
+    }, () => console.log("Updated State: ", this.state.photolink));
   }
 
   handleSelectChange = event => {
@@ -104,6 +117,7 @@ class Form extends Component {
         "name": this.state.eventName,
         "location": this.state.eventLocation,
         "date": this.state.eventDate,
+        "bannerImage": this.state.photolink,
         "groupId": this.state.groupId,
         "userId": this.state.user.userId
       }).then((response) => {
@@ -151,12 +165,13 @@ class Form extends Component {
                     type="text"
                     placeholder="Event Location"
                   />
+
                   <h5 class="center-align red-text text-darken-3">{this.state.errorMessage && this.state.groupId == "" ? "Choose a group!" : ""}</h5>
                   {/* <select className="browser-default create-event-select" id="user-select" name="groupId" multiple onChange={this.handleInputChange}>
                     <option value="" disabled defaultValue>Choose Groups to Invite</option>
                     {
-                      this.state.groups.length == 0 ? 
-                        <option value="" disabled defaultValue>You have no groups, go create one!</option> 
+                      this.state.groups.length == 0 ?
+                        <option value="" disabled defaultValue>You have no groups, go create one!</option>
                         :
                         this.state.groups.map(groups => (
                           <option value={groups.id}>{groups.name}</option>
@@ -173,9 +188,19 @@ class Form extends Component {
                           <option value={groups.id}>{groups.name}</option>
                       
                     ))}
+                        ))}
                   </select>
                   <h5 class="center-align red-text text-darken-3">{this.state.errorMessage && this.state.eventDate == "" ? "Set a date!" : ""}</h5>
                   <input value={this.state.eventDate} name="eventDate" onChange={this.handleInputChange} type="date" />
+                  <BannerLoad
+                    action={this.childHandler}
+                  />
+                  <input
+                    type="hidden"
+                    name="photolink"
+                    value={this.state.photolink}
+                    onChange={this.handleInputChange}
+                  />
                   <button className="waves-effect waves-light btn create-form-submit" onClick={this.handleFormSubmit}>Create Event</button>
                 </form>
               )}

@@ -28,11 +28,10 @@ async function getAllByUserId(userId) {
     }
 }
 
-async function create(name, bannerImageUrl, memberIds) {
+async function create(name, memberIds) {
     try {
         const res = await axios.post("/api/groups/", {
             "name": name,
-            "bannerImage": bannerImageUrl,
             "members": memberIds,
         })
         if (res.data) {

@@ -8,16 +8,13 @@ import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css/dist/js/materialize.min.js'
 // import friends from "./users.json"
-import BannerLoad from "./bannerLoad";// import { Input } from "react-materialize";
+
 
 
 
 //extending component instead of react.component
 class Form extends Component {
-  constructor(props) {
-    super(props);
-    this.childHandler = this.childHandler.bind(this);
-  };
+  
   // Setting the component's initial state with two properties
   state = {
     username: "",
@@ -26,8 +23,8 @@ class Form extends Component {
     loggedIn: false,
     groupName: "",
     members: [],
-    photolink: "",
-    allUsers: [] || ["No Users Available"],
+
+    allUsers: "" || ["No Users Available"],
     phoneNumber: "",
   };
 
@@ -61,13 +58,6 @@ class Form extends Component {
           var instances = M.FormSelect.init(elems, this.state.allUsers);
         }
       })
-  }
-
-  // Receive information from bannerLoad
-  childHandler(bannerLink) {
-    this.setState({
-      photolink: bannerLink
-    }, () => console.log("Updated State: ", this.state.photolink));
   }
 
   handleSelectChange = event => {
@@ -124,7 +114,6 @@ class Form extends Component {
 
       axios.post("/api/groups/", {
         "name": this.state.groupName,
-        "bannerImage": this.state.photolink,
         "members": this.state.members
       })
         .then(response => {
@@ -212,15 +201,17 @@ class Form extends Component {
                         ))}
                   </Input> */}
                   <br />
-                  <BannerLoad
-                    action={this.childHandler}
-                  />
-                  <input
-                    type="hidden"
-                    name="photolink"
+
+                  
+                  {/* <input
+                    // the value of form elements is tied to the state -- this means react will only update what you see on the page when the state is updated
                     value={this.state.photolink}
+                    name="photolink"
+                    //the onChange is what tells React to update the DOM
                     onChange={this.handleInputChange}
-                  />
+                    type="text"
+                    placeholder="Link to Photo"
+                  /> */}
 
                   <button className="waves-effect waves-light btn create-form-submit" onClick={this.handleFormSubmit}>Create Group</button>
                   <p className="form-p">Don't see your friends? Invite them!</p>

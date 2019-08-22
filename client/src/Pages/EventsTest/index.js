@@ -66,8 +66,11 @@ class EventsTest extends Component {
 
             this.setState({
               events: next.data.data,
-              groupId: next.data.data.GroupId
+              groupId: next.data.data.GroupId,
+              bannerImage: next.data.data.bannerImage
             });
+            //call to grab group banner associated by group id
+
 
             //call to grab all members associated by group id
             axios
@@ -80,16 +83,7 @@ class EventsTest extends Component {
                 }
               });
 
-            //call to grab group banner associated by group id
-            axios
-              .get("/api/groups/detail/" + next.data.data.GroupId)
-              .then(next => {
-                if (next.data) {
-                  this.setState({
-                    bannerImage: next.data.data.groupInfo.bannerImage
-                  });
-                }
-              });
+
 
             axios.get("/api/events/comments/" + id).then(next => {
               if (next.data) {

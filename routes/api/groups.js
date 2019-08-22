@@ -7,7 +7,7 @@ router.route("/")
     try {
       const group = await models.Group.create({
         name: req.body.name,
-        bannerImage: req.body.bannerImage || null
+        // bannerImage: req.body.bannerImage || null
       })
       const memberQueries = req.body.members.map(userId => models.Membership.create({
         UserId: userId,
