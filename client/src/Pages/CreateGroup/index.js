@@ -4,18 +4,17 @@ import axios from "axios";
 import { IdentityContext } from "../../identity-context";
 import 'materialize-css/dist/css/materialize.min.css';
 // import { Modal, Button } from 'react-materialize';
-import M from "materialize-css";
+// import M from "materialize-css";
+import 'materialize-css/dist/css/materialize.min.css'
+import M from 'materialize-css/dist/js/materialize.min.js'
 // import friends from "./users.json"
-import BannerLoad from "./bannerLoad";
+
 
 
 
 //extending component instead of react.component
 class Form extends Component {
-  constructor(props) {
-    super(props);
-    this.childHandler = this.childHandler.bind(this);
-  };
+  
   // Setting the component's initial state with two properties
   state = {
     username: "",
@@ -24,13 +23,15 @@ class Form extends Component {
     loggedIn: false,
     groupName: "",
     members: [],
-    photolink: "",
+
     allUsers: "" || ["No Users Available"],
     phoneNumber: "",
   };
 
   componentDidMount() {
     M.AutoInit();
+
+    // M.AutoInit();
     // check for logged in user
     axios.get("/api/user")
       .then(response => {
@@ -49,18 +50,14 @@ class Form extends Component {
       .then(response => {
         if (response.data) {
           console.log("this is all users", response.data.data);
+
           this.setState({
             allUsers: response.data.data
           })
+          var elems = document.querySelectorAll('select');
+          var instances = M.FormSelect.init(elems, this.state.allUsers);
         }
       })
-  }
-
-  // Receive information from bannerLoad
-  childHandler(bannerLink) {
-    this.setState({
-      photolink: bannerLink
-    }, () => console.log("Updated State: ", this.state.photolink));
   }
 
   handleSelectChange = event => {
@@ -117,7 +114,6 @@ class Form extends Component {
 
       axios.post("/api/groups/", {
         "name": this.state.groupName,
-        "bannerImage": this.state.photolink,
         "members": this.state.members
       })
         .then(response => {
@@ -164,7 +160,7 @@ class Form extends Component {
             <IdentityContext.Consumer>
               {({ user }) => (
                 <form className="form create-event-form">
-                  <h5 class="center-align red-text text-darken-3">{this.state.errorMessage && this.state.groupName == "" ? "Group Name is Empty" : ""}</h5>
+                  <h5 className="center-align red-text text-darken-3">{this.state.errorMessage && this.state.groupName == "" ? "Group Name is Empty" : ""}</h5>
                   <input
                     // the value of form elements is tied to the state -- this means react will only update what you see on the page when the state is updated
                     value={this.state.groupName}
@@ -174,26 +170,48 @@ class Form extends Component {
                     type="text"
                     placeholder="Group Name"
                   />
-                  <h5 class="center-align red-text text-darken-3">{this.state.errorMessage && this.state.members.length == 0 ? "You didn't invite any friends :(" : ""}</h5>
-                  <select className="custom-select create-event-select" id="group-select" name="members" multiple={true} onChange={this.handleInputSelect}>
+                  <h5 className="center-align red-text text-darken-3">{this.state.errorMessage && this.state.members.length == 0 ? "You didn't invite any friends :(" : ""}</h5>
+                  <select className="custom-select create-group-select" id="group-select" name="members" multiple={true} onChange={this.handleInputSelect}>
                     {
                       this.state.allUsers.filter((self) => {
                         return self.id != this.state.user.userId
                       })
                         .map(user => (
                           <option value={user.id}>{user.firstName}</option>
-                        ))}
+                        ))
+                        
+                        }
+                          {/* <option value="test">ashgdfsagd</option>
+                          <option value="test2">ashgdfsag34d</option>
+                          <option value="test3">ashgdfsag3434d</option> */}
+
                   </select>
+                  {/* <Input 
+                  name="members" 
+                  type='select' 
+                  multiple={true} 
+                  defaultValue="Choose users"
+                  onChange={this.handleInputSelect}>
+                       {
+                      this.state.allUsers.filter((self) => {
+                        return self.id != this.state.user.userId
+                      })
+                        .map(user => (
+                          <option value={user.id}>{user.firstName}</option>
+                        ))}
+                  </Input> */}
                   <br />
-                  <BannerLoad
-                    action={this.childHandler}
-                  />
-                  <input
-                    type="hidden"
-                    name="photolink"
+
+                  
+                  {/* <input
+                    // the value of form elements is tied to the state -- this means react will only update what you see on the page when the state is updated
                     value={this.state.photolink}
+                    name="photolink"
+                    //the onChange is what tells React to update the DOM
                     onChange={this.handleInputChange}
-                  />
+                    type="text"
+                    placeholder="Link to Photo"
+                  /> */}
 
                   <button className="waves-effect waves-light btn create-form-submit" onClick={this.handleFormSubmit}>Create Group</button>
                   <p className="form-p">Don't see your friends? Invite them!</p>

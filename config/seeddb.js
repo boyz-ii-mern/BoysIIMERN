@@ -46,13 +46,8 @@ async function seedDatabase() {
         superlative: 'Most Likely to Be A Polka Dotted Mouse',
     })
 
-    const image1 = await Image.create({
-        url: 'photo'
-    })
-
     const groupApple = await Group.create({
         name: 'Bar Buddies',
-        BannerId: image1.id
     })
 
     await Membership.create({

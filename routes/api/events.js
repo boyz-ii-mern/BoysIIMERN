@@ -12,6 +12,7 @@ router.route("/")
         name: req.body.name,
         location: req.body.location,
         date: req.body.date,
+        bannerImage: req.body.bannerImage || null,
         isActive: true,
         GroupId: req.body.GroupId,
         UserId: req.body.UserId
@@ -82,11 +83,13 @@ router.route("/detail/:eventId")
       const name = req.body.name
       const location = req.body.location
       const date = req.body.date
+      const bannerImage = req.body.bannerImage
       const isActive = req.body.isActive
       const fields = [
         isNotNullOrUndefined(name) ? 'name' : false,
         isNotNullOrUndefined(location) != null ? 'location' : false,
         isNotNullOrUndefined(date) != null ? 'date' : false,
+        isNotNullOrUndefined(bannerImage) != null ? 'bannerImage' : false,
         isNotNullOrUndefined(isActive) != null ? 'isActive' : false,
       ]
       // update event
@@ -95,6 +98,7 @@ router.route("/detail/:eventId")
           name,
           location,
           date,
+          bannerImage,
           isActive
         }, {
           where: {

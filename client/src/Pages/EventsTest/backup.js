@@ -26,12 +26,11 @@ class EventsTest extends Component {
         userId: this.state.user.userId
       })
       .then(response => {
-        // console.log("Leons response", response);
-        // window.location.reload()
-        //call componentDidMount again to re-render after posting to mySQL
         this.componentDidMount();
       });
   }
+
+
 
   state = {
     username: "",
@@ -47,6 +46,7 @@ class EventsTest extends Component {
 
   componentDidMount() {
     //REALLY IMPORTANT, {ID} below for the EVENT getting pulled from URL
+    // console.log("this is state", this.state)
     const { id } = this.props.match.params;
     // check for logged in user
     axios.get("/api/user").then(response => {
@@ -66,24 +66,102 @@ class EventsTest extends Component {
 
             this.setState({
               events: next.data.data,
-              groupId: next.data.data.GroupId,
-              bannerImage: next.data.data.bannerImage
+              groupId: next.data.data.GroupId
             });
-            //call to grab group banner associated by group id
-
 
             //call to grab all members associated by group id
             axios
               .get("/api/groups/members/" + next.data.data.GroupId)
               .then(next => {
                 if (next.data) {
+                  console.log("members data", next.data);
                   this.setState({
                     members: next.data.data.members
                   });
+
+                  //!test-------------------------------------------------
+                  // console.log("this state members", this.state.members)
+                  let memberS = this.state.members;
+                  // console.log("memberS x", memberS);
+                  // console.log("this is memberS", memberS)
+                  let memberSuperlatives = memberS.map(thing => {
+                    return {
+                      id: thing.id,
+                      superlative: thing.superlative
+                    };
+                  });
+                  //!The above memberSuperlatives is an object of user ID with the superlatives.
+
+                  //TODO Try to find a way to grab the member id, then do an axios call to grab all superlatives by that member id
+                  //TODO Before setting it to the state, do another axios call, then add it to the superlative, where two arrays have same user ID
+                  //TODO then set it to the state
+
+                  axios.get("/api/superlatives/byEvent/" + id).then(nextt => {
+                    if (nextt.data) {
+                      // console.log("these are the superlatives by event ID", next.data)
+                      let superlativeList = nextt.data.data.superlatives;
+                      console.log("these are superlativeList", superlativeList);
+                      let newSuperlativeApi = superlativeList.map(thing => {
+                        return {
+                          id: thing.UserId,
+                          superlative: thing.text
+                        };
+                      });
+                      //Working
+                      console.log("this is member Supes", memberSuperlatives);
+                      console.log(
+                        "this is newSuperlativeApi",
+                        newSuperlativeApi
+                      );
+                      //Working
+
+                      // let merged = [];
+
+                      // for(let i=0; i<newSuperlativeApi.length; i++) {
+                      //   merged.push({
+                      //    ...memberSuperlatives[i],
+                      //    ...newSuperlativeApi[i]
+                      //   });
+                      // }
+
+                      // console.log("this is merged", merged);
+
+                      var output = [];
+
+                      newSuperlativeApi.forEach(function(item) {
+                        var existing = output.filter(function(v, i) {
+                          return v.id == item.id;
+                        });
+                        if (existing.length) {
+                          var existingIndex = output.indexOf(existing[0]);
+                          output[existingIndex].superlative = output[
+                            existingIndex
+                          ].superlative.concat(item.superlative);
+                        } else {
+                          if (typeof item.superlative == "string")
+                            item.superlative = [item.superlative];
+                          output.push(item);
+                        }
+                      });
+                      console.log("current state of members", memberS)
+                      console.log("output", output);
+                    }
+                  });
+
+                  //!test----------------------------------------------------
                 }
               });
 
-
+            //call to grab group banner associated by group id
+            axios
+              .get("/api/groups/detail/" + next.data.data.GroupId)
+              .then(next => {
+                if (next.data) {
+                  this.setState({
+                    bannerImage: next.data.data.groupInfo.bannerImage
+                  });
+                }
+              });
 
             axios.get("/api/events/comments/" + id).then(next => {
               if (next.data) {
@@ -100,7 +178,7 @@ class EventsTest extends Component {
   }
 
   render() {
-
+    console.log("latest state", this.state);
     return (
       <IdentityContext.Provider
         value={{

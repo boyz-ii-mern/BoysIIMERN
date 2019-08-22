@@ -14,6 +14,9 @@ import TabsTest from "./components/eventContent/eventTabs/tabContent";
 import RenderTabs from "./components/eventContent/eventTabs/renderTabs";
 import SignUp from "./Pages/SignUp"
 import Photos from "./components/photoTasks/Photos";
+import 'materialize-css/dist/css/materialize.min.css';
+// import { Modal, Button } from 'react-materialize';
+import M from "materialize-css";
 // import Nav from "./components/Nav";
 
 function App() {

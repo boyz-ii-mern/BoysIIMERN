@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import ImageUploader from 'react-images-upload';
 
 // Firebase
-import { storage, database } from "./../../firebase/index";
+import { storage, database } from "../../firebase/index";
 import "firebase/storage";
 import "firebase/database";
 
