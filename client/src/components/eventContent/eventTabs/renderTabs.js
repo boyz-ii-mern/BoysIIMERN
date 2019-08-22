@@ -6,10 +6,15 @@ import SuperlativeTab from './superlativeTab';
 
 
 function RenderTabs(props) {
+    console.log("renderTabs props", props)
     return (
         <div>
             <TabsTest>
-                <CommentTab label="Comments" action={props.action} comments={props.comments} />
+                <CommentTab 
+                    label="Comments" 
+                    action={props.action} 
+                    comments={props.comments}
+                    friends={props.friends} />
                 <PhotoTab label="Photo Gallery" />
                 <SuperlativeTab
                     eventId={props.eventId}
