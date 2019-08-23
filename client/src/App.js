@@ -1,6 +1,7 @@
 import React from "react";
 
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"; //<!super important to get router to work 
+import HomeGroups from "./Pages/Groups";
 import Home from "./Pages/Home";
 import Events from "./Pages/Events";
 import EventsTest from "./Pages/EventsTest"
@@ -50,6 +51,8 @@ function App() {
           <Route exact path="/createEvent" component={CreateEvent} />
           <Route exact path="/tabstest" component={RenderTabs} />
           <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/groups/:gid" component={HomeGroups} />
+
 
           {/* <Route exact path="/books/:id" component={Detail} /> */}
           <Route component={NoMatch} />

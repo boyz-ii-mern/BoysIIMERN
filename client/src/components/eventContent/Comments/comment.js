@@ -27,7 +27,7 @@ function CommentList (props){
   
   
         return(
-            <div className="comment-list">
+            <div className="comment-list" >
                 <div>
             {/* use comments.user */}
                  {reverse.map(comment => ( 

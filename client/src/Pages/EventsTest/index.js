@@ -179,8 +179,7 @@ class EventsTest extends Component {
             });
           }
         });
-      }
-    });
+      }});
   }
 
   render() {
