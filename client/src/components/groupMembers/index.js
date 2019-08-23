@@ -16,7 +16,7 @@ function GroupMembers (props) {
 
         return(
      
-            <div className="card col">
+            <div className="card col groups-home-card">
                 <div className="card-header">
                     <h5>Members</h5>
                 </div>

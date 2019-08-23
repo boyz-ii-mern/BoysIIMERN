@@ -423,3 +423,18 @@ select {
     font-size: 10px;
     color: #556270;
 }
+
+
+/* -------------------------------- Group Home Page ----------------------------- */
+.group-name-title {
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700!important;
+    font-size: 3rem!important;
+}
+
+.groups-home-card {
+    padding: 0px;
+    margin: 0 0 1rem 0!important;
+}

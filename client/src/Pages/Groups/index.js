@@ -61,9 +61,15 @@ componentDidMount(){
       >
         <IdentityContext.Consumer>
           {({ user }) => (
+           
+            
             <div className="row">
 
-              <div className="col s12 m4 l3 side-content">
+              <div className="col s12 profile-card">
+                <h2 className="group-name-title">Group Name Here</h2>
+              </div>
+
+              <div className="col s12 m4 side-content groups-home-card">
                 {/* <h3 /> */}
 
                 <GroupMembers
@@ -73,7 +79,7 @@ componentDidMount(){
                 {/* Currently commented out GroupEvents */}
                 {/* <GroupEvents /> */}
               </div>
-              <div className="col s12 m8 l9 card my-events-card">
+              <div className="col s12 m8 card my-events-card">
                 <div className="card-header my-events">
                   <h5>Group Events</h5>
                 </div>
