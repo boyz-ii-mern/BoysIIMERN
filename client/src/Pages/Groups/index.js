@@ -39,6 +39,7 @@ componentDidMount(){
       if (next.data) {
         //   console.log("next data for grps", next.data)
         this.setState({
+        groupName: next.data.data.groupInfo.name,
         events: next.data.data.groupInfo.Events,
         members: next.data.data.members
         });
@@ -49,7 +50,7 @@ componentDidMount(){
 }
 
   render() {
-    console.log("latest Group state", this.state);
+    // console.log("latest Group state", this.state);
     return (
       <IdentityContext.Provider
         value={{
@@ -66,10 +67,15 @@ componentDidMount(){
             <div className="row">
 
               <div className="col s12 profile-card">
-                <h2 className="group-name-title">Group Name Here</h2>
+                <h2 className="group-name-title">{this.state.groupName}</h2>
               </div>
 
               <div className="col s12 m4 side-content groups-home-card">
+{/* <div className="card-header">
+                        <h5>{this.state.groupName}</h5>
+</div>
+
+              <div className="col s12 m4 l3 side-content"> */}
                 {/* <h3 /> */}
 
                 <GroupMembers
@@ -92,6 +98,19 @@ componentDidMount(){
                     />
                   ))}
                   </div>
+              
+              {/* <div className="card-content">
+              
+                <div className="card-stacked">
+                    
+               
+
+                {this.state.events.map(event => (
+                  <HomeMyEvents
+                    eventId={event.id}
+                    eventName={event.name}
+                  />
+                ))} */}
                 </div>
               </div>
 

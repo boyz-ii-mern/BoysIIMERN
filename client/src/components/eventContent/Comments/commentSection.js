@@ -8,7 +8,10 @@ function Comments (props){
           <div>
               {/* //input form */}
               {/* //comment generator */}
-              <CommentList comments={props.comments} />
+              <CommentList 
+              comments={props.comments}
+         
+              />
           </div>
       )
   }

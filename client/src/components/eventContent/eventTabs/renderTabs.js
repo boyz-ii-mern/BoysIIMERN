@@ -11,7 +11,9 @@ function RenderTabs(props) {
         <div>
             <TabsTest>
                 <CommentTab 
+                
                     label="Comments" 
+                 
                     action={props.action} 
                     comments={props.comments}
                     friends={props.friends} />

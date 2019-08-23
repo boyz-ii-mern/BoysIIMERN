@@ -221,6 +221,7 @@ class EventsTest extends Component {
                   members={this.state.members}
                   comments={this.state.comments}
                   event={this.state.event}
+                  bannerImage={this.state.bannerImage}
                 />
               </div>
             </div>

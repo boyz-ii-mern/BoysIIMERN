@@ -7,12 +7,15 @@ class CommentTab extends Component {
         super(props)
     }
     render() {
+        console.log("testingComments again", this.props)
         return (
             <div>
                 <AddComment
                     action={this.props.action}
                 />
-                <Comments comments={this.props.comments} />
+                <Comments
+                 comments={this.props.comments}
+                />
             </div>
         );
     }
