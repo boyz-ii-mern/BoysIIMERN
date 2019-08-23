@@ -4,9 +4,6 @@
 import React, { Component } from "react";
 import shortid from 'shortid'
 
-// Pull from Events to get event ID for metadata and future img sorting
-import eventsTest from "../../components/eventsTest.json";
-
 // Firebase
 import { storage, database } from "../../firebase";
 import "firebase/storage";
@@ -41,7 +38,8 @@ class UploadPhotos extends Component {
             uploadValue: 0,
             metadataFile: [],
             rows: [],
-            // uploadEventId: "",
+            imagePath: '',
+            eventId: ''
         };
         
     // Handles our Image Storage
@@ -54,7 +52,7 @@ class UploadPhotos extends Component {
         // ShortID 
         const id = shortid.generate();
 
-        const task = this.storageRef.child(`images/${file.name}`).put(fileUpload, {
+        const task = this.storageRef.child('images' + window.location.pathname + '/' + `${file.name}`).put(fileUpload, {
             shortID: id});
 
         // Handle Uploading Here
@@ -73,10 +71,10 @@ class UploadPhotos extends Component {
                 })
 
                 // Get Metadata
-                this.storageRef.child(`images/${file.name}`).getMetadata().then((metadata) => {
+                this.storageRef.child('images' + window.location.pathname + '/' + `${file.name}`).getMetadata().then((metadata) => {
                     // Metadata for 'filepond/${file.name}' contained
                     // let downloadURL = '';
-                    this.storageRef.child(`images/${file.name}`).getDownloadURL().then(url => {
+                    this.storageRef.child('images' + window.location.pathname + '/' + `${file.name}`).getDownloadURL().then(url => {
                         console.log(url)
                         let metadataFile = {
                             name: metadata.name,
@@ -84,11 +82,16 @@ class UploadPhotos extends Component {
                             contentType: metadata.contentType,
                             fullPath: metadata.fullPath,
                             downloadURL: url,
+                            eventId: window.location.pathname,
                             id: id,
-                            // eventId: this.uploadEventId,
                         }
+                        this.setState({
+                            imagePath: url,
+                            eventId: window.location.pathname
+                        });
+
                     // Save Metadata
-                    this.databaseRef.child('images').push({ metadataFile });
+                    this.databaseRef.child('images' + window.location.pathname + '/').push({ metadataFile });
                     })
 
                 }).catch(function(error) {
@@ -112,7 +115,6 @@ class UploadPhotos extends Component {
 
         return(
             <div>
-            {/* <RenderEventId /> */}
             <div style={uploadStyle}>
                 <FilePond
                     ref={ref => (this.pond = ref)}
@@ -123,7 +125,7 @@ class UploadPhotos extends Component {
                     oninit={() => this.handleInit()}
                 >
                     {this.state.files.map(file => (
-                        <File key = {file} source = {file}/>
+                        <File key={file} source={file}/>
                     ))}
                 </FilePond>
 

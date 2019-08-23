@@ -17,6 +17,7 @@ import Photos from "./components/photoTasks/Photos";
 import 'materialize-css/dist/css/materialize.min.css';
 // import { Modal, Button } from 'react-materialize';
 import M from "materialize-css";
+import UploadPhotos from "./components/photoTasks/UploadPhotos";
 // import Nav from "./components/Nav";
 
 function App() {
@@ -44,7 +45,7 @@ function App() {
           <Route exact path="/home" component={Home} />
           <Route exact path="/events/:id" component={EventsTest} />
           <Route exact path="/events" component={Events} />
-          <Route exact path="/events/photos/:eventId" component={Photos} />
+          <Route exact path="/events/photos/:eventId" component={UploadPhotos} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/createGroup" component={CreateGroup} />
           <Route exact path="/createEvent" component={CreateEvent} />
