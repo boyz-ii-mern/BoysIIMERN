@@ -1,7 +1,5 @@
 // Pages and Packages
 import React, { Component } from "react";
-// import Avatar from 'react-avatar-edit';
-import ImageUploader from 'react-images-upload';
 import shortid from 'shortid'
 
 // Firebase
@@ -71,7 +69,6 @@ handleProcessing(fieldName, file, metadata, load, error, progress, abort) {
             // Get Metadata
             this.storageRef.child(`avatars/${file.name}`).getMetadata().then((metadata) => {
                 // Metadata for 'filepond/${file.name}' contained
-                // let downloadURL = '';
                 this.storageRef.child(`avatars/${file.name}`).getDownloadURL().then(url => {
                     console.log(url)
                     let metadataFile = {
@@ -81,7 +78,6 @@ handleProcessing(fieldName, file, metadata, load, error, progress, abort) {
                         fullPath: metadata.fullPath,
                         downloadURL: url,
                         id: id,
-                        // eventId: this.uploadEventId,
                     }
                     this.setState({
                       avatarLink: url
@@ -104,30 +100,38 @@ handleInit() {
 }
 
 render() {
+  const parentDiv= {
+    display: 'flex',
+    justifyContent: 'space-between',
+    margin: '0 15px'
+  }
+
   const pondStyle = {
     width: '170px',
-    marginRight: '0',
-    contentAlign: 'right'
+    height: '170px'
+  }
+
+  const imgDiv = {
+    width: '170px',
+    height: '170px',
+    overflow: 'hidden',
+    position: 'relative',
+    borderRadius: '50%',
   }
 
   const imgStyle = {
-    borderRadius: '50%',
-    marginRight: '0',
-    marginLeft:'0',
-    contentAlign: 'left',
-    position: 'absolute',
-    maxWidth: '170px',
-    maxHeight: '170px',
-    width: '200px',
-    height: '200px'
+    margin: '0 auto',
+    display: 'inline',
+    height: '100%',
+    width: 'auto'
   }
 
     return(
       <div>
         <p>Who's Most Likely to upload a profile pic?! YOU ARE!</p>
         <br />
-        <div style={pondStyle}>
-        <img style={imgStyle} src={this.state.avatarLink} alt='' />
+        <div style={parentDiv}>
+          <div style={pondStyle}>
               <FilePond
                   ref={ref => (this.pond = ref)}
                   files={this.state.files}
@@ -151,6 +155,10 @@ render() {
                   ))}
               </FilePond>
             </div>
+          <div style={imgDiv}>
+            <img style={imgStyle} src={this.state.avatarLink} alt='' />
+          </div>
+        </div>
       </div>
     );
 }

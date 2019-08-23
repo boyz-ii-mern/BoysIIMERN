@@ -1,124 +1,155 @@
 // Pages and Packages
 import React, { Component } from "react";
-import ImageUploader from 'react-images-upload';
+import shortid from 'shortid'
 
 // Firebase
-import { storage, database } from "../../firebase/index";
+import { storage, database } from "./../../firebase/index";
 import "firebase/storage";
 import "firebase/database";
 
-class BannerLoad extends Component {
+// FilePond
+import { FilePond, registerPlugin, File } from "react-filepond";
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+
+// FilePond CSS
+import "filepond/dist/filepond.min.css";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+
+// Register Filepond Plugins for Additional Functionality
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
+
+class bannerLoad extends Component {
   constructor(props) {
     super(props);
-    this.onDrop = this.onDrop.bind(this);
-  }
 
-  state = { 
-    pictures: [],
-    url: '',
-    metadataFile: [],
-    bannerLink: ''
-  };
+    // Reference Firebase 
+    this.storageRef = storage;
+    this.databaseRef = database;
 
-
-onDrop(picture) {
-  this.setState({
-      pictures: this.state.pictures.concat(picture)
-  });
 }
 
-// fileChangedHandler = (event) => {
-//   this.setState({ selectedFile: event.target.files[0] })
-//   console.log(event.target.files[0])
-// }
+    state = {
+        files: [],
+        url: null,
+        uploadValue: 0,
+        metadataFile: [],
+        rows: [],
+        bannerLink: ''
+    };
+    
+// Handles our Image Storage
+handleProcessing(fieldName, file, metadata, load, error, progress, abort) {
+    // Logs for Testing
+    console.log(this.storageRef.child(file.name).fullPath);
 
-uploadHandler = (e) => {
-  e.preventDefault();
+    const fileUpload = file;
 
-  const file = this.state.pictures[0];
-  console.log(file);
+    // ShortID 
+    const id = shortid.generate();
 
-  // Logs for Testing
-  console.log(storage.child(file.name).fullPath);
+    const task = this.storageRef.child(`banners/${file.name}`).put(fileUpload, {
+        shortID: id});
 
-  const uploadTask = storage.child('banners/' + file.name).put(file);
-  
-  uploadTask.on(`state_changed`, (snapshot) => {
-      // Progress
-      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log('Upload is ' + progress + '% done.');
-      switch (snapshot.state) {
-        case storage.TaskState, 'paused':
-          console.log('Upload is paused.');
-          break;
-        case storage.TaskState, 'running':
-          console.log('Upload is running');
-          break;
-        }
-    }, (error) => {
-      // Error
-      switch (error.code) {
-        case 'storage/unauthorized':
-          break;
-        case 'storage/canceled':
-          break;
-        case 'storage/unknown':
-          break;
-        }
-    }, () => {
-      // Success!
-      uploadTask.snapshot.ref.getDownloadURL()
-      .then(function(downloadURL) {
-        console.log("Uploaded Link: ", downloadURL);
-      });
+    // Handle Uploading Here
+        task.on(`state_changed` , (snapshot) => {
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+        }, (err) => {
+            // Log Error
+            console.log(err);
+            error(err.message);
+        }, () => {
+            // Success
+            console.log("VICTORY");
+            this.setState({
+                url: task.snapshot.downloadURL
+            })
 
-      // Get File Firebase Storage Metadata
-      storage.child(`banners/${file.name}`).getMetadata()
-      .then((metadata) => {
-        storage.child('banners/' + file.name)
-        .getDownloadURL().then(url => {
-          console.log(url)
-          let metadataFile = {
-            name: metadata.name,
-            downloadURL: url,
-            contentType: metadata.contentType
-          }
-          this.setState({
-            bannerLink: url
-          });
+            // Get Metadata
+            this.storageRef.child(`banners/${file.name}`).getMetadata().then((metadata) => {
+                // Metadata for 'filepond/${file.name}' contained
+                this.storageRef.child(`banners/${file.name}`).getDownloadURL().then(url => {
+                    console.log(url)
+                    let metadataFile = {
+                        name: metadata.name,
+                        size: metadata.size,
+                        contentType: metadata.contentType,
+                        fullPath: metadata.fullPath,
+                        downloadURL: url,
+                        id: id,
+                    }
+                    this.setState({
+                      bannerLink: url
+                    });
 
-          // Send bannerLink to log in CreateGroup Index
-          this.props.action(`${this.state.bannerLink}`);
-          
-        // Save Metadata in Firebase Database
-        database.child('banners').push({ metadataFile });
-        })
-      }).catch(function(error) {
-        console.log(error)
-      });
+                  // Send bannerLink to log in Create Event Index
+                  this.props.action(`${this.state.bannerLink}`);
+
+                // Save Metadata
+                this.databaseRef.child('banners').push({ metadataFile });
+                });
+            }).catch(function(error) {
+              console.log(error)
+        });
     })
 }
 
-render() {
-
-    return (
-      <div>
-          <p>Upload a Picture of Your Group!</p>
-          <br />
-          <ImageUploader
-                withIcon={true}
-                buttonText='Choose Image'
-                onChange={this.onDrop}
-                imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                maxFileSize={5242880}
-                singleImage={true}
-                withPreview={true}
-            />
-          {/* <input type="file" onChange={this.fileChangedHandler}/> */}
-          <button onClick={this.uploadHandler}>Confirm Image</button>
-      </div>
-    ); 
-  }
+handleInit() {
+    console.log("FilePond ACTIVATED", this.pond);
 }
 
-export default BannerLoad;
+render() {
+  const parentDiv = {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center!important'
+  }
+
+  const pondStyle = {
+    justifyContent: 'center'
+  }
+
+  const imgDiv = {
+    width: '300px',
+    height: '150px',
+    overflow: 'hidden',
+  }
+
+  const imgStyle = {
+    margin: 'auto',
+    display: 'inline',
+    height: 'auto',
+    width: '100%'
+  }
+
+    return(
+      <div>
+        <p>Choose a Banner for Your Event!</p>
+        <br />
+        <div style={parentDiv}>
+          <div style={pondStyle}>
+              <FilePond
+                  ref={ref => (this.pond = ref)}
+                  files={this.state.files}
+                  allowMultiple={false}
+                  maxFiles={1}
+                  allowImagePreview={true}
+                  server={{process : this.handleProcessing.bind(this)}}
+                  oninit={() => this.handleInit()}
+              >
+                  {this.state.files.map(file => (
+                      <File key = {file} source = {file}/>
+                  ))}
+              </FilePond>
+            </div>
+          <div style={imgDiv}>
+            <img style={imgStyle} src={this.state.bannerLink} alt='' />
+          </div>
+        </div>
+      </div>
+    );
+}
+}
+
+export default bannerLoad;
