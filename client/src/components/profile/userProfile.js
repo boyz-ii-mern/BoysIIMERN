@@ -16,7 +16,7 @@ class UserProfile extends Component {
                             <div className="section">
                                 {/* update username to database */}
 
-                                <img src={user.avatar != null ? `${user.avatar}` : `../Images/avatar-01.png`} alt="" className="circle responsive-img profile-image" />
+                                <img src={user.avatar == null || user.avatar == "" ? `../Images/avatar-01.png` : `${user.avatar}`} alt="" className="circle responsive-img profile-image" />
 
                                 <h4 className="profile-name">{loggedIn ? `${user.firstName}` : `Username`}</h4>
                                 <h6 className="profile-superlative">{loggedIn ? `${user.superlative}` : `Most Likely to Do Something`}</h6>
