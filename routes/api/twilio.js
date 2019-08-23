@@ -13,7 +13,7 @@ router.route("/")
         console.log("this is newPhoneNum", newPhoneNum);
         client.messages
             .create({
-                body: 'https://boyz2mern.herokuapp.com/signup',
+                body: 'Signup for Likely at: https://boyz2mern.herokuapp.com/signup',
                 from: '+18178359696',
                 to: newPhoneNum
             })

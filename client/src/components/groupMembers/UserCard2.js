@@ -14,7 +14,7 @@ function User2 (props) {
                 <div className="section">
   
                 <User
-                    avatar={userThing.avatar}
+                    avatar={userThing.avatar == null || userThing.avatar == "" ? `../Images/avatar-01.png` : `${userThing.avatar}`}
                     name={userThing.firstName}
                     lastName={userThing.lastName}
                    
