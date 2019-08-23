@@ -120,12 +120,15 @@ class UploadPhotos extends Component {
                     ref={ref => (this.pond = ref)}
                     files={this.state.files}
                     allowMultiple={true}
-                    maxFiles={10}
+                    maxFiles={5}
+                    maxParallelUploads={5}
+                    dropOnElement={true}
+                    dropValidation={true}
                     server={{process : this.handleProcessing.bind(this)}}
                     oninit={() => this.handleInit()}
                 >
-                    {this.state.files.map(file => (
-                        <File key={file} source={file}/>
+                     {this.state.files.map(file => (
+                         <File key={file} source={file}/>
                     ))}
                 </FilePond>
 
