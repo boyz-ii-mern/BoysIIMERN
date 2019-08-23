@@ -29,7 +29,8 @@ class EventsTest extends Component {
         this.componentDidMount();
       });
   }
-defaultImage="https://cdn.pixabay.com/photo/2015/12/15/09/04/banner-1093909__340.jpg"
+  defaultImage =
+    "https://cdn.pixabay.com/photo/2015/12/15/09/04/banner-1093909__340.jpg";
   state = {
     username: "",
     password: "",
@@ -57,12 +58,12 @@ defaultImage="https://cdn.pixabay.com/photo/2015/12/15/09/04/banner-1093909__340
         });
 
         // console.log("this be req.params", id)
-        
+
         axios.get("/api/events/detail/" + id).then(next => {
           if (next.data) {
             // console.log("get events daniel", next.data.data);
-            console.log("+++++++++++++++++next.data:", next.data.data)
-            const image = next.data.data.bannerImage 
+            console.log("+++++++++++++++++next.data:", next.data.data);
+            const image = next.data.data.bannerImage;
             this.setState({
               event: next.data.data,
               groupId: next.data.data.GroupId,
@@ -128,11 +129,23 @@ defaultImage="https://cdn.pixabay.com/photo/2015/12/15/09/04/banner-1093909__340
                       // console.log("new array", arr3);
                       // console.log("tester", arr3[0].superlative);
                       let testerSup = arr3[0].superlative;
-        
+
                       // console.log("random supppp", randomTest);
                       //no way this works---
-
+                      // console.log("superlative length", typeof(randomArr3[0].superlative))
                       let randomArr3 = arr3.map(superlative => {
+                        if (typeof(superlative.superlative) === "string") {
+                          return {
+                            avatar: superlative.avatar,
+                            email: superlative.email,
+                            firstName: superlative.firstName,
+                            id: superlative.id,
+                            lastName: superlative.lastName,
+                            password: superlative.password,
+                            superlative: superlative.superlative
+                          };
+                        }
+                        else{
                         return {
                           avatar: superlative.avatar,
                           email: superlative.email,
@@ -147,8 +160,9 @@ defaultImage="https://cdn.pixabay.com/photo/2015/12/15/09/04/banner-1093909__340
                               )
                             ]
                         };
+                      }
                       });
-                      // console.log("this is randomArr3", randomArr3);
+                      console.log("this is randomArr3", randomArr3);
 
                       this.setState({
                         members: randomArr3
@@ -170,7 +184,8 @@ defaultImage="https://cdn.pixabay.com/photo/2015/12/15/09/04/banner-1093909__340
             });
           }
         });
-      }});
+      }
+    });
   }
 
   render() {
