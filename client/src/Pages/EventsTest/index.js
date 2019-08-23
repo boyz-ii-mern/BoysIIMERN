@@ -29,7 +29,7 @@ class EventsTest extends Component {
         this.componentDidMount();
       });
   }
-
+defaultImage="https://cdn.pixabay.com/photo/2015/12/15/09/04/banner-1093909__340.jpg"
   state = {
     username: "",
     password: "",
@@ -39,7 +39,7 @@ class EventsTest extends Component {
     event: {},
     members: [],
     comments: "" || ["no starting comments cuz i have no friends"],
-    bannerImage: "https://cdn.pixabay.com/photo/2015/12/15/09/04/banner-1093909__340.jpg"
+    bannerImage: EventsTest.defaultImage
   };
 
   componentDidMount() {
@@ -62,10 +62,11 @@ class EventsTest extends Component {
           if (next.data) {
             // console.log("get events daniel", next.data.data);
             console.log("+++++++++++++++++next.data:", next.data.data)
+            const image = next.data.data.bannerImage 
             this.setState({
               event: next.data.data,
               groupId: next.data.data.GroupId,
-              bannerImage: next.data.data.bannerImage
+              bannerImage: !image ? EventsTest.bannerImage : image
             });
 
             //call to grab all members associated by group id
