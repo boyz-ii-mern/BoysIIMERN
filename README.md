@@ -1,6 +1,8 @@
 # Likely
 
-Likely is an app that gives small groups the opportunity to plan events, chat, post photos, and assign hilarious superlatives to one another on the go. It's all the best parts of Facebook with the added benefit of not having to actually be on Facebook! Join different groups, plan multiple events, and you'll be voted Most Likely to have a blast!
+Likely is an app that gives small groups the opportunity to plan events, chat, post photos, and assign hilarious superlatives to one another on the go. It's all the best parts of Facebook with the added benefit of not having to actually be on Facebook! 
+
+Join different groups, plan multiple events, and you'll be voted Most Likely to have a blast!
 
 ## User Experience
 
@@ -12,9 +14,9 @@ Created with ReactJS and Deployed on Heroku.
 
 ## Built With
 
-* Twilio
-* Moment
-* Passport
+* [Twilio](https://www.twilio.com/)
+* [Moment](https://momentjs.com/)
+* [Passport](http://www.passportjs.org/)
 * Node
 
 ### CSS
@@ -25,11 +27,10 @@ Created with ReactJS and Deployed on Heroku.
 * Express
 
 ### Photos
-* Filepond
-* React Stack Grid
-* React Lightbox
-* React SizeMe
-* Firebase Storage & Database
+* [Filepond](https://pqina.nl/filepond/)
+* [React Stack Grid](https://github.com/tsuyoshiwada/react-stack-grid)
+* [React Image Lightbox](https://www.npmjs.com/package/react-image-lightbox)
+* [Firebase Storage & Database](https://firebase.google.com/)
 
 ## Authors
 
@@ -45,4 +46,4 @@ Created with ReactJS and Deployed on Heroku.
 
 ### Acknowledgments
 
-* Thank you to our instructors, our TAs, and our fellow classmates!
+*Thank you to our instructors, our TAs, and our fellow classmates!*
