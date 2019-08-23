@@ -36,10 +36,10 @@ class EventsTest extends Component {
     user: {},
     loggedIn: false,
     groupId: "" || ["no group id"],
-    events: "" || ["no events", "get out nerd"],
+    event: {},
     members: [],
     comments: "" || ["no starting comments cuz i have no friends"],
-    bannerImage: "" || ["no group banner"]
+    bannerImage: "https://cdn.pixabay.com/photo/2015/12/15/09/04/banner-1093909__340.jpg"
   };
 
   componentDidMount() {
@@ -57,14 +57,15 @@ class EventsTest extends Component {
         });
 
         // console.log("this be req.params", id)
-        //call to grab all 'events' associated to user. 'id' is grabbed from the URL  then display to main page. sets groups key/value to state.
+        
         axios.get("/api/events/detail/" + id).then(next => {
           if (next.data) {
             // console.log("get events daniel", next.data.data);
-
+            console.log("+++++++++++++++++next.data:", next.data.data)
             this.setState({
-              events: next.data.data,
-              groupId: next.data.data.GroupId
+              event: next.data.data,
+              groupId: next.data.data.GroupId,
+              bannerImage: next.data.data.bannerImage
             });
 
             //call to grab all members associated by group id
@@ -158,17 +159,6 @@ class EventsTest extends Component {
                 }
               });
 
-            //call to grab group banner associated by group id
-            axios
-              .get("/api/groups/detail/" + next.data.data.GroupId)
-              .then(next => {
-                if (next.data) {
-                  this.setState({
-                    bannerImage: next.data.data.groupInfo.bannerImage
-                  });
-                }
-              });
-
             axios.get("/api/events/comments/" + id).then(next => {
               if (next.data) {
                 // console.log("did get messages work?", next.data)
@@ -215,7 +205,7 @@ class EventsTest extends Component {
                   userId={this.state.user.userId}
                   members={this.state.members}
                   comments={this.state.comments}
-                  event={this.state.events}
+                  event={this.state.event}
                 />
               </div>
             </div>
