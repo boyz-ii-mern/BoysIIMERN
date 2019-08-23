@@ -9,8 +9,6 @@ import { database } from "../../firebase";
 import "firebase/database";
 import "firebase/storage";
 
-// import ImageGallery from "react-image-gallery";
-
 class Photos extends Component {
     constructor(props) {
         super(props);
