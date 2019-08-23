@@ -15,26 +15,30 @@ class Photos extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // user: this.props.user,
-            // eventID: to-do...
-            file: null,
-            key: null,
-            url: null,
-            images: [],
+            eventId: '',
+            file: null || ["null"],
+            key: null || ["null"],
+            url: null || ["null"],
+            images: [] || ["null"],
             photoIndex: 0,
             isOpen: false,
         };
     }
 
     async componentDidMount() {
-        const imgRef = database.child('images');
+        const imgRef = database.child('images' + window.location.pathname + '/');
 
         imgRef.on('value', (child) => {
             
             console.log(child.val());
-            console.log(Object.keys(child.val()));
+            console.log(Object.keys(child.val() || {}));
 
-            this.setState({images: Object.keys(child.val()).reverse().map(key => child.val()[key].metadataFile.downloadURL)});
+            if (Object.keys(child.val() || {}) === null) {
+                return console.log("No Photos Uploaded Yet...");
+            } else {
+                return (this.setState({images: Object.keys(child.val() || {}).reverse().map(key => child.val()[key].metadataFile.downloadURL)
+                }));
+            }
          })
     }
     
@@ -61,7 +65,7 @@ class Photos extends Component {
                  monitorImagesLoaded={true}
                 >
                 {this.state.images.map((url, i) => ( 
-                    <img src={url} photoIndex={i} style={imgStyle} 
+                    <img src={url} photoindex={i} key={i} style={imgStyle} 
                     onClick={() => this.setState({ 
                         isOpen: true
                     })}/>
