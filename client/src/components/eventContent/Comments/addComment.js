@@ -52,7 +52,7 @@ class AddComment extends Component {
                 onChange={this.handleChange}
               />
             </label>
-            <button type="submit" value="Submit" className="waves-effect waves-light btn add-comment-submit">submit</button>
+            <button type="submit" value="Submit" className="btn add-comment-submit">submit</button>
           </form>
         );
       }
