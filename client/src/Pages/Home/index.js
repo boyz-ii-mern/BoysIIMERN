@@ -106,6 +106,7 @@ class Home extends Component {
                   <HomeMyEvents
                     eventId={event.id}
                     eventName={event.name}
+                    bannerImage={event.bannerImage}
                   />
                 ))}
                 </div>

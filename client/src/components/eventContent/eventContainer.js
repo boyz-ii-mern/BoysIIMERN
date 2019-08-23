@@ -24,6 +24,7 @@ function EventContainer(props) {
                 userId={props.userId}
                 friends={props.members}
                 action={props.action}
+                bannerImage={props.bannerImage}
             />
             {/* <EventNav />
             <Comments /> */}
