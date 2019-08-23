@@ -73,16 +73,22 @@ componentDidMount(){
                 {/* Currently commented out GroupEvents */}
                 {/* <GroupEvents /> */}
               </div>
-              <div className="card-content">
-                <div className="card-stacked">
-                {this.state.events.map(event => (
-                  <HomeMyEvents
-                    eventId={event.id}
-                    eventName={event.name}
-                  />
-                ))}
+              <div className="col s12 m8 l9 card my-events-card">
+                <div className="card-header my-events">
+                  <h5>Group Events</h5>
+                </div>
+                <div className="card-content">
+                  <div className="card-stacked">
+                  {this.state.events.map(event => (
+                    <HomeMyEvents
+                      eventId={event.id}
+                      eventName={event.name}
+                    />
+                  ))}
+                  </div>
                 </div>
               </div>
+
             </div>
           )}
         </IdentityContext.Consumer>

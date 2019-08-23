@@ -14,6 +14,10 @@ body {
 .brand-logo {
     margin-top: 8px!important;
 }
+
+.section {
+    padding: 5px 0px 2px 10px!important;
+}
 /* --------- Fonts --------- */
 h1 {
     color: blue;
