@@ -25,7 +25,7 @@ function GroupMembers (props) {
         <User 
            name= {item.firstName}
            lastName= {item.lastName}
-           avatar= {item.avatar}
+           avatar= {item.avatar == null || item.avatar == "" ? `../Images/avatar-01.png` : `${item.avatar}`}
            superlative={item.superlative}
         />
      ))}
