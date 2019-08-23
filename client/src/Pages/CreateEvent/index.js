@@ -178,7 +178,7 @@ class Form extends Component {
                       
                     ))}
                   </select> */}
-                  <select className="custom-select create-group-select" id="group-select" name="members" onChange={this.handleInputSelect}>
+                  <select className="custom-select create-group-select" id="group-select" name="groupId" onChange={this.handleInputChange}>
                   <option defaultValue>Choose Groups to Invite</option>
                     {
                       this.state.groups.length == 0 ? 
@@ -188,7 +188,6 @@ class Form extends Component {
                           <option value={groups.id}>{groups.name}</option>
                       
                     ))}
-                        ))}
                   </select>
                   <h5 class="center-align red-text text-darken-3">{this.state.errorMessage && this.state.eventDate == "" ? "Set a date!" : ""}</h5>
                   <input value={this.state.eventDate} name="eventDate" onChange={this.handleInputChange} type="date" />

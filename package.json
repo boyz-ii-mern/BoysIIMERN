@@ -27,7 +27,7 @@
     "express-session": "^1.16.2",
     "filepond": "^4.4.12",
     "filepond-plugin-image-exif-orientation": "^1.0.6",
-    "filepond-plugin-image-preview": "^4.2.1",
+    "filepond-plugin-image-preview": "^4.3.3",
     "firebase": "^6.3.4",
     "firebase-app": "0.0.1",
     "if-env": "^1.0.4",

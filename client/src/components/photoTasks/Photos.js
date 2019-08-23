@@ -17,11 +17,11 @@ class Photos extends Component {
         this.state = {
             // user: this.props.user,
             // eventID: to-do...
-            file: null || ["null"],
-            key: null || ["null"],
-            url: null || ["null"],
-            images: [] || ["null"],
-            photoIndex: 0 || ["null"],
+            file: null,
+            key: null,
+            url: null,
+            images: [],
+            photoIndex: 0,
             isOpen: false,
         };
     }
