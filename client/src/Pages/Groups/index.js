@@ -20,7 +20,9 @@ state = {
 };
 
 componentDidMount(){
-    
+    const id = this.props.match.params.gid;
+    // console.log("this is id", this.props.match.params.gid)
+
     axios.get("/api/user").then(response => {
         if (response.data) {
           // console.log("USER FROM API", response.data);
@@ -32,7 +34,7 @@ componentDidMount(){
 
 
     axios
-    .get("/api/groups/detail/1")
+    .get("/api/groups/detail/" + id)
     .then(next => {
       if (next.data) {
         //   console.log("next data for grps", next.data)

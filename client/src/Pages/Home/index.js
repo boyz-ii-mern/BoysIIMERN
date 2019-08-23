@@ -29,7 +29,7 @@ class Home extends Component {
     // check for logged in user
     axios.get("/api/user").then(response => {
       if (response.data) {
-        console.log("USER FROM API", response.data);
+        // console.log("USER FROM API", response.data);
         this.setState({
           user: response.data,
           userStateInfo: `${response.data.username} is logged in`,
@@ -49,7 +49,7 @@ class Home extends Component {
         //call to grab all 'events' associated to user, then display to main page. sets groups key/value to state.
         api.user.allEventsAttending(response.data.userId).then(next => {
           if (next.data) {
-            console.log("get events data", next.data);
+            // console.log("get events data", next.data);
             this.setState({
               events: next.data
             });
@@ -62,7 +62,7 @@ class Home extends Component {
 
   render() {
     console.log("this is first load state", this.state);
-    // console.log("this groups state", this.state.groups)
+    console.log("this groups state", this.state.groups)
     return (
       <IdentityContext.Provider
         value={{
