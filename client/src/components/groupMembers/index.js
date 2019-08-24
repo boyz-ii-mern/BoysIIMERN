@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import User from "./UserCard";
 
 function GroupMembers (props) {
-
+console.log("groupMembers", props)
     let gmember = props.members || []
    //Console Log gmember will show the below object example being passed in. Must set initial array value as [] or it will not map. 
     // avatar: null

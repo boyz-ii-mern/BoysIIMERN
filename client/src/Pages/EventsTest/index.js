@@ -82,91 +82,100 @@ class EventsTest extends Component {
 
                   //!Begin --------Logic to randomize superlative-----------------------------------------------------------
 
-                  let memberS = this.state.members;
-                  let memberSuperlatives = memberS.map(thing => {
-                    return {
-                      id: thing.id,
-                      superlative: thing.superlative
-                    };
-                  });
+                  // let memberS = this.state.members;
+                  // // console.log("this is memberS state", memberS)
+                  // let memberSuperlatives = memberS.map(thing => {
+                  //   return {
+                  //     id: thing.id,
+                  //     superlative: thing.superlative
+                  //   };
+                  // });
 
-                  axios.get("/api/superlatives/byEvent/" + id).then(nextt => {
-                    if (nextt.data) {
-                      // console.log("these are the superlatives by event ID", next.data)
-                      let superlativeList = nextt.data.data.superlatives;
-                      // console.log("these are superlativeList", superlativeList);
-                      let newSuperlativeApi = superlativeList.map(thing => {
-                        return {
-                          id: thing.UserId,
-                          superlative: thing.text
-                        };
-                      });
+                  // axios.get("/api/superlatives/byEvent/" + id).then(nextt => {
+                  //   if (nextt.data) {
+                  //     console.log("these are the superlatives by event ID", next.data)
+                  //     let superlativeList = nextt.data.data.superlatives;
+                  //     // console.log("these are superlativeList", superlativeList);
+                  //     let newSuperlativeApi = superlativeList.map(thing => {
+                  //       return {
+                  //         id: thing.UserId,
+                  //         superlative: thing.text
+                  //       };
+                  //     });
 
-                      var output = [];
+                  //     var output = [];
 
-                      newSuperlativeApi.forEach(function(item) {
-                        var existing = output.filter(function(v, i) {
-                          return v.id == item.id;
-                        });
-                        if (existing.length) {
-                          var existingIndex = output.indexOf(existing[0]);
-                          output[existingIndex].superlative = output[
-                            existingIndex
-                          ].superlative.concat(item.superlative);
-                        } else {
-                          if (typeof item.superlative == "string")
-                            item.superlative = [item.superlative];
-                          output.push(item);
-                        }
-                      });
+                  //     newSuperlativeApi.forEach(function(item) {
+                  //       var existing = output.filter(function(v, i) {
+                  //         return v.id == item.id;
+                  //       });
+                  //       if (existing.length) {
+                  //         var existingIndex = output.indexOf(existing[0]);
+                  //         output[existingIndex].superlative = output[
+                  //           existingIndex
+                  //         ].superlative.concat(item.superlative);
+                  //       } else {
+                  //         if (typeof item.superlative == "string")
+                  //           item.superlative = [item.superlative];
+                  //         output.push(item);
+                  //       }
 
-                      let arr3 = [];
+                  //     });
+                  //     console.log("this is output and this works fine", output);
+                      // console.log("what is memberS", memberS)
+//-------------------------------------------------------------------------------------------------------
 
-                      memberS.forEach((itm, i) => {
-                        arr3.push(Object.assign({}, itm, output[i]));
-                      });
+                      // let arr3 = [];
+                      // //!SOMETHING IS WRONG HERE WITH ASSIGNMING. 
+                      // memberS.forEach((itm, i) => {
+                      //   arr3.push(Object.assign({}, itm, output[i]));
+                      // });
+//-------------------------------------------------------------------------------------------------------
+
+
+
 
                       // console.log("new array", arr3);
                       // console.log("tester", arr3[0].superlative);
-                      let testerSup = arr3[0].superlative;
+                      // let testerSup = arr3[0].superlative;
 
                       // console.log("random supppp", randomTest);
                       //no way this works---
                       // console.log("superlative length", typeof(randomArr3[0].superlative))
-                      let randomArr3 = arr3.map(superlative => {
-                        if (typeof(superlative.superlative) === "string") {
-                          return {
-                            avatar: superlative.avatar,
-                            email: superlative.email,
-                            firstName: superlative.firstName,
-                            id: superlative.id,
-                            lastName: superlative.lastName,
-                            password: superlative.password,
-                            superlative: superlative.superlative
-                          };
-                        }
-                        else{
-                        return {
-                          avatar: superlative.avatar,
-                          email: superlative.email,
-                          firstName: superlative.firstName,
-                          id: superlative.id,
-                          lastName: superlative.lastName,
-                          password: superlative.password,
-                          superlative:
-                            superlative.superlative[
-                              Math.floor(
-                                Math.random() * superlative.superlative.length
-                              )
-                            ]
-                        };
-                      }
-                      });
-                      console.log("this is randomArr3", randomArr3);
+                      // let randomArr3 = arr3.map(superlative => {
+                      //   if (typeof(superlative.superlative) === "string") {
+                      //     return {
+                      //       avatar: superlative.avatar,
+                      //       email: superlative.email,
+                      //       firstName: superlative.firstName,
+                      //       id: superlative.id,
+                      //       lastName: superlative.lastName,
+                      //       password: superlative.password,
+                      //       superlative: superlative.superlative
+                      //     };
+                      //   }
+                      //   else{
+                      //   return {
+                      //     avatar: superlative.avatar,
+                      //     email: superlative.email,
+                      //     firstName: superlative.firstName,
+                      //     id: superlative.id,
+                      //     lastName: superlative.lastName,
+                      //     password: superlative.password,
+                      //     superlative:
+                      //       superlative.superlative[
+                      //         Math.floor(
+                      //           Math.random() * superlative.superlative.length
+                      //         )
+                      //       ]
+                      //   };
+                      // }
+                      // });
+                      // console.log("this is randomArr3", randomArr3);
 
-                      this.setState({
-                        members: randomArr3
-                      });
+                      // this.setState({
+                      //   members: randomArr3
+                      // });
                       // console.log("latest members state", this.state);
                     }
                   });
@@ -182,10 +191,11 @@ class EventsTest extends Component {
                 });
               }
             });
+            //! COMMENTING OUT THE RANDOM LOGIC
           }
         });
-      }
-    });
+      // }
+    // });
   }
 
   render() {
