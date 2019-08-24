@@ -6,7 +6,7 @@ import eventsTest from "./eventsTest.json"; //<--this is just a test variable ob
 // import EventsCard from "./eventsCard"
 import Moment from 'react-moment';
 
-// console.log("this is eventsTest", eventsTest);
+console.log("this is eventsTest", eventsTest);
 
 function HomeMyEvents(props) {
   return (
