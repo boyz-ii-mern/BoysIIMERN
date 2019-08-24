@@ -62,13 +62,20 @@ componentDidMount(){
       >
         <IdentityContext.Consumer>
           {({ user }) => (
+           
+            
             <div className="row">
 
-<div className="card-header">
+              <div className="col s12 profile-card">
+                <h2 className="group-name-title">{this.state.groupName}</h2>
+              </div>
+
+              <div className="col s12 m4 side-content groups-home-card">
+{/* <div className="card-header">
                         <h5>{this.state.groupName}</h5>
 </div>
 
-              <div className="col s12 m4 l3 side-content">
+              <div className="col s12 m4 l3 side-content"> */}
                 {/* <h3 /> */}
 
                 <GroupMembers
@@ -78,8 +85,21 @@ componentDidMount(){
                 {/* Currently commented out GroupEvents */}
                 {/* <GroupEvents /> */}
               </div>
+              <div className="col s12 m8 card my-events-card">
+                <div className="card-header my-events">
+                  <h5>Group Events</h5>
+                </div>
+                <div className="card-content">
+                  <div className="card-stacked">
+                  {this.state.events.map(event => (
+                    <HomeMyEvents
+                      eventId={event.id}
+                      eventName={event.name}
+                    />
+                  ))}
+                  </div>
               
-              <div className="card-content">
+              {/* <div className="card-content">
               
                 <div className="card-stacked">
                     
@@ -90,9 +110,10 @@ componentDidMount(){
                     eventId={event.id}
                     eventName={event.name}
                   />
-                ))}
+                ))} */}
                 </div>
               </div>
+
             </div>
           )}
         </IdentityContext.Consumer>

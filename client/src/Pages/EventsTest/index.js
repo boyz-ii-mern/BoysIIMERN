@@ -40,7 +40,7 @@ class EventsTest extends Component {
     event: {},
     members: [],
     comments: "" || ["no starting comments cuz i have no friends"],
-    bannerImage: EventsTest.defaultImage
+    bannerImage: ''
   };
 
   componentDidMount() {
@@ -67,7 +67,7 @@ class EventsTest extends Component {
             this.setState({
               event: next.data.data,
               groupId: next.data.data.GroupId,
-              bannerImage: !image ? EventsTest.bannerImage : image
+              bannerImage: !image ? 'https://cdn.pixabay.com/photo/2015/12/15/09/04/banner-1093909__340.jpg' : image
             });
 
             //call to grab all members associated by group id

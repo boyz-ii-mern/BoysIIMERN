@@ -32,12 +32,14 @@ function CommentList (props){
             {/* use comments.user */}
                  {reverse.map(comment => ( 
                 <div>
-                   <User2
-                     comment={comment}
-                   />
+                    <div className="comment-extras valign-wrapper">
+                        <User2
+                            comment={comment}
+                        />
+                        <Moment fromNow={"MMM Do YYYY"} className="moment">{comment.createdAt}</Moment>
+                    </div>
                    <div>
                    <p className="comment-content" >{comment.body}</p>
-                   <Moment fromNow={"MMM Do YYYY"}>{comment.createdAt}</Moment>
                    </div>
                 </div>
                  ))}   

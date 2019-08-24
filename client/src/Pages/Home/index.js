@@ -107,6 +107,9 @@ class Home extends Component {
                     eventId={event.id}
                     eventName={event.name}
                     bannerImage={event.bannerImage}
+                    date={event.date}
+                    location={event.location}
+
                   />
                 ))}
                 </div>

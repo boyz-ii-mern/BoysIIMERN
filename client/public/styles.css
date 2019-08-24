@@ -14,6 +14,14 @@ body {
 .brand-logo {
     margin-top: 8px!important;
 }
+
+.section {
+    padding: 5px 0px 2px 10px!important;
+}
+
+.card {
+    margin: 0 0 1rem 0!important;
+}
 /* --------- Fonts --------- */
 h1 {
     color: blue;
@@ -111,6 +119,7 @@ select {
 .side-content {
     display: flex;
     flex-direction: column;
+    padding-left: 0px!important;
 }
 
 .my-events {
@@ -125,6 +134,7 @@ select {
 .events-header {
     max-height: 300px;
     min-height: 100px;
+    padding-left: 0px!important;
 }
 
 .events-header-image {
@@ -264,7 +274,7 @@ select {
 
 /* ----------------- Comments Section ----------------- */
 .comment-list {
-    padding: 10px;
+    padding: 20px 30px 20px 20px;
 }
 
 .comment-content {
@@ -287,6 +297,14 @@ select {
     width: 70%;
 }
 
+.comment-extras {
+    display: flex;
+    justify-content: space-between;
+}
+
+.moment {
+    color: #ccc;
+}
 /* ----------------- Superlatives Section ----------------- */
 .superlative-user-image {
     width: 60px!important;
@@ -369,7 +387,7 @@ select {
 /* -------------------------------- Sign In/Up Form ----------------------------- */
 .sign-up-button {
     background-color: #fff!important;
-    color: #556270;
+    color: #556270!important;
     margin-top: 10px;
 }
 
@@ -418,4 +436,19 @@ select {
     text-align: right;
     font-size: 10px;
     color: #556270;
+}
+
+
+/* -------------------------------- Group Home Page ----------------------------- */
+.group-name-title {
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700!important;
+    font-size: 3rem!important;
+}
+
+.groups-home-card {
+    padding: 0px;
+    margin: 0 0 1rem 0!important;
 }

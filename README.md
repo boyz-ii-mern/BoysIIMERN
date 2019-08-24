@@ -2,7 +2,7 @@
 
 Likely is an app that gives small groups the opportunity to plan events, chat, post photos, and assign hilarious superlatives to one another on the go. It's all the best parts of Facebook with the added benefit of not having to actually be on Facebook! 
 
-Join different groups, plan multiple events, and you'll be voted Most Likely to have a blast!
+Join different groups, plan multiple events, and you'll be voted Most **Likely** to have a blast!
 
 Check out our app! https://boyz2mern.herokuapp.com/
 

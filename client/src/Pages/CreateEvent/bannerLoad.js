@@ -114,6 +114,7 @@ render() {
     width: '300px',
     height: '150px',
     overflow: 'hidden',
+    margin: '0 auto'
   }
 
   const imgStyle = {
