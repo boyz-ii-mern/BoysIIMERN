@@ -47,7 +47,7 @@ class AddComment extends Component {
               <input className="add-comment-input"
                 type="text"
                 name="comments"
-                placeholder="Say something. Or don't."
+                placeholder="Most likely to...."
                 value={this.state.value}
                 onChange={this.handleChange}
               />
