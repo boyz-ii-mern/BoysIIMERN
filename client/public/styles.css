@@ -119,6 +119,7 @@ select {
 .side-content {
     display: flex;
     flex-direction: column;
+    padding-left: 0px!important;
 }
 
 .my-events {
@@ -133,6 +134,7 @@ select {
 .events-header {
     max-height: 300px;
     min-height: 100px;
+    padding-left: 0px!important;
 }
 
 .events-header-image {
@@ -385,7 +387,7 @@ select {
 /* -------------------------------- Sign In/Up Form ----------------------------- */
 .sign-up-button {
     background-color: #fff!important;
-    color: #556270;
+    color: #556270!important;
     margin-top: 10px;
 }
 
