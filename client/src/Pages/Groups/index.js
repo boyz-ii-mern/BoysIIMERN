@@ -50,7 +50,7 @@ componentDidMount(){
 }
 
   render() {
-    // console.log("latest Group state", this.state);
+    console.log("latest Group state", this.state);
     return (
       <IdentityContext.Provider
         value={{
@@ -95,6 +95,7 @@ componentDidMount(){
                     <HomeMyEvents
                       eventId={event.id}
                       eventName={event.name}
+                      date={event.date}
                     />
                   ))}
                   </div>
