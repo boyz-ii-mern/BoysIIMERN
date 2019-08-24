@@ -37,6 +37,7 @@ class SuperlativeTab extends Component {
     }
 
     render() {
+        console.log("this is superlatives", this.state.superlatives)
         return (
             <div>
                 <SuperlativesForm

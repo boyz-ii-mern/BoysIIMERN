@@ -3,10 +3,12 @@ import User from "../../groupMembers/UserCard";
 
 function SuperlativeUser(props) {
     const {superlative} = props
+    console.log("n superlatard", props)
+
     return (
         <div className="section user-section valign-wrapper col s12 m6">
             {/* update source to database */}
-            <img src={superlative.User.avatar} alt="" className="circle responsive-img superlative-user-image" />
+            <img src={props.avatard} alt="" className="circle responsive-img superlative-user-image" />
             <div className="section">
                 {/* update username to database */}
                 <h6>{`${superlative.User.firstName} ${superlative.User.lastName}`}</h6>
