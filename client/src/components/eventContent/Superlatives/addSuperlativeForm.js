@@ -62,7 +62,7 @@ class SuperlativesForm extends Component {
                             className="add-comment-input"
                             type="text"
                             name="superlativeInput"
-                            placeholder="Say something. Or don't."
+                            placeholder="Most Likely To..."
                             value={this.state.superlativeInput}
                             onChange={this.handleChange}
                         />
