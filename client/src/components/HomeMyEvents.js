@@ -1,11 +1,20 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"; //<!super important to get router to work
+// import Events from "../Pages/Events"
+import eventsTest from "./eventsTest.json"; //<--this is just a test variable object used to dynamically create each event
+// import Events from "../Pages/Events";
+// import EventsCard from "./eventsCard"
 import Moment from 'react-moment';
 
-function EventTitle (props) {
-    // console.log("passed in time and headres", props)
-    // console.log("date", props.date)
+// console.log("this is eventsTest", eventsTest);
 
-        return (
+function HomeMyEvents(props) {
+  return (
+  
+          <div className="section">
+            {/* <Link to={"/events/" + props.eventId}>
+             
+            </Link> */}
             <div className="event-title">
                <div className="event-title-container valign-wrapper">
                     <div className="event-date">
@@ -19,13 +28,17 @@ function EventTitle (props) {
                         </h4>
                     </div>
                     <div className="event-name-location">
-                        <h4 className="event-location">{props.name}</h4>
+                      <Link to={"/events/" + props.eventId}>
+                        <h4 className="event-location">{props.eventName}</h4>
+                      </Link>
                         <p>{props.location}</p>
                     </div>
                </div>
-                <hr className="event-divider"></hr>
+               <div className="divider"></div>
             </div>
-        )
-    }
+          </div>
+          
+  );
+}
 
-export default EventTitle;
+export default HomeMyEvents;

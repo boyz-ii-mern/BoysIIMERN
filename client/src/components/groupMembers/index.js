@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import User from "./UserCard";
 
 function GroupMembers (props) {
-
+console.log("groupMembers", props)
     let gmember = props.members || []
    //Console Log gmember will show the below object example being passed in. Must set initial array value as [] or it will not map. 
     // avatar: null
@@ -16,7 +16,7 @@ function GroupMembers (props) {
 
         return(
      
-            <div className="card col">
+            <div className="card col groups-home-card">
                 <div className="card-header">
                     <h5>Members</h5>
                 </div>
@@ -25,7 +25,7 @@ function GroupMembers (props) {
         <User 
            name= {item.firstName}
            lastName= {item.lastName}
-           avatar= {item.avatar}
+           avatar= {item.avatar == null || item.avatar == "" ? `../Images/avatar-01.png` : `${item.avatar}`}
            superlative={item.superlative}
         />
      ))}

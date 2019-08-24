@@ -22,33 +22,37 @@ class AddComment extends Component {
 
           [name]: value
         });
+        this.forceUpdate();
       }
     
       handleSubmit(event) {
+        event.preventDefault();
+        document.getElementById("comment-form").reset();
+
         // alert("Your Comment: " + this.state.comments);
         this.props.action(this.state.comments);
 
-        this.setState({
-          comments: ""
-        })
-        event.preventDefault();
+        // this.setState({
+        //   comments: ""
+        // })
+        
       }
     
       render() {
         return (
-          <form onSubmit={this.handleSubmit} className="add-comment-form">
+          <form onSubmit={this.handleSubmit} className="add-comment-form" id="comment-form">
           {/* // <form onSubmit={()=this.props.action} className="add-comment-form"> */}
  
            <label className="add-comment-label">
               <input className="add-comment-input"
                 type="text"
                 name="comments"
-                placeholder="Say something. Or don't."
+                placeholder="Most likely to...."
                 value={this.state.value}
                 onChange={this.handleChange}
               />
             </label>
-            <button type="submit" value="Submit" className="waves-effect waves-light btn add-comment-submit">submit</button>
+            <button type="submit" value="Submit" className="btn add-comment-submit">submit</button>
           </form>
         );
       }

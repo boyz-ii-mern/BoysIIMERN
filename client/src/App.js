@@ -1,6 +1,7 @@
 import React from "react";
 
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"; //<!super important to get router to work 
+import HomeGroups from "./Pages/Groups";
 import Home from "./Pages/Home";
 import Events from "./Pages/Events";
 import EventsTest from "./Pages/EventsTest"
@@ -14,6 +15,10 @@ import TabsTest from "./components/eventContent/eventTabs/tabContent";
 import RenderTabs from "./components/eventContent/eventTabs/renderTabs";
 import SignUp from "./Pages/SignUp"
 import Photos from "./components/photoTasks/Photos";
+import 'materialize-css/dist/css/materialize.min.css';
+// import { Modal, Button } from 'react-materialize';
+import M from "materialize-css";
+import UploadPhotos from "./components/photoTasks/UploadPhotos";
 // import Nav from "./components/Nav";
 
 function App() {
@@ -41,12 +46,14 @@ function App() {
           <Route exact path="/home" component={Home} />
           <Route exact path="/events/:id" component={EventsTest} />
           <Route exact path="/events" component={Events} />
-          <Route exact path="/events/photos/:eventId" component={Photos} />
+          <Route exact path="/events/photos/:eventId" component={UploadPhotos} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/createGroup" component={CreateGroup} />
           <Route exact path="/createEvent" component={CreateEvent} />
           <Route exact path="/tabstest" component={RenderTabs} />
           <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/groups/:gid" component={HomeGroups} />
+
 
           {/* <Route exact path="/books/:id" component={Detail} /> */}
           <Route component={NoMatch} />

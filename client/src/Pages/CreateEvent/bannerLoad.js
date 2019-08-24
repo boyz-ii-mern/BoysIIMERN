@@ -19,7 +19,7 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 // Register Filepond Plugins for Additional Functionality
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-class AvatarLoad extends Component {
+class bannerLoad extends Component {
   constructor(props) {
     super(props);
 
@@ -35,7 +35,7 @@ class AvatarLoad extends Component {
         uploadValue: 0,
         metadataFile: [],
         rows: [],
-        avatarLink: ''
+        bannerLink: ''
     };
     
 // Handles our Image Storage
@@ -48,7 +48,7 @@ handleProcessing(fieldName, file, metadata, load, error, progress, abort) {
     // ShortID 
     const id = shortid.generate();
 
-    const task = this.storageRef.child(`avatars/${file.name}`).put(fileUpload, {
+    const task = this.storageRef.child(`banners/${file.name}`).put(fileUpload, {
         shortID: id});
 
     // Handle Uploading Here
@@ -67,9 +67,9 @@ handleProcessing(fieldName, file, metadata, load, error, progress, abort) {
             })
 
             // Get Metadata
-            this.storageRef.child(`avatars/${file.name}`).getMetadata().then((metadata) => {
+            this.storageRef.child(`banners/${file.name}`).getMetadata().then((metadata) => {
                 // Metadata for 'filepond/${file.name}' contained
-                this.storageRef.child(`avatars/${file.name}`).getDownloadURL().then(url => {
+                this.storageRef.child(`banners/${file.name}`).getDownloadURL().then(url => {
                     console.log(url)
                     let metadataFile = {
                         name: metadata.name,
@@ -80,14 +80,14 @@ handleProcessing(fieldName, file, metadata, load, error, progress, abort) {
                         id: id,
                     }
                     this.setState({
-                      avatarLink: url
+                      bannerLink: url
                     });
 
-                  // Send avatarLink to log in SignUp Index
-                  this.props.action(`${this.state.avatarLink}`);
+                  // Send bannerLink to log in Create Event Index
+                  this.props.action(`${this.state.bannerLink}`);
 
                 // Save Metadata
-                this.databaseRef.child('avatars').push({ metadataFile });
+                this.databaseRef.child('banners').push({ metadataFile });
                 });
             }).catch(function(error) {
               console.log(error)
@@ -100,35 +100,33 @@ handleInit() {
 }
 
 render() {
-  const parentDiv= {
+  const parentDiv = {
     display: 'flex',
-    justifyContent: 'space-between',
-    margin: '0 15px'
+    flexDirection: 'column',
+    justifyContent: 'center!important'
   }
 
   const pondStyle = {
-    width: '170px',
-    height: '170px'
+    justifyContent: 'center'
   }
 
   const imgDiv = {
-    width: '170px',
-    height: '170px',
+    width: '300px',
+    height: '150px',
     overflow: 'hidden',
-    position: 'relative',
-    borderRadius: '50%',
+    margin: '0 auto'
   }
 
   const imgStyle = {
-    margin: '0 auto',
+    margin: 'auto',
     display: 'inline',
-    height: '100%',
-    width: 'auto'
+    height: 'auto',
+    width: '100%'
   }
 
     return(
       <div>
-        <p>Who's Most Likely to upload a profile pic?! YOU ARE!</p>
+        <p>Choose a Banner for Your Event!</p>
         <br />
         <div style={parentDiv}>
           <div style={pondStyle}>
@@ -138,15 +136,6 @@ render() {
                   allowMultiple={false}
                   maxFiles={1}
                   allowImagePreview={true}
-                  imagePreviewHeight={170}
-                  imageCropAspectRatio={'1:1'}
-                  imageResizeTargetWidth={200}
-                  imageResizeTargetHeight={200}
-                  stylePanelLayout={'compact circle'}
-                  styleLoadIndicatorPosition={'center bottom'}
-                  styleProgressIndicatorPosition={'center bottom'}
-                  styleButtonRemoveItemPosition={'center bottom'}
-                  styleButtonProcessItemPosition={'center bottom'}
                   server={{process : this.handleProcessing.bind(this)}}
                   oninit={() => this.handleInit()}
               >
@@ -156,7 +145,7 @@ render() {
               </FilePond>
             </div>
           <div style={imgDiv}>
-            <img style={imgStyle} src={this.state.avatarLink} alt='' />
+            <img style={imgStyle} src={this.state.bannerLink} alt='' />
           </div>
         </div>
       </div>
@@ -164,4 +153,4 @@ render() {
 }
 }
 
-export default AvatarLoad;
+export default bannerLoad;

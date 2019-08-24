@@ -23,22 +23,24 @@ function CommentList (props){
     //! 'reverse' array has latest comments on top. if this is causing issues, use commentList instead
     let commentList = props.comments || []
     let reverse = commentList.slice(0).reverse()
-    //--------------------------------------------
-    // console.log("reverse comments", reverse)
-    // console.log("this is commentList", commentList)
+    // console.log("reverse", reverse)
+  
+  
         return(
-            <div className="comment-list">
+            <div className="comment-list" >
                 <div>
             {/* use comments.user */}
                  {reverse.map(comment => ( 
                 <div>
-                   <User2
-                 
-                     comment={comment}
-                   />
+                    <div className="comment-extras valign-wrapper">
+                        <User2
+                            comment={comment}
+                        />
+                        <Moment fromNow={"MMM Do YYYY"} className="moment">{comment.createdAt}</Moment>
+                    </div>
+                   <div>
                    <p className="comment-content" >{comment.body}</p>
-                   <Moment format={"MMM Do YYYY"}>{props.date}</Moment>
-
+                   </div>
                 </div>
                  ))}   
 
