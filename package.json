@@ -50,7 +50,7 @@
     "react-router": "^5.0.1",
     "react-sizeme": "^2.6.7",
     "react-stack-grid": "^0.7.1",
-    "sequelize": "^5.12.3",
+    "sequelize": "^5.15.1",
     "session": "^0.1.0",
     "shortid": "^2.2.14",
     "twilio": "^3.33.3"
